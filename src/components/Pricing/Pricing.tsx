@@ -1,87 +1,108 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Reveal } from "@/components/common/Reveal";
 
 type Plan = {
   name: string;
   price: string;
   unit: string;
-  features: string[];
+  features: { text: string; sub?: string }[];
   highlighted?: boolean;
-  badge?: string;
 };
 
-const plans: Plan[] = [
-  {
-    name: "Audit",
-    price: "$300",
-    unit: "/project",
-    features: [
-      "Reputation assessment",
-      "Metrics evaluation",
-      "Competitor comparison",
-      "Organic traffic evaluation",
-      "Recommendations",
-    ],
-  },
-  {
-    name: "Express",
-    price: "$500",
-    unit: "/project",
-    features: [
-      "1 localization",
-      "App release report",
-      "Text metadata",
-      "Graph metadata",
-      "1 platform",
-    ],
-  },
-  {
-    name: "Growth",
-    price: "$2,000",
-    unit: "/month",
-    badge: "Most Popular",
-    highlighted: true,
-    features: [
-      "In-app events",
-      "Audit & strategy",
-      "Graph & text metadata",
-      "Competitor analysis",
-      "A/B testing",
-      "Weekly & monthly reports",
-      "Localization",
-    ],
-  },
-  {
-    name: "Scale",
-    price: "$3,000",
-    unit: "/month",
-    features: [
-      "Apple & Google Ads management",
-      "Analytics setup",
-      "ASO growth track",
-      "Everything in Growth",
-      "Dedicated growth manager",
-    ],
-  },
-  {
-    name: "Research & Strategy",
-    price: "$1,500",
-    unit: "/project",
-    features: [
-      "Competitor ASO evaluation",
-      "12-month strategy",
-      "UA channel analysis",
-      "Competitor revenue assessment",
-    ],
-  },
+type TabKey = "aso" | "audit";
+
+const TABS: { key: TabKey; label: string }[] = [
+  { key: "aso", label: "ASO & UA" },
+  { key: "audit", label: "Audit & Research" },
 ];
 
+const PLANS: Record<TabKey, Plan[]> = {
+  aso: [
+    {
+      name: "Express",
+      price: "$500",
+      unit: "/project",
+      features: [
+        { text: "1 platform" },
+        { text: "1 localization" },
+        {
+          text: "Text metadata",
+          sub: "(semantic core, tittle, subtitle, full description, other key fields)",
+        },
+        { text: "Graph metadata", sub: "(icons, screens, banners etc.)" },
+        { text: "App release report, KPI analysis" },
+      ],
+    },
+    {
+      name: "Growth",
+      price: "$2,000",
+      unit: "/month",
+      highlighted: true,
+      features: [
+        { text: "Competitor Analysis" },
+        { text: "Audit & Strategy" },
+        {
+          text: "Text metadata",
+          sub: "(semantic core, tittle, subtitle, full description, other key fields)",
+        },
+        { text: "Graph metadata", sub: "(icons, screens, banners etc.)" },
+        { text: "In-app events, promotional content" },
+        { text: "Product pages" },
+        { text: "Reputation management" },
+        { text: "A/B/C.. tests" },
+        { text: "Product page localization expanding" },
+        { text: "Reports and KPI analysis every week/month/quarter." },
+      ],
+    },
+    {
+      name: "Scale",
+      price: "$3,000",
+      unit: "/month",
+      features: [
+        { text: "ASO Growth included" },
+        { text: "Apple & Google Ads management & scaling" },
+        { text: "Analytics setup support" },
+      ],
+    },
+  ],
+  audit: [
+    {
+      name: "Audit",
+      price: "$300",
+      unit: "/project",
+      highlighted: true,
+      features: [
+        { text: "Text metadata" },
+        { text: "Graphic metadata" },
+        { text: "Evaluation of organic traffic and keywords" },
+        { text: "Reputation management assessment" },
+        { text: "Competitor comparison" },
+        { text: "Metrics evaluation" },
+        { text: "Hypotheses and recommendations" },
+      ],
+    },
+    {
+      name: "Research & Strategy",
+      price: "$1,500",
+      unit: "/project",
+      features: [
+        { text: "Competitor revenue and market assessment" },
+        { text: "Evaluation of competitors’ ASO strategies" },
+        { text: "UA channel analysis" },
+        { text: "12-month app growth strategy" },
+      ],
+    },
+  ],
+};
+
 export const Pricing: React.FC = () => {
+  const [tab, setTab] = useState<TabKey>("aso");
+  const plans = PLANS[tab];
+
   return (
-    <section
-      id="pricing"
-      className="px-4 py-24 sm:px-6 md:px-10 md:py-28"
-    >
+    <section id="pricing" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
       <div className="mx-auto max-w-[1280px]">
         <Reveal as="div" className="text-center">
           <span className="inline-block rounded-full bg-primary-soft px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
@@ -96,7 +117,36 @@ export const Pricing: React.FC = () => {
           Pick the engagement that fits your stage
         </Reveal>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-5">
+        <Reveal as="div" delay={120} className="mt-10 flex justify-center gap-3 sm:gap-4">
+          {TABS.map((t) => {
+            const active = tab === t.key;
+            return (
+              <button
+                key={t.key}
+                type="button"
+                onClick={() => setTab(t.key)}
+                aria-pressed={active}
+                className={
+                  "rounded-full px-6 py-3 text-sm font-semibold transition sm:text-base " +
+                  (active
+                    ? "bg-primary text-white shadow-md shadow-primary/25"
+                    : "bg-white text-ink ring-1 ring-border hover:bg-ink-soft/5")
+                }
+              >
+                {t.label}
+              </button>
+            );
+          })}
+        </Reveal>
+
+        <div
+          className={
+            "mt-12 grid gap-5 md:gap-6 " +
+            (plans.length === 3
+              ? "md:grid-cols-3"
+              : "mx-auto max-w-3xl md:grid-cols-2")
+          }
+        >
           {plans.map((p, i) => (
             <Reveal key={p.name} delay={i * 80}>
               <article
@@ -107,12 +157,6 @@ export const Pricing: React.FC = () => {
                     : "bg-white text-ink ring-border shadow-sm hover:shadow-xl")
                 }
               >
-                {p.badge && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent-yellow px-3 py-1 text-[11px] font-bold uppercase tracking-wide text-ink">
-                    {p.badge}
-                  </span>
-                )}
-
                 <h3
                   className={
                     "text-base font-semibold " +
@@ -162,7 +206,7 @@ export const Pricing: React.FC = () => {
 
                 <ul className="flex flex-1 flex-col gap-3 text-sm">
                   {p.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3">
+                    <li key={f.text} className="flex items-start gap-3">
                       <span
                         className={
                           "mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full " +
@@ -188,9 +232,21 @@ export const Pricing: React.FC = () => {
                         </svg>
                       </span>
                       <span
-                        className={p.highlighted ? "text-white/95" : "text-ink-soft"}
+                        className={
+                          p.highlighted ? "text-white/95" : "text-ink-soft"
+                        }
                       >
-                        {f}
+                        <span className="font-medium">{f.text}</span>
+                        {f.sub && (
+                          <span
+                            className={
+                              "block text-xs " +
+                              (p.highlighted ? "text-white/80" : "text-muted")
+                            }
+                          >
+                            {f.sub}
+                          </span>
+                        )}
                       </span>
                     </li>
                   ))}
