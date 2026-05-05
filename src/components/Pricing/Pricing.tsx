@@ -127,10 +127,10 @@ export const Pricing: React.FC = () => {
                 onClick={() => setTab(t.key)}
                 aria-pressed={active}
                 className={
-                  "rounded-full px-6 py-3 text-sm font-semibold transition sm:text-base " +
+                  "rounded-full border border-black/80 px-6 py-3 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] sm:text-base " +
                   (active
-                    ? "bg-primary text-white shadow-md shadow-primary/25"
-                    : "bg-white text-ink ring-1 ring-border hover:bg-ink-soft/5")
+                    ? "bg-primary text-white"
+                    : "bg-white text-ink hover:bg-surface")
                 }
               >
                 {t.label}
@@ -151,10 +151,8 @@ export const Pricing: React.FC = () => {
             <Reveal key={p.name} delay={i * 80}>
               <article
                 className={
-                  "relative flex h-full flex-col rounded-3xl p-7 ring-1 transition card-lift " +
-                  (p.highlighted
-                    ? "bg-primary text-white ring-primary shadow-xl shadow-primary/25 hover:shadow-2xl hover:shadow-primary/35 lg:scale-[1.04] lg:-translate-y-1"
-                    : "bg-white text-ink ring-border shadow-sm hover:shadow-xl")
+                  "relative flex h-full flex-col rounded-3xl border border-black/80 p-7 shadow-[8px_8px_0_0_#000] transition " +
+                  (p.highlighted ? "bg-primary text-white" : "bg-white text-ink")
                 }
               >
                 <h3
@@ -182,10 +180,10 @@ export const Pricing: React.FC = () => {
                 <a
                   href="#contact"
                   className={
-                    "group mt-6 inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold transition " +
+                    "group mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-black/80 px-5 py-3 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] " +
                     (p.highlighted
                       ? "bg-white text-primary hover:bg-white/95"
-                      : "bg-ink text-white hover:bg-ink-soft")
+                      : "bg-primary text-white hover:bg-primary/90")
                   }
                 >
                   Get Started

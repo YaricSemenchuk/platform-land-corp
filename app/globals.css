@@ -98,8 +98,16 @@ body {
   0%, 100% { opacity: 0.6; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.05); }
 }
-.anim-float { animation: float-y 6s ease-in-out infinite; }
-.anim-float-slow { animation: float-y-slow 9s ease-in-out infinite; }
+.anim-float { animation: float-square 6s ease-in-out infinite; }
+.anim-float-slow { animation: float-square 8s ease-in-out infinite reverse; }
+
+@keyframes float-square {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(18px, 0); }
+  50%  { transform: translate(18px, 18px); }
+  75%  { transform: translate(0, 18px); }
+  100% { transform: translate(0, 0); }
+}
 .anim-spin-slow { animation: spin-slow 24s linear infinite; }
 .anim-pulse-soft { animation: pulse-soft 4s ease-in-out infinite; }
 

@@ -23,10 +23,8 @@ export const CtaBanner: React.FC<Props> = ({
       <Reveal as="div" direction="scale">
         <div
           className={
-            "relative mx-auto max-w-[1080px] overflow-hidden rounded-[28px] px-8 py-14 text-center sm:px-12 md:py-20 " +
-            (dark
-              ? "bg-primary text-white"
-              : "bg-white text-ink ring-1 ring-border shadow-sm")
+            "relative mx-auto max-w-[1080px] overflow-hidden rounded-[28px] border border-black/80 px-8 py-14 text-center shadow-[8px_8px_0_0_#000] sm:px-12 md:py-20 " +
+            (dark ? "bg-primary text-white" : "bg-white text-ink")
           }
         >
           {dark && (
@@ -63,10 +61,10 @@ export const CtaBanner: React.FC<Props> = ({
                   <a
                     href={primary.href ?? "#contact"}
                     className={
-                      "group inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-sm font-semibold shadow-lg transition hover:-translate-y-0.5 " +
+                      "group inline-flex items-center gap-3 rounded-full border border-black/80 px-7 py-3.5 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] " +
                       (dark
-                        ? "bg-white text-ink shadow-black/10 hover:bg-white/95 hover:shadow-xl"
-                        : "bg-primary text-white shadow-primary/25 hover:bg-primary/90 hover:shadow-primary/35")
+                        ? "bg-white text-ink hover:bg-white/95"
+                        : "bg-primary text-white hover:bg-primary/90")
                     }
                   >
                     {primary.label}
@@ -82,10 +80,10 @@ export const CtaBanner: React.FC<Props> = ({
                   <a
                     href={secondary.href ?? "#contact"}
                     className={
-                      "inline-flex items-center gap-3 rounded-full border px-7 py-3.5 text-sm font-semibold transition " +
+                      "inline-flex items-center gap-3 rounded-full border border-black/80 px-7 py-3.5 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] " +
                       (dark
-                        ? "border-white/40 text-white hover:bg-white/10"
-                        : "border-border text-ink hover:bg-surface")
+                        ? "bg-transparent text-white hover:bg-white/10"
+                        : "bg-white text-ink hover:bg-surface")
                     }
                   >
                     {secondary.label}

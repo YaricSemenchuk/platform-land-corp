@@ -23,7 +23,7 @@ const items = [
 ];
 
 export const Faq: React.FC = () => {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section id="faq" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
@@ -41,7 +41,7 @@ export const Faq: React.FC = () => {
           Frequently Asked Questions
         </Reveal>
 
-        <div className="mt-12 flex flex-col gap-4">
+        <div className="mt-12 flex flex-col border-t border-border">
           {items.map((it, i) => {
             const isOpen = open === i;
             return (
@@ -70,37 +70,46 @@ type ItemProps = {
 
 const FaqItem: React.FC<ItemProps> = ({ question, answer, open, onToggle }) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const max = open ? (contentRef.current?.scrollHeight ?? 0) + 32 : 0;
+  const [measured, setMeasured] = React.useState(0);
+  React.useEffect(() => {
+    if (!contentRef.current) return;
+    const el = contentRef.current;
+    const update = () => setMeasured(el.scrollHeight);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const max = open ? measured + 32 : 0;
 
   return (
-    <div
-      className={
-        "overflow-hidden rounded-2xl bg-surface ring-1 transition-colors duration-300 " +
-        (open ? "ring-primary/40" : "ring-border")
-      }
-    >
+    <div className="border-b border-border">
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left md:px-8 md:py-6"
+        className="group flex w-full items-center justify-between gap-4 py-6 text-left md:py-7"
       >
-        <span className="text-sm font-semibold text-ink md:text-base">
+        <span className="text-base font-semibold text-ink md:text-lg">
           {question}
         </span>
         <span
+          style={{
+            transform: open ? "rotate(-45deg)" : "rotate(0deg)",
+            transitionDuration: "500ms",
+            transitionProperty: "transform, background-color",
+            transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
+          }}
           className={
-            "grid h-9 w-9 shrink-0 place-items-center rounded-full transition-all duration-300 " +
-            (open
-              ? "bg-primary text-white rotate-45"
-              : "bg-white text-ink ring-1 ring-border")
+            "grid h-11 w-11 shrink-0 place-items-center rounded-full border border-black/80 text-white shadow-[3px_3px_0_0_#000] group-hover:bg-ink " +
+            (open ? "bg-ink" : "bg-primary")
           }
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path
-              d="M6 12h12M12 6v12"
+              d="M4 12h16M12 4v16"
               stroke="currentColor"
-              strokeWidth="2.2"
+              strokeWidth="4"
               strokeLinecap="round"
             />
           </svg>
@@ -108,11 +117,14 @@ const FaqItem: React.FC<ItemProps> = ({ question, answer, open, onToggle }) => {
       </button>
       <div
         style={{ maxHeight: max }}
-        className="overflow-hidden transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        className="overflow-hidden transition-[max-height] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
       >
         <div
           ref={contentRef}
-          className="border-t border-border px-6 pb-6 pt-4 text-sm leading-relaxed text-muted md:px-8"
+          className={
+            "pb-6 pr-12 text-sm leading-relaxed text-muted transition-opacity duration-[700ms] ease-out md:text-base " +
+            (open ? "opacity-100 delay-150" : "opacity-0")
+          }
         >
           {answer}
         </div>
