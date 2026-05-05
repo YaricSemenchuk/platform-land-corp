@@ -1,8 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Statistics } from "@/components/Statistics/Statistics";
 import { Reveal } from "@/components/common/Reveal";
+import { ContactModal } from "@/components/Contact/ContactModal";
 
 export const Hero: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <section className="relative px-4 pt-6 sm:px-6 md:px-10">
       <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[32px] bg-primary px-6 py-20 sm:px-12 md:px-16 md:py-28">
@@ -38,20 +42,15 @@ export const Hero: React.FC = () => {
           </Reveal>
 
           <Reveal as="div" delay={360}>
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href="#contact"
+            <div className="mt-10 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
                 className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:shadow-xl"
               >
                 Get Started
-                <span className="grid h-2.5 w-2.5 place-items-center rounded-full bg-primary transition-transform duration-300 group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#cases"
-                className="inline-flex items-center gap-3 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
-              >
-                See Case Studies
-              </a>
+                <span className="grid h-2.5 w-2.5 place-items-center rounded-full bg-accent-pink transition-transform duration-300 group-hover:translate-x-0.5" />
+              </button>
             </div>
           </Reveal>
         </div>
@@ -60,6 +59,8 @@ export const Hero: React.FC = () => {
       <div className="mt-12 sm:mt-14">
         <Statistics />
       </div>
+
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 };
@@ -74,28 +75,29 @@ const HeroDecoration: React.FC = () => (
       aria-hidden
       className="pointer-events-none absolute -bottom-40 -left-32 h-[360px] w-[360px] rounded-full bg-black/15 blur-3xl anim-float-slow"
     />
-    <svg
-      aria-hidden
-      className="pointer-events-none absolute right-4 top-6 hidden h-44 w-44 opacity-90 md:block lg:right-12 lg:top-10 lg:h-60 lg:w-60 anim-spin-slow"
-      viewBox="0 0 220 220"
-      fill="none"
-    >
-      <circle cx="110" cy="110" r="98" stroke="white" strokeOpacity="0.25" />
-      <circle cx="110" cy="110" r="74" stroke="white" strokeOpacity="0.35" />
-      <circle cx="110" cy="110" r="48" stroke="white" strokeOpacity="0.5" />
-      <circle cx="110" cy="110" r="24" fill="white" fillOpacity="0.95" />
-      <circle cx="180" cy="60" r="10" fill="#ffe43c" />
-      <circle cx="40" cy="170" r="8" fill="#ff61b4" />
-      <circle cx="190" cy="160" r="6" fill="#fd5200" />
-    </svg>
-    <svg
-      aria-hidden
-      className="pointer-events-none absolute left-6 bottom-6 hidden h-28 w-28 opacity-70 md:block anim-float-slow"
-      viewBox="0 0 120 120"
-      fill="none"
-    >
-      <circle cx="60" cy="60" r="58" stroke="white" strokeOpacity="0.2" />
-      <circle cx="60" cy="60" r="40" stroke="white" strokeOpacity="0.3" />
-    </svg>
+    <AppStoreTile className="pointer-events-none absolute left-2 top-16 h-20 w-20 sm:left-6 sm:top-24 sm:h-28 sm:w-28 lg:left-12 lg:top-32 lg:h-36 lg:w-36 anim-float-slow" />
+    <PlayStoreTile className="pointer-events-none absolute right-2 top-6 h-20 w-20 sm:right-6 sm:top-10 sm:h-28 sm:w-28 lg:right-12 lg:top-16 lg:h-36 lg:w-36 anim-float" />
   </>
+);
+
+const AppStoreTile: React.FC<{ className?: string }> = ({ className }) => (
+  <svg aria-hidden className={className} viewBox="0 0 160 160" fill="none">
+    <rect x="20" y="20" width="120" height="120" rx="28" fill="white" stroke="#0b0b0f" strokeWidth="3" />
+    <rect x="20" y="128" width="120" height="12" rx="6" fill="#0b0b0f" opacity="0.85" />
+    <circle cx="80" cy="76" r="34" fill="#3b5cff" />
+    <text x="80" y="90" textAnchor="middle" fontFamily="system-ui, sans-serif" fontWeight="700" fontSize="44" fill="white">A</text>
+  </svg>
+);
+
+const PlayStoreTile: React.FC<{ className?: string }> = ({ className }) => (
+  <svg aria-hidden className={className} viewBox="0 0 160 160" fill="none">
+    <rect x="20" y="20" width="120" height="120" rx="28" fill="white" stroke="#0b0b0f" strokeWidth="3" />
+    <rect x="20" y="128" width="120" height="12" rx="6" fill="#0b0b0f" opacity="0.85" />
+    <g transform="translate(60 48)">
+      <path d="M2 2 L42 28 L2 54 Z" fill="#34a853" />
+      <path d="M2 2 L42 28 L24 36 Z" fill="#fbbc04" />
+      <path d="M2 54 L42 28 L24 20 Z" fill="#ea4335" />
+      <path d="M2 2 L24 28 L2 54 Z" fill="#4285f4" />
+    </g>
+  </svg>
 );
