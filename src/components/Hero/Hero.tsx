@@ -1,9 +1,13 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { Statistics } from "@/components/Statistics/Statistics";
 import { Reveal } from "@/components/common/Reveal";
+import { ContactModal } from "@/components/Contact/ContactModal";
 
 export const Hero: React.FC = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <section className="relative overflow-hidden bg-primary">
       <HeroDecoration />
@@ -28,11 +32,26 @@ export const Hero: React.FC = () => {
             strategies
           </span>
         </Reveal>
+
+        <Reveal as="div" delay={360}>
+          <div className="mt-10 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setModalOpen(true)}
+              className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              Get Started
+              <span className="grid h-2.5 w-2.5 place-items-center rounded-full bg-accent-pink transition-transform duration-300 group-hover:translate-x-0.5" />
+            </button>
+          </div>
+        </Reveal>
       </div>
 
       <div className="relative z-10 -mt-24 px-4 pb-16 sm:px-6 md:-mt-28 md:pb-20">
         <Statistics />
       </div>
+
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 };
@@ -70,4 +89,3 @@ const HeroDecoration: React.FC = () => (
     />
   </>
 );
-
