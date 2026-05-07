@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   title: "Promobile — App Store Optimization Agency & Platform",
   description:
     "Reach rank 1 with app installs, ratings and reviews from PROMOBILE. Drive your app's organic growth with proven ASO and paid acquisition strategies.",
+  icons: {
+    icon: "/logopromobile.png",
+    shortcut: "/logopromobile.png",
+    apple: "/logopromobile.png",
+  },
 };
 
 export default function RootLayout({
@@ -30,6 +35,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${readexPro.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
+      suppressHydrationWarning
     >
       <body
         className="min-h-full flex flex-col bg-white text-ink"
