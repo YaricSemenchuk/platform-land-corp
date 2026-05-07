@@ -104,17 +104,11 @@ export const Pricing: React.FC = () => {
   return (
     <section id="pricing" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
       <div className="mx-auto max-w-[1280px]">
-        <Reveal as="div" className="text-center">
-          <span className="inline-block rounded-full bg-primary-soft px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-            Services &amp; Pricing
-          </span>
-        </Reveal>
         <Reveal
           as="h2"
-          delay={80}
-          className="mt-4 text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
+          className="text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
         >
-          Pick the engagement that fits your stage
+          Services &amp; Pricing
         </Reveal>
 
         <Reveal as="div" delay={120} className="mt-10 flex justify-center gap-3 sm:gap-4">
@@ -127,10 +121,10 @@ export const Pricing: React.FC = () => {
                 onClick={() => setTab(t.key)}
                 aria-pressed={active}
                 className={
-                  "rounded-full border border-black/80 px-6 py-3 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] sm:text-base " +
+                  "rounded-full border border-black/80 px-6 py-3 text-sm font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] sm:text-base " +
                   (active
                     ? "bg-primary text-white"
-                    : "bg-white text-ink hover:bg-surface")
+                    : "bg-white text-ink hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000]")
                 }
               >
                 {t.label}
@@ -151,7 +145,7 @@ export const Pricing: React.FC = () => {
             <Reveal key={p.name} delay={i * 80}>
               <article
                 className={
-                  "relative flex h-full flex-col rounded-3xl border border-black/80 p-7 shadow-[8px_8px_0_0_#000] transition " +
+                  "relative flex h-full flex-col rounded-3xl border border-black/80 p-7 shadow-[0_8px_0_0_#000] transition " +
                   (p.highlighted ? "bg-primary text-white" : "bg-white text-ink")
                 }
               >
@@ -180,7 +174,7 @@ export const Pricing: React.FC = () => {
                 <a
                   href="#contact"
                   className={
-                    "group mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-black/80 px-5 py-3 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] " +
+                    "group mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-black/80 px-5 py-3 text-sm font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
                     (p.highlighted
                       ? "bg-white text-primary hover:bg-white/95"
                       : "bg-primary text-white hover:bg-primary/90")

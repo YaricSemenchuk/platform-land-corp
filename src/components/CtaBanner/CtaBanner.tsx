@@ -1,5 +1,8 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Reveal } from "@/components/common/Reveal";
+import { ContactModal } from "@/components/Contact/ContactModal";
 
 type Props = {
   title: string;
@@ -17,13 +20,14 @@ export const CtaBanner: React.FC<Props> = ({
   variant = "light",
 }) => {
   const dark = variant === "dark";
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section className="px-4 sm:px-6 md:px-10">
       <Reveal as="div" direction="scale">
         <div
           className={
-            "relative mx-auto max-w-[1080px] overflow-hidden rounded-[28px] border border-black/80 px-8 py-14 text-center shadow-[8px_8px_0_0_#000] sm:px-12 md:py-20 " +
+            "relative mx-auto max-w-[1080px] overflow-hidden rounded-[28px] border border-black/80 px-8 py-14 text-center shadow-[0_8px_0_0_#000] sm:px-12 md:py-20 " +
             (dark ? "bg-primary text-white" : "bg-white text-ink")
           }
         >
@@ -58,10 +62,11 @@ export const CtaBanner: React.FC<Props> = ({
             {(primary || secondary) && (
               <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
                 {primary && (
-                  <a
-                    href={primary.href ?? "#contact"}
+                  <button
+                    type="button"
+                    onClick={() => setModalOpen(true)}
                     className={
-                      "group inline-flex items-center gap-3 rounded-full border border-black/80 px-7 py-3.5 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] " +
+                      "group inline-flex items-center gap-3 rounded-full border border-black/80 px-7 py-3.5 text-sm font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
                       (dark
                         ? "bg-white text-ink hover:bg-white/95"
                         : "bg-primary text-white hover:bg-primary/90")
@@ -74,13 +79,13 @@ export const CtaBanner: React.FC<Props> = ({
                         (dark ? "bg-primary" : "bg-white")
                       }
                     />
-                  </a>
+                  </button>
                 )}
                 {secondary && (
                   <a
                     href={secondary.href ?? "#contact"}
                     className={
-                      "inline-flex items-center gap-3 rounded-full border border-black/80 px-7 py-3.5 text-sm font-semibold shadow-[4px_4px_0_0_#000] transition active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0_0_#000] " +
+                      "inline-flex items-center gap-3 rounded-full border border-black/80 px-7 py-3.5 text-sm font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
                       (dark
                         ? "bg-transparent text-white hover:bg-white/10"
                         : "bg-white text-ink hover:bg-surface")
@@ -94,6 +99,8 @@ export const CtaBanner: React.FC<Props> = ({
           </div>
         </div>
       </Reveal>
+
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 };

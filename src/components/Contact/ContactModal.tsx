@@ -50,7 +50,7 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
   };
 
   const inputCls =
-    'w-full rounded-xl bg-gray-100 px-4 py-3 text-sm text-ink placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-primary/40';
+    'w-full rounded-xl bg-[#dcdcdc] px-4 py-3 text-sm text-ink placeholder:text-[#7a7a7a] outline-none focus:ring-2 focus:ring-primary/40';
   const labelCls = 'mb-2 block text-sm font-semibold text-ink';
 
   return createPortal(
@@ -62,7 +62,8 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
       aria-label="Contact form"
     >
       <div
-        className="relative w-full max-w-3xl rounded-3xl bg-white p-6 shadow-2xl sm:p-8 md:p-10"
+        className="relative w-full max-w-3xl rounded-3xl bg-white p-6 sm:p-8 md:p-10"
+        style={{ boxShadow: "0 10px 0 0 #0b0b0f" }}
         onClick={(e) => e.stopPropagation()}
       >
         <button

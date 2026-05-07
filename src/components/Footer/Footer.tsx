@@ -1,86 +1,96 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Reveal } from "@/components/common/Reveal";
 
-const navLinks = [
-  { label: "Core Directions", href: "#about" },
-  { label: "Partnership Stages", href: "#process" },
-  { label: "Case Studies", href: "#cases" },
-  { label: "Pricing", href: "#pricing" },
+const colA = [
+  { label: "About", href: "#about" },
+  { label: "Stages", href: "#partnership" },
+  { label: "Services", href: "#pricing" },
+];
+
+const colB = [
+  { label: "Cases", href: "#cases" },
   { label: "FAQ", href: "#faq" },
+  { label: "Pricing", href: "#pricing" },
 ];
 
 const socials = [
-  { label: "Instagram", href: "#", icon: <InstagramIcon /> },
-  { label: "X", href: "#", icon: <XIcon /> },
-  { label: "LinkedIn", href: "#", icon: <LinkedInIcon /> },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/promobile-app/",
+    icon: <LinkedInIcon />,
+  },
+  { label: "Telegram", href: "https://t.me/promobile_app", icon: <TelegramIcon /> },
   { label: "Facebook", href: "#", icon: <FacebookIcon /> },
+  { label: "Instagram", href: "#", icon: <InstagramIcon /> },
 ];
 
 export const Footer: React.FC = () => {
   return (
-    <footer id="contact" className="mt-16 bg-ink text-white">
+    <footer id="contact" className="mt-auto pt-20 md:pt-28">
       <Reveal>
-        <div className="mx-auto max-w-[1280px] px-6 py-14 md:px-10 md:py-16">
-          <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-            <Link href="/" className="group flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-white font-bold transition-transform duration-300 group-hover:rotate-[8deg]">
-                P
-              </span>
-              <span className="text-lg font-semibold tracking-tight">
-                Promobile
-              </span>
-            </Link>
+        <div className="rounded-t-[32px] bg-[#1c1c1f] px-8 py-14 text-white md:px-14 md:py-20">
+          <div className="grid gap-12 md:grid-cols-[1fr_auto_auto] md:gap-16 md:items-start">
+            <div className="flex flex-col gap-10">
+              <Link href="/" aria-label="ProMobile" className="inline-block">
+                <Image
+                  src="/logopromobile.png"
+                  alt="ProMobile"
+                  width={56}
+                  height={56}
+                  className="h-12 w-auto md:h-14"
+                  priority
+                />
+              </Link>
 
-            <nav className="flex flex-wrap gap-x-7 gap-y-3 md:max-w-xl md:justify-end">
-              {navLinks.map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="text-sm text-white/70 transition-colors hover:text-white"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </nav>
-          </div>
-
-          <div className="mt-12 grid gap-8 md:grid-cols-2 md:items-end md:justify-between">
-            <div>
-              <p className="text-sm font-medium text-white/60">Contact us:</p>
-              <a
-                href="mailto:info@promobile.app"
-                className="mt-2 block text-lg font-semibold transition-colors hover:text-accent-yellow md:text-xl"
-              >
-                info@promobile.app
-              </a>
-            </div>
-
-            <div className="flex gap-3 md:justify-end">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  aria-label={s.label}
-                  className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:-translate-y-0.5 hover:bg-white/20"
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-12 border-t border-white/10 pt-6 text-sm text-white/60">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p>Copyright © {new Date().getFullYear()} Promobile</p>
-              <div className="flex gap-6">
-                <Link href="#" className="hover:text-white">
-                  Privacy Policy
+              <div className="flex flex-col gap-4 text-sm text-white/85">
+                <Link href="/privacy-policy" className="hover:text-white">
+                  Privacy policy
                 </Link>
-                <Link href="#" className="hover:text-white">
-                  Terms
-                </Link>
+                <p className="text-white/70">
+                  Copyright © ProMobile, {new Date().getFullYear()}
+                </p>
               </div>
+            </div>
+
+            <nav className="grid grid-cols-2 gap-x-16 gap-y-5 text-sm text-white/90 md:gap-x-20">
+              <ul className="flex flex-col gap-5">
+                {colA.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="hover:text-white">
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <ul className="flex flex-col gap-5">
+                {colB.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className="hover:text-white">
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <div className="flex items-start gap-5 md:justify-self-end">
+              {socials.map((s) => {
+                const external = s.href.startsWith("http");
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    aria-label={s.label}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    className="text-white transition hover:-translate-y-0.5 hover:text-white/80"
+                  >
+                    {s.icon}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -89,36 +99,40 @@ export const Footer: React.FC = () => {
   );
 };
 
-function InstagramIcon() {
+function LinkedInIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-      <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="12" cy="12" r="3.6" stroke="currentColor" strokeWidth="1.6" />
-      <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
-    </svg>
-  );
-}
-function XIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <rect x="2" y="2" width="20" height="20" rx="3" />
       <path
-        d="M3 3l8.4 11.2L3.6 21h2.6l6.5-7.1L18 21h3l-8.7-11.6L20.4 3h-2.6l-6 6.6L6 3H3z"
-        fill="currentColor"
+        d="M7.5 9.5h-2v8h2v-8zm-1-3.2a1.15 1.15 0 100 2.3 1.15 1.15 0 000-2.3zM18.5 17.5h-2v-3.9c0-1-.4-1.6-1.2-1.6-.7 0-1.1.5-1.3 1v4.5h-2v-8h2v.9c.3-.5 1-1.1 2.1-1.1 1.6 0 2.4 1 2.4 3v5.2z"
+        fill="#1c1c1f"
       />
     </svg>
   );
 }
-function LinkedInIcon() {
+
+function TelegramIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.32 0h4.37v1.92h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.47 3.04 5.47 6.99V22h-4.56v-6.2c0-1.48-.03-3.39-2.07-3.39-2.07 0-2.39 1.62-2.39 3.29V22H7.54V8z" />
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M21.5 3.5L2.5 11l5.5 2 2 6 3-3.5 4.5 3.5L21.5 3.5z" />
     </svg>
   );
 }
+
 function FacebookIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M22 12.07C22 6.51 17.52 2 12 2S2 6.51 2 12.07c0 5.02 3.66 9.18 8.44 9.93V14.9H7.9v-2.83h2.54V9.85c0-2.51 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.45 2.83h-2.33v7.1C18.34 21.25 22 17.09 22 12.07z" />
+    </svg>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="2" />
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
     </svg>
   );
 }

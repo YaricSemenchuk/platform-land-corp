@@ -1,37 +1,38 @@
 import React from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/common/Reveal";
 
 type Card = {
   title: string;
   body: string;
   tone: "light" | "dark";
-  icon: React.ReactNode;
+  icon: string;
 };
 
 const cards: Card[] = [
   {
-    title: "Audit & Competitor Research",
-    body: "Deep analysis of store pages, keywords, creatives and competitive metrics to surface opportunities you can act on this week.",
+    title: "Audit & Competitor\nResearch",
+    body: "Analysis of the store page, niche, and competitors based on real data and metric dynamics. We build a strategy that is grounded in the product’s economics.",
     tone: "light",
-    icon: <SearchIcon />,
+    icon: "/global.png",
   },
   {
-    title: "Full-Service App Promotion",
-    body: "Ongoing support that combines analytics, optimization, and creative iteration to compound your growth month over month.",
+    title: "App Store\nOptimization",
+    body: "Our team guarantees your app gets discovered and installed more often by boosting search rankings and conversion rates.",
     tone: "dark",
-    icon: <SparklesIcon />,
+    icon: "/aso.png",
   },
   {
-    title: "App Store Optimization",
-    body: "We boost discovery and conversion with metadata, custom product pages, A/B tests and in-app events tuned to your funnel.",
+    title: "Paid User\nAcquisition",
+    body: "Aligning paid channels with your product KPIs for efficient launches and management. Strong unit economics guide our efforts, managing spend wisely to avoid waste and achieve optimal returns.",
     tone: "dark",
-    icon: <ShieldIcon />,
+    icon: "/result.png",
   },
   {
-    title: "Paid User Acquisition",
-    body: "Channel alignment with product KPIs across Apple Search Ads, Google Ads and beyond — engineered for healthy ROAS.",
+    title: "Full Service App\nPromotion",
+    body: "Ongoing, reliable support that unites our expertise into a seamless system for app advancement. A dedicated team manages analytics setup, organic search optimization, and paid traffic channels.",
     tone: "light",
-    icon: <ChartIcon />,
+    icon: "/analitics.png",
   },
 ];
 
@@ -39,56 +40,44 @@ export const About: React.FC = () => {
   return (
     <section id="about" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
       <div className="mx-auto max-w-[1080px]">
-        <Reveal as="div" className="text-center">
-          <span className="inline-block rounded-full bg-primary-soft px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-            Core Directions
-          </span>
-        </Reveal>
-
         <Reveal
           as="h2"
-          delay={80}
-          className="mt-4 text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
+          className="text-center text-4xl font-bold tracking-tight text-ink sm:text-5xl md:text-6xl"
         >
-          Where we move the needle
+          Core Directions
         </Reveal>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 md:gap-8">
+        <div className="mt-14 grid gap-8 md:grid-cols-2 md:gap-10">
           {cards.map((c, i) => (
-            <Reveal
-              key={c.title}
-              delay={120 * i}
-              className="card-lift"
-            >
+            <Reveal key={c.title} delay={120 * i}>
               <article
+                style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
                 className={
-                  "relative flex min-h-[260px] flex-col rounded-3xl p-8 ring-1 transition-shadow md:min-h-[280px] " +
+                  "relative flex min-h-[260px] flex-col rounded-3xl border-2 border-ink p-8 md:min-h-[300px] md:p-10 " +
                   (c.tone === "dark"
-                    ? "bg-primary text-white ring-primary shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30"
-                    : "bg-white text-ink ring-border shadow-sm hover:shadow-xl")
+                    ? "bg-primary text-white"
+                    : "bg-white text-ink")
                 }
               >
-                <h3 className="max-w-[80%] text-xl font-semibold leading-snug md:text-[22px]">
+                <h3 className="whitespace-pre-line pr-24 text-2xl font-bold leading-tight md:pr-28 md:text-[28px]">
                   {c.title}
                 </h3>
                 <p
                   className={
-                    "mt-4 max-w-[42ch] text-sm leading-relaxed md:text-[15px] " +
-                    (c.tone === "dark" ? "text-white/85" : "text-muted")
+                    "mt-6 pr-24 text-sm leading-relaxed md:pr-28 md:text-[15px] " +
+                    (c.tone === "dark" ? "text-white/90" : "text-ink/80")
                   }
                 >
                   {c.body}
                 </p>
-                <div
-                  className={
-                    "absolute bottom-7 right-7 grid h-14 w-14 place-items-center rounded-2xl transition-transform duration-300 group-hover:rotate-6 " +
-                    (c.tone === "dark"
-                      ? "bg-white/15 text-white"
-                      : "bg-primary-soft text-primary")
-                  }
-                >
-                  {c.icon}
-                </div>
+                <Image
+                  src={c.icon}
+                  alt=""
+                  aria-hidden
+                  width={80}
+                  height={80}
+                  className="absolute bottom-8 right-8 h-16 w-16 md:bottom-10 md:right-10 md:h-20 md:w-20"
+                />
               </article>
             </Reveal>
           ))}
@@ -97,57 +86,3 @@ export const About: React.FC = () => {
     </section>
   );
 };
-
-function SearchIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <circle cx="11" cy="11" r="6" stroke="currentColor" strokeWidth="1.8" />
-      <path
-        d="M20 20l-3.5-3.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-function SparklesIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3zM18 14l1 2.4L21 18l-2.4 1L18 22l-1-2.4L15 18l2.4-1L18 14z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-function ShieldIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-      />
-      <path
-        d="M9 12l2 2 4-4"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-function ChartIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M4 19h16M6 16V9m6 7V5m6 11v-5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}

@@ -25,7 +25,7 @@ const stats: Stat[] = [
 export const Statistics: React.FC = () => {
   return (
     <div className="mx-auto max-w-[1080px]">
-      <div className="grid grid-cols-1 divide-y divide-border overflow-hidden rounded-[28px] border border-black/80 bg-surface shadow-[8px_8px_0_0_#000] md:grid-cols-3 md:divide-x md:divide-y-0">
+      <div className="grid grid-cols-1 divide-y divide-border overflow-hidden rounded-[28px] border border-black/80 bg-surface shadow-[0_8px_0_0_#000] md:grid-cols-3 md:divide-x md:divide-y-0">
         {stats.map((s, i) => (
           <Reveal
             key={s.label}

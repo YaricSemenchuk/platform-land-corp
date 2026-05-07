@@ -38,7 +38,7 @@ export const Hero: React.FC = () => {
             <button
               type="button"
               onClick={() => setModalOpen(true)}
-              className="group inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:shadow-xl"
+              className="group inline-flex items-center gap-3 rounded-full border border-black/80 bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-[0_6px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_8px_0_0_#000] active:translate-y-0.5 active:shadow-[0_3px_0_0_#000]"
             >
               Get Started
               <span className="grid h-2.5 w-2.5 place-items-center rounded-full bg-accent-pink transition-transform duration-300 group-hover:translate-x-0.5" />

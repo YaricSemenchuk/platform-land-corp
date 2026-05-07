@@ -1,3 +1,4 @@
+import { Header } from "@/components/Header/Header";
 import { Hero } from "@/components/Hero/Hero";
 import { About } from "@/components/About/About";
 import { Partnership } from "@/components/Partnership/Partnership";
@@ -9,6 +10,7 @@ import { CtaBanner } from "@/components/CtaBanner/CtaBanner";
 export default function Home() {
   return (
     <main className="flex flex-1 flex-col bg-white">
+      <Header />
       <Hero />
       <About />
       <Partnership />

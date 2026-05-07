@@ -28,15 +28,9 @@ export const Faq: React.FC = () => {
   return (
     <section id="faq" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
       <div className="mx-auto max-w-[920px]">
-        <Reveal as="div" className="text-center">
-          <span className="inline-block rounded-full bg-primary-soft px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
-            FAQ
-          </span>
-        </Reveal>
         <Reveal
           as="h2"
-          delay={80}
-          className="mt-4 text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
+          className="text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
         >
           Frequently Asked Questions
         </Reveal>
@@ -101,7 +95,7 @@ const FaqItem: React.FC<ItemProps> = ({ question, answer, open, onToggle }) => {
             transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
           }}
           className={
-            "grid h-11 w-11 shrink-0 place-items-center rounded-full border border-black/80 text-white shadow-[3px_3px_0_0_#000] group-hover:bg-ink " +
+            "grid h-11 w-11 shrink-0 place-items-center rounded-full border border-black/80 text-white group-hover:bg-ink " +
             (open ? "bg-ink" : "bg-primary")
           }
         >
