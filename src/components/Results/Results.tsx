@@ -8,9 +8,17 @@ import { cases } from "./cases";
 export const Results: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const setRef = useRef<HTMLDivElement | null>(null);
   const pausedRef = useRef(false);
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
+  const offsetRef = useRef(0);
+
+  const getPeriod = useCallback(() => {
+    const set = setRef.current;
+    if (!set) return 0;
+    return set.offsetWidth + 24; // set width + gap between sets
+  }, []);
 
   // Auto-scroll loop. Speed in px/sec.
   useEffect(() => {
@@ -23,11 +31,11 @@ export const Results: React.FC = () => {
       const dt = (ts - lastTsRef.current) / 1000;
       lastTsRef.current = ts;
 
-      if (!pausedRef.current && el) {
-        const half = el.scrollWidth / 2;
-        let next = el.scrollLeft + SPEED * dt;
-        if (next >= half) next -= half;
-        el.scrollLeft = next;
+      const period = getPeriod();
+      if (!pausedRef.current && el && period > 0) {
+        offsetRef.current += SPEED * dt;
+        if (offsetRef.current >= period) offsetRef.current -= period;
+        el.scrollLeft = offsetRef.current;
       }
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -36,7 +44,7 @@ export const Results: React.FC = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       lastTsRef.current = null;
     };
-  }, []);
+  }, [getPeriod]);
 
   const pause = useCallback(() => {
     pausedRef.current = true;
@@ -51,25 +59,29 @@ export const Results: React.FC = () => {
     const card = el.querySelector<HTMLElement>("[data-card]");
     const gap = 24;
     const step = (card?.offsetWidth ?? 300) + gap;
-    const half = el.scrollWidth / 2;
+    const period = getPeriod();
+    if (period <= 0) return;
     if (dir === -1 && el.scrollLeft - step < 0) {
-      el.scrollLeft += half;
+      el.scrollLeft += period;
+      offsetRef.current = el.scrollLeft;
     }
     const target = el.scrollLeft + dir * step;
     el.scrollTo({ left: target, behavior: "smooth" });
-  }, []);
+  }, [getPeriod]);
 
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el) return;
     const onScrollEnd = () => {
-      const half = el.scrollWidth / 2;
-      if (el.scrollLeft >= half) el.scrollLeft -= half;
-      else if (el.scrollLeft < 0) el.scrollLeft += half;
+      const period = getPeriod();
+      if (period <= 0) return;
+      if (el.scrollLeft >= period) el.scrollLeft -= period;
+      else if (el.scrollLeft < 0) el.scrollLeft += period;
+      offsetRef.current = el.scrollLeft;
     };
     el.addEventListener("scrollend", onScrollEnd);
     return () => el.removeEventListener("scrollend", onScrollEnd);
-  }, []);
+  }, [getPeriod]);
 
   const renderCard = (c: (typeof cases)[number], i: number, keyPrefix: string) => (
     <button
@@ -156,9 +168,13 @@ export const Results: React.FC = () => {
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           }}
         >
-          <div className="flex w-max gap-6 py-3 pl-6 pr-6">
-            {cases.map((c, i) => renderCard(c, i, "a"))}
-            {cases.map((c, i) => renderCard(c, i, "b"))}
+          <div className="flex w-max gap-6 py-3">
+            <div ref={setRef} className="flex shrink-0 gap-6">
+              {cases.map((c, i) => renderCard(c, i, "a"))}
+            </div>
+            <div className="flex shrink-0 gap-6" aria-hidden>
+              {cases.map((c, i) => renderCard(c, i, "b"))}
+            </div>
           </div>
         </div>
       </div>
