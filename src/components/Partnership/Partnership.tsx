@@ -98,13 +98,13 @@ export const Partnership: React.FC = () => {
               data-variant={i % 2 === 0 ? 'light' : 'dark'}
               className="ps-item group relative w-[580px] max-w-full h-[275px] rounded-full border border-black/80 shadow-[0_6px_0_0_#000] overflow-hidden data-[variant=light]:bg-white data-[variant=light]:text-ink data-[variant=dark]:bg-primary data-[variant=dark]:text-white"
             >
-              <span className="absolute inset-y-0 right-4 left-60 flex flex-col items-center justify-center text-center text-2xl md:text-3xl font-extrabold leading-tight transition-opacity duration-200 ease-out group-data-[active=true]:opacity-0 group-data-[active=true]:duration-150">
+              <span style={{ width: '40%' }} className="absolute inset-y-0 right-4 flex flex-col items-center justify-center text-center text-2xl md:text-3xl font-extrabold leading-tight transition-opacity duration-200 ease-out group-data-[active=true]:opacity-0 group-data-[active=true]:duration-150">
                 {stage.title.split(' ').map((w) => (
                   <span key={w}>{w}</span>
                 ))}
               </span>
 
-              <span className="absolute inset-y-0 left-12 right-60 flex items-center text-center justify-center text-sm md:text-base font-semibold leading-snug opacity-0 transition-opacity duration-[250ms] ease-out delay-150 group-data-[active=true]:opacity-100">
+              <span style={{ width: '40%' }} className="absolute inset-y-0 left-12 flex items-center text-center justify-center text-sm md:text-base font-semibold leading-snug opacity-0 transition-opacity duration-[250ms] ease-out delay-150 group-data-[active=true]:opacity-100">
                 {stage.description}
               </span>
 
