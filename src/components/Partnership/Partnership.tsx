@@ -87,7 +87,7 @@ export const Partnership: React.FC = () => {
           Partnership Stages
         </h2>
 
-        <ol className="flex flex-col gap-10">
+        <ol className="flex flex-col items-center gap-10">
           {stages.map((stage, i) => (
             <li
               key={stage.n}
@@ -96,17 +96,19 @@ export const Partnership: React.FC = () => {
               }}
               data-active="false"
               data-variant={i % 2 === 0 ? 'light' : 'dark'}
-              className="ps-item group relative w-full min-h-[170px] rounded-full border border-black/80 shadow-[0_6px_0_0_#000] overflow-hidden data-[variant=light]:bg-white data-[variant=light]:text-ink data-[variant=dark]:bg-primary data-[variant=dark]:text-white"
+              className="ps-item group relative w-[580px] max-w-full h-[275px] rounded-full border border-black/80 shadow-[0_6px_0_0_#000] overflow-hidden data-[variant=light]:bg-white data-[variant=light]:text-ink data-[variant=dark]:bg-primary data-[variant=dark]:text-white"
             >
-              <span className="absolute inset-y-0 right-10 left-40 flex items-center justify-end text-right text-2xl md:text-3xl font-extrabold leading-tight transition-opacity duration-200 ease-out group-data-[active=true]:opacity-0 group-data-[active=true]:duration-150">
-                {stage.title}
+              <span className="absolute inset-y-0 right-4 left-60 flex flex-col items-center justify-center text-center text-2xl md:text-3xl font-extrabold leading-tight transition-opacity duration-200 ease-out group-data-[active=true]:opacity-0 group-data-[active=true]:duration-150">
+                {stage.title.split(' ').map((w) => (
+                  <span key={w}>{w}</span>
+                ))}
               </span>
 
-              <span className="absolute inset-y-0 left-10 right-40 flex items-center text-center justify-center text-sm md:text-base font-semibold leading-snug opacity-0 transition-opacity duration-[250ms] ease-out delay-150 group-data-[active=true]:opacity-100">
+              <span className="absolute inset-y-0 left-12 right-60 flex items-center text-center justify-center text-sm md:text-base font-semibold leading-snug opacity-0 transition-opacity duration-[250ms] ease-out delay-150 group-data-[active=true]:opacity-100">
                 {stage.description}
               </span>
 
-              <span className="ps-circle absolute top-1/2 -translate-y-1/2 left-3 w-32 h-32 rounded-full flex items-center justify-center text-6xl font-extrabold shadow-md transition-[left,background-color,color] duration-[400ms] ease-in-out group-data-[active=true]:left-[calc(100%-8rem-0.75rem)] group-data-[variant=light]:bg-primary group-data-[variant=light]:text-white group-data-[variant=dark]:bg-white group-data-[variant=dark]:text-primary">
+              <span className="ps-circle absolute top-1/2 -translate-y-1/2 left-4 w-56 h-56 rounded-full flex items-center justify-center text-7xl font-extrabold shadow-md transition-[left,background-color,color] duration-[400ms] ease-in-out group-data-[active=true]:left-[calc(100%-14rem-1rem)] group-data-[variant=light]:bg-primary group-data-[variant=light]:text-white group-data-[variant=dark]:bg-white group-data-[variant=dark]:text-primary">
                 {stage.n}
               </span>
             </li>

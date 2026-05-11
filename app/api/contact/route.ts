@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 type Payload = {
   fullName?: string;
@@ -8,83 +8,88 @@ type Payload = {
   message?: string;
 };
 
+const formatLines = (p: Payload) => [
+  `Full Name: ${p.fullName || '-'}`,
+  `Company: ${p.company || '-'}`,
+  `E-mail: ${p.email || '-'}`,
+  `Messenger: ${p.messenger || '-'}`,
+  `Message: ${p.message || '-'}`,
+];
+
 export async function POST(req: Request) {
-  let body: Payload;
+  let data: Payload;
   try {
-    body = (await req.json()) as Payload;
+    data = (await req.json()) as Payload;
   } catch {
-    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const fullName = body.fullName?.trim();
-  const company = body.company?.trim();
-  const email = body.email?.trim();
-  const messenger = body.messenger?.trim();
-  const message = body.message?.trim();
+  const fullName = data.fullName?.trim();
+  const company = data.company?.trim();
+  const email = data.email?.trim();
+  const messenger = data.messenger?.trim();
+  const message = data.message?.trim();
 
   if (!fullName || !company || !email || !messenger || !message) {
     return NextResponse.json(
-      { error: "All fields are required" },
+      { error: 'All fields are required' },
       { status: 400 },
     );
   }
 
-  const lines = [
-    "New contact form submission",
-    `Full Name: ${fullName}`,
-    `Company: ${company}`,
-    `E-mail: ${email}`,
-    `Messenger: ${messenger}`,
-    `Message: ${message}`,
-  ];
+  const text = ['New contact form submission:', ...formatLines({ fullName, company, email, messenger, message })].join('\n');
 
   const slackUrl = process.env.SLACK_WEBHOOK_URL;
-  // const tgToken = process.env.TELEGRAM_BOT_TOKEN;
-  // const tgChatId = process.env.TELEGRAM_CHAT_ID;
+  const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+  const tgChat = process.env.TELEGRAM_CHAT_ID;
 
   const tasks: Promise<Response>[] = [];
 
   if (slackUrl) {
     tasks.push(
       fetch(slackUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      }),
+    );
+  }
+
+  if (tgToken && tgChat) {
+    tasks.push(
+      fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          text: ["*New contact form submission*", ...lines.slice(1)].join("\n"),
+          chat_id: tgChat,
+          text,
         }),
       }),
     );
   }
 
-  // if (tgToken && tgChatId) {
-  //   tasks.push(
-  //     fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({
-  //         chat_id: tgChatId,
-  //         text: lines.join("\n"),
-  //         disable_web_page_preview: true,
-  //       }),
-  //     }),
-  //   );
-  // }
-
   if (tasks.length === 0) {
     return NextResponse.json(
-      { error: "No delivery channels configured" },
+      { error: 'No delivery channels configured' },
       { status: 500 },
     );
   }
 
   const results = await Promise.allSettled(tasks);
-  const anyOk = results.some((r) => r.status === "fulfilled" && r.value.ok);
+  const failures: { i: number; status?: number; body?: string; reason?: unknown }[] = [];
+  for (let i = 0; i < results.length; i++) {
+    const r = results[i];
+    if (r.status === 'rejected') {
+      failures.push({ i, reason: r.reason });
+    } else if (!r.value.ok) {
+      const body = await r.value.text().catch(() => '');
+      failures.push({ i, status: r.value.status, body });
+    }
+  }
 
-  if (!anyOk) {
-    return NextResponse.json(
-      { error: "Failed to deliver message" },
-      { status: 502 },
-    );
+  if (failures.length) {
+    console.error('Contact webhook failures:', JSON.stringify(failures));
+    return NextResponse.json({ ok: false, failures }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });
