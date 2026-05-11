@@ -14,7 +14,7 @@ export const Results: React.FC = () => {
 
   // Auto-scroll loop. Speed in px/sec.
   useEffect(() => {
-    const SPEED = 40;
+    const SPEED = 15;
     const el = scrollerRef.current;
     if (!el) return;
 
