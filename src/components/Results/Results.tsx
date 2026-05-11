@@ -1,16 +1,67 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/common/Reveal";
 import { CaseModal } from "./CaseModal";
 import { cases } from "./cases";
 
 export const Results: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const pausedRef = useRef(false);
+  const rafRef = useRef<number | null>(null);
+  const lastTsRef = useRef<number | null>(null);
 
-  const renderCard = (c: (typeof cases)[number], i: number) => (
+  // Auto-scroll loop. Speed in px/sec.
+  useEffect(() => {
+    const SPEED = 40;
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const tick = (ts: number) => {
+      if (lastTsRef.current == null) lastTsRef.current = ts;
+      const dt = (ts - lastTsRef.current) / 1000;
+      lastTsRef.current = ts;
+
+      if (!pausedRef.current && el) {
+        const half = el.scrollWidth / 2;
+        let next = el.scrollLeft + SPEED * dt;
+        if (next >= half) next -= half;
+        el.scrollLeft = next;
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      lastTsRef.current = null;
+    };
+  }, []);
+
+  const pause = useCallback(() => {
+    pausedRef.current = true;
+  }, []);
+  const resume = useCallback(() => {
+    pausedRef.current = false;
+  }, []);
+
+  const scrollByCards = useCallback((dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-card]");
+    const gap = 24;
+    const step = (card?.offsetWidth ?? 300) + gap;
+    const half = el.scrollWidth / 2;
+    let target = el.scrollLeft + dir * step;
+    if (target < 0) target += half;
+    if (target >= half) target -= half;
+    el.scrollTo({ left: target, behavior: "smooth" });
+  }, []);
+
+  const renderCard = (c: (typeof cases)[number], i: number, keyPrefix: string) => (
     <button
-      key={`card-${i}`}
+      key={`${keyPrefix}-${i}`}
+      data-card
       type="button"
       onClick={() => setActiveIdx(i)}
       style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
@@ -55,42 +106,56 @@ export const Results: React.FC = () => {
       </div>
 
       <div
-        className="mt-14 overflow-hidden"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
-        }}
+        className="relative mt-14"
+        onMouseEnter={pause}
+        onMouseLeave={resume}
+        onTouchStart={pause}
+        onTouchEnd={resume}
       >
-        <div className="results-marquee flex w-max gap-6 py-3 pl-6">
-          {cases.map((c, i) => renderCard(c, i))}
-          {cases.map((c, i) => (
-            <React.Fragment key={`dup-${i}`}>{renderCard(c, i)}</React.Fragment>
-          ))}
+        <button
+          type="button"
+          onClick={() => scrollByCards(-1)}
+          aria-label="Previous case"
+          className="absolute left-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[0_4px_0_0_#0b0b0f] transition hover:-translate-y-[calc(50%+2px)] md:flex"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollByCards(1)}
+          aria-label="Next case"
+          className="absolute right-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[0_4px_0_0_#0b0b0f] transition hover:-translate-y-[calc(50%+2px)] md:flex"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+
+        <div
+          ref={scrollerRef}
+          className="results-scroller overflow-x-auto"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          }}
+        >
+          <div className="flex w-max gap-6 py-3 pl-6 pr-6">
+            {cases.map((c, i) => renderCard(c, i, "a"))}
+            {cases.map((c, i) => renderCard(c, i, "b"))}
+          </div>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes results-scroll {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
+        .results-scroller {
+          scrollbar-width: none;
         }
-        .results-marquee {
-          animation: results-scroll 60s linear infinite;
-          will-change: transform;
-        }
-        .results-marquee:hover {
-          animation-play-state: paused;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .results-marquee {
-            animation: none;
-          }
+        .results-scroller::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
 
