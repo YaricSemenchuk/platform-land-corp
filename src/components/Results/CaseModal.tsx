@@ -36,17 +36,20 @@ export type CaseDetail = {
   tagline: string;
   platforms: PlatformKey[];
   countries: string[];
+  countriesText?: string;
   months: number | string;
   tools: string;
   goal: string;
   execution: string[];
   keyResults: { label: string; value: string }[];
   highlight: { value: string; label: string };
+  stats?: { value: string; label: string }[];
   preview?: {
     appName: string;
     publisher: string;
     iconBg?: string;
     iconLabel?: string;
+    image?: string;
   };
 };
 
@@ -114,8 +117,8 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
 
         <div className="max-h-[85vh] overflow-y-auto px-6 py-7 sm:px-8 md:px-10 md:py-9">
           <h2 className="text-3xl font-bold text-ink md:text-4xl" style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}>{data.category}</h2>
-          <p className="mt-2 text-base text-ink-soft md:text-lg">{data.appName}</p>
-          {data.tagline && <p className="mt-1 text-sm text-ink-soft">{data.tagline}</p>}
+          {data.appName && <p className="mt-2 text-base text-ink-soft md:text-lg">{data.appName}</p>}
+          {data.tagline && <p className="mt-1 text-base text-ink-soft md:text-lg">{data.tagline}</p>}
 
           <div className="mt-7 grid gap-6 lg:grid-cols-2">
             <div className="flex flex-col gap-4">
@@ -129,16 +132,20 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                   <div className="mt-2 text-xs font-medium text-ink-soft">Platform</div>
                 </div>
                 <div className={`${cardCls} flex flex-col items-center text-center`} style={cardShadow}>
-                  <div className="flex flex-nowrap items-center justify-center gap-1.5">
-                    {data.countries.map((code, i) => (
-                      <ReactCountryFlag
-                        key={i}
-                        countryCode={code}
-                        svg
-                        style={{ width: '30px', height: '21px', objectFit: 'cover', borderRadius: '2px' }}
-                      />
-                    ))}
-                  </div>
+                  {data.countriesText ? (
+                    <div className="font-bold text-primary" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '25px' }}>{data.countriesText}</div>
+                  ) : (
+                    <div className="flex flex-nowrap items-center justify-center gap-1.5">
+                      {data.countries.map((code, i) => (
+                        <ReactCountryFlag
+                          key={i}
+                          countryCode={code}
+                          svg
+                          style={{ width: '30px', height: '21px', objectFit: 'cover', borderRadius: '2px' }}
+                        />
+                      ))}
+                    </div>
+                  )}
                   <div className="mt-2 text-xs font-medium text-ink-soft">{data.countries.length > 1 ? 'Countries' : 'Country'}</div>
                 </div>
                 <div className={`${cardCls} flex flex-col items-center text-center`} style={cardShadow}>
@@ -148,12 +155,12 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
               </div>
 
               <div className={cardCls} style={cardShadow}>
-                <div className="text-sm font-bold text-ink" style={headerFont}>Tools</div>
+                <div className="text-sm font-bold text-ink" style={headerFont}>Tools &amp; Tech Stack</div>
                 <p className="mt-1" style={descFont}>{data.tools}</p>
               </div>
 
               <div className={cardCls} style={cardShadow}>
-                <div className="text-sm font-bold text-ink" style={headerFont}>Goal</div>
+                <div className="text-sm font-bold text-ink" style={headerFont}>Strategic Objectives</div>
                 <p className="mt-1" style={descFont}>{data.goal}</p>
               </div>
             </div>
@@ -176,18 +183,24 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                   </button>
                 </div>
               )}
-              <div className="grid flex-1 grid-cols-3 gap-2 bg-gradient-to-br from-primary-soft to-primary-soft-2 p-3">
-                <div className="rounded-xl bg-white/70" />
-                <div className="rounded-xl bg-white/70" />
-                <div className="rounded-xl bg-white/70" />
-              </div>
+              {data.preview?.image ? (
+                <div className="flex-1 overflow-hidden">
+                  <img src={data.preview.image} alt={data.preview.appName} className="h-full w-full object-cover" />
+                </div>
+              ) : (
+                <div className="grid flex-1 grid-cols-3 gap-2 bg-gradient-to-br from-primary-soft to-primary-soft-2 p-3">
+                  <div className="rounded-xl bg-white/70" />
+                  <div className="rounded-xl bg-white/70" />
+                  <div className="rounded-xl bg-white/70" />
+                </div>
+              )}
             </div>
           </div>
 
           <div className="mt-6 grid gap-6 lg:grid-cols-2">
             <div className="border bg-primary-soft-2 px-6 py-5" style={cardShadow}>
-              <div className="text-sm font-bold text-ink" style={headerFont}>Execution</div>
-              <ol className="mt-3 space-y-2 text-sm text-ink-soft">
+              <div className="text-sm font-bold text-ink" style={headerFont}>Execution (What Was Done)</div>
+              <ol className="mt-3 space-y-2" style={descFont}>
                 {data.execution.map((e, i) => (
                   <li key={i}>
                     <span className="font-semibold text-ink">{i + 1}. </span>
@@ -199,20 +212,38 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
 
             <div className="border bg-primary px-6 py-5 text-white" style={cardShadow}>
               <div className="text-sm font-bold" style={headerFont}>Key Results</div>
-              <div className="mt-3 grid grid-cols-[1fr_auto_auto] items-center gap-4">
-                <ul className="space-y-2 text-sm">
-                  {data.keyResults.map((r, i) => (
-                    <li key={i}>
-                      <b>{r.label}:</b> {r.value}
-                    </li>
+              {data.stats && data.stats.length > 0 ? (
+                <div className="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+                  {data.stats.map((s, i) => (
+                    <React.Fragment key={i}>
+                      {i > 0 && <div className="h-full w-px bg-white/40" />}
+                      <div className="text-center">
+                        <div className="text-3xl font-bold leading-tight">{s.value}</div>
+                        <div className="mt-2 text-xs leading-snug">{s.label}</div>
+                      </div>
+                    </React.Fragment>
                   ))}
-                </ul>
-                <div className="h-full w-px bg-white/40" />
-                <div className="text-center">
-                  <div className="text-2xl font-bold leading-tight">{data.highlight.value}</div>
-                  <div className="mt-1 text-xs leading-snug">{data.highlight.label}</div>
                 </div>
-              </div>
+              ) : (
+                <div className={`mt-3 grid items-center gap-4 ${data.highlight.value ? 'grid-cols-[1fr_auto_auto]' : ''}`}>
+                  <ul className="space-y-2" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '10px' }}>
+                    {data.keyResults.map((r, i) => (
+                      <li key={i}>
+                        <b>{r.label}:</b> {r.value}
+                      </li>
+                    ))}
+                  </ul>
+                  {data.highlight.value && (
+                    <>
+                      <div className="h-full w-px bg-white/40" />
+                      <div className="text-center">
+                        <div className="text-2xl font-bold leading-tight">{data.highlight.value}</div>
+                        <div className="mt-1 text-xs leading-snug">{data.highlight.label}</div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </div>
