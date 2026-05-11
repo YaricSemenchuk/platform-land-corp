@@ -32,7 +32,7 @@ export const Results: React.FC = () => {
             <Reveal key={c.index} delay={i * 130}>
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
-                className="relative flex flex-col overflow-hidden rounded-3xl border-2 border-ink bg-[#dcdcdc]"
+                className="relative flex flex-col overflow-hidden rounded-3xl border border-ink bg-[#EDEDED]"
               >
                 <div className="flex items-center gap-2 bg-primary px-5 py-3.5">
                   <span className="h-3.5 w-3.5 rounded-full bg-[#ff5f57]" />

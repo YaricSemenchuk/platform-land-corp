@@ -45,7 +45,7 @@ export const Portfolio: React.FC = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {caseStudies.map((study) => (
-            <Card key={study.id} className="border border-gray-200">
+            <Card key={study.id} className="border border-gray-200 bg-[#EDEDED]">
               <div className="text-3xl mb-4">{study.icon}</div>
               <div className="text-2xl font-bold text-gray-900 mb-2">{study.metric}</div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">{study.title}</h3>

@@ -51,33 +51,35 @@ export const About: React.FC = () => {
           {cards.map((c, i) => (
             <Reveal key={c.title} delay={120 * i}>
               <article
-                style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
+                style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: "45px" }}
                 className={
-                  "relative flex min-h-[260px] flex-col rounded-3xl border-2 border-ink p-8 md:min-h-[300px] md:p-10 " +
+                  "relative flex h-[280px] w-full max-w-[580px] flex-col border border-ink p-8 md:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
                 }
               >
-                <h3 className="whitespace-pre-line pr-24 text-2xl font-bold leading-tight md:pr-28 md:text-[28px]">
+                <h3 className="whitespace-pre-line text-2xl font-bold leading-tight md:text-[28px]">
                   {c.title}
                 </h3>
-                <p
-                  className={
-                    "mt-6 pr-24 text-sm leading-relaxed md:pr-28 md:text-[15px] " +
-                    (c.tone === "dark" ? "text-white/90" : "text-ink/80")
-                  }
-                >
-                  {c.body}
-                </p>
-                <Image
-                  src={c.icon}
-                  alt=""
-                  aria-hidden
-                  width={80}
-                  height={80}
-                  className="absolute bottom-8 right-8 h-16 w-16 md:bottom-10 md:right-10 md:h-20 md:w-20"
-                />
+                <div className="mt-6 flex items-end gap-4">
+                  <p
+                    className={
+                      "text-sm leading-relaxed md:text-[15px] " +
+                      (c.tone === "dark" ? "text-white/90" : "text-ink/80")
+                    }
+                  >
+                    {c.body}
+                  </p>
+                  <Image
+                    src={c.icon}
+                    alt=""
+                    aria-hidden
+                    width={80}
+                    height={80}
+                    className="h-12 w-12 shrink-0 md:h-16 md:w-16"
+                  />
+                </div>
               </article>
             </Reveal>
           ))}
