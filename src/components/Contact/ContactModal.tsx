@@ -47,9 +47,17 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
     setForm((p) => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', form);
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+    } catch (err) {
+      console.error('Contact submit failed:', err);
+    }
     markContactSubmitted();
   };
 
