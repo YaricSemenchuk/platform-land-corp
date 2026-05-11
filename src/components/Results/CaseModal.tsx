@@ -121,7 +121,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
           {data.tagline && <p className="mt-1 text-base text-ink-soft md:text-lg">{data.tagline}</p>}
 
           <div className="mt-7 grid gap-6 lg:grid-cols-2">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <div className="grid grid-cols-3 gap-3 [&>div]:!h-[70px] [&>div]:!py-0 [&>div]:justify-center">
                 <div className={`${cardCls} flex flex-col items-center text-center`} style={cardShadow}>
                   <div className="flex flex-nowrap items-center justify-center gap-1.5">
@@ -170,7 +170,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                 <img
                   src={data.preview.image}
                   alt={data.preview.appName}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-contain"
                 />
               ) : (
                 <div className="grid flex-1 grid-cols-3 gap-2 bg-gradient-to-br from-primary-soft to-primary-soft-2 p-3">
