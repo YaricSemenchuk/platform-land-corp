@@ -165,7 +165,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
               </div>
             </div>
 
-            <div className="flex flex-col overflow-hidden border bg-white" style={cardShadow}>
+            <div className="flex flex-col overflow-hidden bg-white">
               {data.preview?.image ? (
                 <img
                   src={data.preview.image}
