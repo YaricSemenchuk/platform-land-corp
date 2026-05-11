@@ -166,27 +166,12 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
             </div>
 
             <div className="flex flex-col overflow-hidden border bg-white" style={cardShadow}>
-              {data.preview && (
-                <div className="flex items-center gap-3 px-4 py-3">
-                  <div
-                    className="grid h-12 w-12 place-items-center rounded-xl text-xs font-bold text-white"
-                    style={{ background: data.preview.iconBg ?? 'var(--primary)' }}
-                  >
-                    {data.preview.iconLabel ?? data.preview.appName.slice(0, 3)}
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-bold text-ink">{data.preview.appName}</div>
-                    <div className="text-xs text-ink-soft">{data.preview.publisher}</div>
-                  </div>
-                  <button className="rounded-full bg-primary px-4 py-1.5 text-xs font-semibold text-white">
-                    GET
-                  </button>
-                </div>
-              )}
               {data.preview?.image ? (
-                <div className="flex-1 overflow-hidden">
-                  <img src={data.preview.image} alt={data.preview.appName} className="h-full w-full object-cover" />
-                </div>
+                <img
+                  src={data.preview.image}
+                  alt={data.preview.appName}
+                  className="h-full w-full object-contain"
+                />
               ) : (
                 <div className="grid flex-1 grid-cols-3 gap-2 bg-gradient-to-br from-primary-soft to-primary-soft-2 p-3">
                   <div className="rounded-xl bg-white/70" />
