@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { markContactSubmitted, useContactSubmitted } from './contactState';
 
 type Props = {
   open: boolean;
@@ -18,9 +19,13 @@ const initial = {
 
 export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
   const [form, setForm] = useState(initial);
+  const submitted = useContactSubmitted();
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      setForm(initial);
+      return;
+    }
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
@@ -45,8 +50,7 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Contact form submitted:', form);
-    setForm(initial);
-    onClose();
+    markContactSubmitted();
   };
 
   const inputCls =
@@ -77,6 +81,16 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
           </svg>
         </button>
 
+        {submitted ? (
+          <div className="py-12 text-center">
+            <h3 className="text-2xl font-bold text-ink md:text-3xl">
+              Спасибо!
+            </h3>
+            <p className="mt-3 text-base text-ink/80">
+              Данные успешно отправлены
+            </p>
+          </div>
+        ) : (
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div>
             <label htmlFor="fullName" className={labelCls}>Full Name</label>
@@ -107,6 +121,7 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
             </button>
           </div>
         </form>
+        )}
       </div>
     </div>,
     document.body,
