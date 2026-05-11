@@ -53,7 +53,7 @@ export const About: React.FC = () => {
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
                 className={
-                  "relative flex min-h-[260px] flex-col rounded-3xl border-2 border-ink p-8 md:min-h-[300px] md:p-10 " +
+                  "relative flex min-h-[260px] flex-col rounded-3xl border-1 border-ink p-8 md:min-h-[300px] md:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")

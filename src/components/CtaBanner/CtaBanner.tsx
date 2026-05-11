@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Reveal } from "@/components/common/Reveal";
 import { ContactModal } from "@/components/Contact/ContactModal";
+import { useContactSubmitted } from "@/components/Contact/useContactSubmitted";
 
 type Props = {
   title: string;
@@ -21,6 +22,9 @@ export const CtaBanner: React.FC<Props> = ({
 }) => {
   const dark = variant === "dark";
   const [modalOpen, setModalOpen] = useState(false);
+  const submitted = useContactSubmitted();
+
+  if (submitted) return null;
 
   return (
     <section className="px-4 sm:px-6 md:px-10">

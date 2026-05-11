@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { markContactSubmitted } from './useContactSubmitted';
 
 type Props = {
   open: boolean;
@@ -16,8 +17,12 @@ const initial = {
   message: '',
 };
 
+type Status = 'idle' | 'sending' | 'success' | 'error';
+
 export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
   const [form, setForm] = useState(initial);
+  const [status, setStatus] = useState<Status>('idle');
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -42,11 +47,32 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
     setForm((p) => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', form);
-    setForm(initial);
-    onClose();
+    if (status === 'sending') return;
+    setStatus('sending');
+    setErrorMsg(null);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => ({}))) as { error?: string };
+        throw new Error(data.error ?? 'Failed to send');
+      }
+      setStatus('success');
+      markContactSubmitted();
+      setForm(initial);
+      setTimeout(() => {
+        setStatus('idle');
+        onClose();
+      }, 1500);
+    } catch (err) {
+      setStatus('error');
+      setErrorMsg(err instanceof Error ? err.message : 'Failed to send');
+    }
   };
 
   const inputCls =
@@ -84,7 +110,7 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
           </div>
           <div>
             <label htmlFor="company" className={labelCls}>Company</label>
-            <input id="company" name="company" value={form.company} onChange={handleChange} placeholder="Company" className={inputCls} />
+            <input id="company" name="company" value={form.company} onChange={handleChange} required placeholder="Company" className={inputCls} />
           </div>
           <div>
             <label htmlFor="email" className={labelCls}>E-mail</label>
@@ -92,19 +118,26 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
           </div>
           <div>
             <label htmlFor="messenger" className={labelCls}>Messenger (Whatsapp/Telegram)</label>
-            <input id="messenger" name="messenger" value={form.messenger} onChange={handleChange} placeholder="Phone number or contact link" className={inputCls} />
+            <input id="messenger" name="messenger" value={form.messenger} onChange={handleChange} required placeholder="Phone number or contact link" className={inputCls} />
           </div>
           <div className="md:col-span-2">
             <label htmlFor="message" className={labelCls}>Message</label>
-            <textarea id="message" name="message" value={form.message} onChange={handleChange} rows={3} placeholder="Enter your message" className={`${inputCls} resize-none`} />
+            <textarea id="message" name="message" value={form.message} onChange={handleChange} required rows={3} placeholder="Enter your message" className={`${inputCls} resize-none`} />
           </div>
-          <div className="md:col-span-2 mt-2">
+          <div className="md:col-span-2 mt-2 flex flex-wrap items-center gap-4">
             <button
               type="submit"
-              className="inline-flex items-center justify-center rounded-full bg-primary px-10 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:-translate-y-0.5 hover:shadow-xl"
+              disabled={status === 'sending'}
+              className="inline-flex items-center justify-center rounded-full bg-primary px-10 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:-translate-y-0.5 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
             >
-              Send
+              {status === 'sending' ? 'Sending…' : 'Send'}
             </button>
+            {status === 'success' && (
+              <span className="text-sm font-medium text-green-600">Thanks! We&rsquo;ll be in touch shortly.</span>
+            )}
+            {status === 'error' && (
+              <span className="text-sm font-medium text-red-600">{errorMsg ?? 'Something went wrong.'}</span>
+            )}
           </div>
         </form>
       </div>
