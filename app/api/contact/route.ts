@@ -9,11 +9,11 @@ type Payload = {
 };
 
 const formatLines = (p: Payload) => [
-  `*Full Name:* ${p.fullName || '-'}`,
-  `*Company:* ${p.company || '-'}`,
-  `*E-mail:* ${p.email || '-'}`,
-  `*Messenger:* ${p.messenger || '-'}`,
-  `*Message:* ${p.message || '-'}`,
+  `Full Name: ${p.fullName || '-'}`,
+  `Company: ${p.company || '-'}`,
+  `E-mail: ${p.email || '-'}`,
+  `Messenger: ${p.messenger || '-'}`,
+  `Message: ${p.message || '-'}`,
 ];
 
 export async function POST(req: Request) {
@@ -44,20 +44,26 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           chat_id: tgChat,
           text,
-          parse_mode: 'Markdown',
         }),
       }),
     );
   }
 
   const results = await Promise.allSettled(tasks);
-  const failures = results
-    .map((r, i) => ({ r, i }))
-    .filter(({ r }) => r.status === 'rejected' || (r.status === 'fulfilled' && !r.value.ok));
+  const failures: { i: number; status?: number; body?: string; reason?: unknown }[] = [];
+  for (let i = 0; i < results.length; i++) {
+    const r = results[i];
+    if (r.status === 'rejected') {
+      failures.push({ i, reason: r.reason });
+    } else if (!r.value.ok) {
+      const body = await r.value.text().catch(() => '');
+      failures.push({ i, status: r.value.status, body });
+    }
+  }
 
   if (failures.length) {
-    console.error('Contact webhook failures:', failures);
-    return NextResponse.json({ ok: false }, { status: 502 });
+    console.error('Contact webhook failures:', JSON.stringify(failures));
+    return NextResponse.json({ ok: false, failures }, { status: 502 });
   }
 
   return NextResponse.json({ ok: true });
