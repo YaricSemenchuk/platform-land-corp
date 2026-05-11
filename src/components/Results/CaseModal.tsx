@@ -122,7 +122,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
 
           <div className="mt-7 grid gap-6 lg:grid-cols-2">
             <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-3 gap-3 [&>div]:!py-2 [&>div]:justify-center">
+              <div className="grid grid-cols-3 gap-3 [&>div]:!h-[70px] [&>div]:!py-0 [&>div]:justify-center">
                 <div className={`${cardCls} flex flex-col items-center text-center`} style={cardShadow}>
                   <div className="flex flex-nowrap items-center justify-center gap-1.5">
                     {data.platforms.map((p, i) => (
