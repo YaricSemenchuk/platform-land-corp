@@ -44,6 +44,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Meal Planner & Macro Counter',
       iconBg: '#6B5BFF',
       iconLabel: 'S',
+      image: '/cases/calorie.png',
     },
   },
   {
@@ -101,6 +102,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Baby sleep sounds and white noise for kids',
       iconBg: '#fd5200',
       iconLabel: '🌙',
+      image: '/cases/Store.png',
     },
   },
   {
@@ -129,6 +131,7 @@ export const cases: CaseDetail[] = [
       publisher: 'iGaming',
       iconBg: '#4262ff',
       iconLabel: 'NDA',
+      image: '/cases/xbet.png',
     },
   },
   {
@@ -153,6 +156,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Finance',
       iconBg: '#4262ff',
       iconLabel: 'NDA',
+      image: '/cases/fintech-ua.png',
     },
   },
   {
@@ -179,6 +183,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Finance',
       iconBg: '#4262ff',
       iconLabel: 'NDA',
+      image: '/cases/fintech-ph.png',
     },
   },
   {
@@ -207,6 +212,7 @@ export const cases: CaseDetail[] = [
       publisher: 'AI Assistant',
       iconBg: '#4262ff',
       iconLabel: '✦',
+      image: '/cases/lumi.png',
     },
   },
   {
@@ -232,6 +238,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Books',
       iconBg: '#4262ff',
       iconLabel: 'NDA',
+      image: '/cases/kids-fairy-tales.png',
     },
   },
   {
@@ -260,6 +267,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Shopping',
       iconBg: '#4262ff',
       iconLabel: 'NDA',
+      image: '/cases/fashion.png',
     },
   },
   {
@@ -289,6 +297,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Multi-stop route planning app',
       iconBg: '#ef4444',
       iconLabel: 'R',
+      image: '/cases/route-planner.png',
     },
   },
   {
@@ -317,6 +326,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Legal Help Ask Attorney Online',
       iconBg: '#4262ff',
       iconLabel: '⚖',
+      image: '/cases/skylex.png',
     },
   },
   {
@@ -343,6 +353,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Online Cinema',
       iconBg: '#4262ff',
       iconLabel: 'NDA',
+      image: '/cases/online-cinema.png',
     },
   },
   {
@@ -372,6 +383,7 @@ export const cases: CaseDetail[] = [
       publisher: 'iGaming',
       iconBg: '#4262ff',
       iconLabel: 'NDA',
+      image: '/cases/gambling-orm.png',
     },
   },
 ];
