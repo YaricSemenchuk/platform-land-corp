@@ -52,10 +52,23 @@ export const Results: React.FC = () => {
     const gap = 24;
     const step = (card?.offsetWidth ?? 300) + gap;
     const half = el.scrollWidth / 2;
-    let target = el.scrollLeft + dir * step;
-    if (target < 0) target += half;
-    if (target >= half) target -= half;
+    if (dir === -1 && el.scrollLeft - step < 0) {
+      el.scrollLeft += half;
+    }
+    const target = el.scrollLeft + dir * step;
     el.scrollTo({ left: target, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const onScrollEnd = () => {
+      const half = el.scrollWidth / 2;
+      if (el.scrollLeft >= half) el.scrollLeft -= half;
+      else if (el.scrollLeft < 0) el.scrollLeft += half;
+    };
+    el.addEventListener("scrollend", onScrollEnd);
+    return () => el.removeEventListener("scrollend", onScrollEnd);
   }, []);
 
   const renderCard = (c: (typeof cases)[number], i: number, keyPrefix: string) => (
