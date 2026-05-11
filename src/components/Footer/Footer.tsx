@@ -22,8 +22,8 @@ const socials = [
     icon: <LinkedInIcon />,
   },
   { label: "Telegram", href: "https://t.me/promobile_app", icon: <TelegramIcon /> },
-  { label: "Facebook", href: "#", icon: <FacebookIcon /> },
-  { label: "Instagram", href: "#", icon: <InstagramIcon /> },
+  { label: "Facebook", href: "https://www.facebook.com/61575265504649/about/?_rdr", icon: <FacebookIcon /> },
+  { label: "Instagram", href: "https://www.instagram.com/promobile_app/", icon: <InstagramIcon /> },
 ];
 
 export const Footer: React.FC = () => {
