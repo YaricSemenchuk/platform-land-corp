@@ -14,7 +14,7 @@ export const Results: React.FC = () => {
       type="button"
       onClick={() => setActiveIdx(i)}
       style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
-      className="group relative flex h-full w-[280px] shrink-0 flex-col overflow-hidden rounded-3xl border-2 border-ink bg-[#dcdcdc] text-left transition hover:-translate-y-0.5 sm:w-[300px]"
+      className="group relative flex h-[320px] w-[280px] shrink-0 flex-col overflow-hidden rounded-3xl border-2 border-ink bg-[#dcdcdc] text-left transition hover:-translate-y-0.5 sm:w-[300px]"
     >
       <div className="flex items-center gap-2 bg-primary px-5 py-3.5">
         <span className="h-3.5 w-3.5 rounded-full bg-[#ff5f57]" />
