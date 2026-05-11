@@ -170,7 +170,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                 <img
                   src={data.preview.image}
                   alt={data.preview.appName}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-cover"
                 />
               ) : (
                 <div className="grid flex-1 grid-cols-3 gap-2 bg-gradient-to-br from-primary-soft to-primary-soft-2 p-3">
