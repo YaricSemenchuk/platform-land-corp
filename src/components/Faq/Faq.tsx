@@ -6,19 +6,19 @@ import { Reveal } from "@/components/common/Reveal";
 const items = [
   {
     q: "How fast will we see results?",
-    a: "Most clients see meaningful keyword movement within 3–6 weeks. Paid UA usually returns measurable signal in the first 1–2 weeks once campaigns leave learning.",
+    a: "~3-6 weeks for the first improvements.",
   },
   {
     q: "How much does ASO & Paid UA cost?",
-    a: "Engagements start from $1,000 per month and scale with the scope of your goals. After our initial audit we deliver a tailored plan with clear pricing.",
+    a: "Starts from $1,000 per month, depending on the scope.",
   },
   {
     q: "Do I need both ASO and ASA?",
-    a: "They reinforce each other — strong ASO lifts conversion on paid traffic, and ASA traffic feeds App Store ranking. Most apps see the best ROI with both running in concert.",
+    a: "ASO improves organic visibility, while ASA accelerates paid growth. Using both together maximizes results, but we can tailor our approach based on your goals.",
   },
   {
     q: "Do you offer one-time ASO optimization?",
-    a: "Yes. We run a one-time deep-dive audit and metadata refresh for teams who want to validate the opportunity before committing to a retainer — and a maintenance track once you're ready.",
+    a: "Yes, depending on your needs, we provide both one-time ASO audits and ongoing ASO maintenance.",
   },
 ];
 

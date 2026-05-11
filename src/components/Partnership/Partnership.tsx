@@ -108,7 +108,7 @@ export const Partnership: React.FC = () => {
                 {stage.description}
               </span>
 
-              <span className="ps-circle absolute top-1/2 -translate-y-1/2 left-4 w-56 h-56 rounded-full flex items-center justify-center text-7xl font-extrabold shadow-md transition-[left,background-color,color] duration-[400ms] ease-in-out group-data-[active=true]:left-[calc(100%-14rem-1rem)] group-data-[variant=light]:bg-primary group-data-[variant=light]:text-white group-data-[variant=dark]:bg-white group-data-[variant=dark]:text-primary">
+              <span style={{ fontSize: '100px' }} className="ps-circle absolute top-1/2 -translate-y-1/2 left-4 w-56 h-56 rounded-full flex items-center justify-center font-extrabold shadow-md transition-[left,background-color,color] duration-[400ms] ease-in-out group-data-[active=true]:left-[calc(100%-14rem-1rem)] group-data-[variant=light]:bg-primary group-data-[variant=light]:text-white group-data-[variant=dark]:bg-white group-data-[variant=dark]:text-primary">
                 {stage.n}
               </span>
             </li>
