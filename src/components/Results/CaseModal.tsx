@@ -92,7 +92,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={data.title}
+      aria-label={data.category}
     >
       <div
         className="relative w-full max-w-5xl overflow-hidden rounded-3xl border-2 border-ink bg-white"
