@@ -44,7 +44,7 @@ export const cases: CaseDetail[] = [
       publisher: 'Meal Planner & Macro Counter',
       iconBg: '#6B5BFF',
       iconLabel: 'S',
-      image: '/cases/calorie.png',
+      image: '/cases/srama.png',
     },
   },
   {
