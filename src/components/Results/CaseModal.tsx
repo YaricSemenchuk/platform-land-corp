@@ -77,8 +77,8 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
 
   if (!open || !data || typeof window === 'undefined') return null;
 
-  const cardCls =
-    'border bg-white px-5 py-4';
+  const cardCls = 'border bg-white px-5 py-4';
+  const triCardCls = 'border bg-white px-2 py-4 sm:px-5';
   const cardShadow = {
     borderRadius: '16px',
     borderColor: '#252525',
@@ -89,7 +89,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-primary/40 px-4 py-8 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-primary/40 px-2 py-4 backdrop-blur-md sm:px-4 sm:py-8"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -116,27 +116,29 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
           </button>
         </div>
 
-        <div className="max-h-[85vh] overflow-y-auto px-6 py-7 sm:px-8 md:px-10 md:py-9">
+        <div className="max-h-[85vh] overflow-y-auto px-3 py-4 sm:px-8 sm:py-7 md:px-10 md:py-9">
           <h2 className="text-3xl font-bold text-ink md:text-4xl" style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}>{data.category}</h2>
           {data.appName && <p className="mt-2 text-base text-ink-soft md:text-lg">{data.appName}</p>}
           {data.tagline && <p className="mt-1 text-base text-ink-soft md:text-lg">{data.tagline}</p>}
 
           <div className="mt-7 grid gap-6 lg:grid-cols-2">
             <div className="flex flex-col gap-3">
-              <div className="grid grid-cols-3 gap-3 [&>div]:!h-[70px] [&>div]:!py-0 [&>div]:justify-center">
-                <div className={`${cardCls} flex flex-col items-center text-center`} style={cardShadow}>
-                  <div className="flex flex-nowrap items-center justify-center gap-1.5">
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 [&>div]:!h-[70px] [&>div]:!py-0 [&>div]:justify-center">
+                <div className={`${triCardCls} flex flex-col items-center text-center`} style={cardShadow}>
+                  <div className="flex flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 [&_span]:!h-[14px] [&_span]:!w-[14px] sm:[&_span]:!h-[21px] sm:[&_span]:!w-[21px] [&_svg]:!h-[9px] [&_svg]:!w-[9px] sm:[&_svg]:!h-[13px] sm:[&_svg]:!w-[13px]">
                     {data.platforms.map((p, i) => (
                       <PlatformIcon key={i} kind={p} size={21} />
                     ))}
                   </div>
-                  <div className="mt-2 text-xs font-medium text-ink-soft">Platform</div>
+                  <div className="mt-2 text-[10px] font-medium text-ink-soft sm:text-xs">Platform</div>
                 </div>
-                <div className={`${cardCls} flex flex-col items-center text-center`} style={cardShadow}>
+                <div className={`${triCardCls} flex flex-col items-center text-center`} style={cardShadow}>
                   {data.countriesText ? (
-                    <div className="font-bold text-primary" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '25px' }}>{data.countriesText}</div>
+                    <div className="font-bold text-primary" style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}>
+                      <span className="text-[16px] sm:text-[25px]">{data.countriesText}</span>
+                    </div>
                   ) : (
-                    <div className="flex flex-nowrap items-center justify-center gap-1.5">
+                    <div className="flex flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 [&>img]:!h-[14px] [&>img]:!w-[20px] sm:[&>img]:!h-[21px] sm:[&>img]:!w-[30px]">
                       {data.countries.map((code, i) => (
                         <ReactCountryFlag
                           key={i}
@@ -147,11 +149,11 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                       ))}
                     </div>
                   )}
-                  <div className="mt-2 text-xs font-medium text-ink-soft">{data.countries.length > 1 ? 'Countries' : 'Country'}</div>
+                  <div className="mt-2 text-[10px] font-medium text-ink-soft sm:text-xs">{data.countries.length > 1 ? 'Countries' : 'Country'}</div>
                 </div>
-                <div className={`${cardCls} flex flex-col items-center text-center`} style={cardShadow}>
-                  <div className="font-bold text-primary" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '25px' }}>{data.months}</div>
-                  <div className="mt-2 text-xs font-medium text-ink-soft">Months</div>
+                <div className={`${triCardCls} flex flex-col items-center text-center`} style={cardShadow}>
+                  <div className="font-bold text-primary text-[18px] sm:text-[25px]" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", lineHeight: 1 }}>{data.months}</div>
+                  <div className="mt-2 text-[10px] font-medium text-ink-soft sm:text-xs">Months</div>
                 </div>
               </div>
 
@@ -184,7 +186,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
           </div>
 
           <div className="mt-6 grid gap-6 lg:grid-cols-2">
-            <div className="border bg-primary-soft-2 px-6 py-5" style={cardShadow}>
+            <div className="border bg-primary-soft-2 px-4 py-4 sm:px-6 sm:py-5" style={cardShadow}>
               <div className="text-sm font-bold text-ink" style={headerFont}>Execution (What Was Done)</div>
               <ol className="mt-3 space-y-2" style={descFont}>
                 {data.execution.map((e, i) => (
@@ -196,23 +198,23 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
               </ol>
             </div>
 
-            <div className="border bg-primary px-6 py-5 text-white" style={cardShadow}>
+            <div className="border bg-primary px-4 py-4 text-white sm:px-6 sm:py-5" style={cardShadow}>
               <div className="text-sm font-bold" style={headerFont}>Key Results</div>
               {data.stats && data.stats.length > 0 ? (
-                <div className="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+                <div className="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
                   {data.stats.map((s, i) => (
                     <React.Fragment key={i}>
                       {i > 0 && <div className="h-full w-px bg-white/40" />}
                       <div className="text-center">
-                        <div className="text-3xl font-bold leading-tight">{s.value}</div>
-                        <div className="mt-2 text-xs leading-snug">{s.label}</div>
+                        <div className="text-lg font-bold leading-tight sm:text-3xl">{s.value}</div>
+                        <div className="mt-1 text-[10px] leading-snug sm:mt-2 sm:text-xs">{s.label}</div>
                       </div>
                     </React.Fragment>
                   ))}
                 </div>
               ) : (
-                <div className={`mt-3 grid items-center gap-4 ${data.highlight.value ? 'grid-cols-[1fr_auto_auto]' : ''}`}>
-                  <ul className="space-y-2" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '10px' }}>
+                <div className={`mt-3 grid items-center gap-2 sm:gap-4 ${data.highlight.value ? 'grid-cols-[1fr_auto_1fr]' : ''}`}>
+                  <ul className="space-y-1.5 sm:space-y-2" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '10px' }}>
                     {data.keyResults.map((r, i) => (
                       <li key={i}>
                         <b>{r.label}:</b> {r.value}
@@ -223,8 +225,8 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                     <>
                       <div className="h-full w-px bg-white/40" />
                       <div className="text-center">
-                        <div className="text-2xl font-bold leading-tight">{data.highlight.value}</div>
-                        <div className="mt-1 text-xs leading-snug">{data.highlight.label}</div>
+                        <div className="text-base font-bold leading-tight sm:text-2xl">{data.highlight.value}</div>
+                        <div className="mt-1 text-[10px] leading-snug sm:text-xs">{data.highlight.label}</div>
                       </div>
                     </>
                   )}
