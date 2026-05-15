@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Readex_Pro, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer/Footer";
+import { MetaPixel } from "@/components/MetaPixel/MetaPixel";
 
 const readexPro = Readex_Pro({
   variable: "--font-readex-pro",
@@ -36,6 +37,7 @@ export default function RootLayout({
         className="min-h-full flex flex-col bg-white text-ink"
         suppressHydrationWarning
       >
+        <MetaPixel />
         {children}
         <Footer />
       </body>

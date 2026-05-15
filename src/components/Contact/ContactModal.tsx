@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { markContactSubmitted } from './useContactSubmitted';
+import { trackPixelEvent } from '@/components/MetaPixel/MetaPixel';
 
 type Props = {
   open: boolean;
@@ -26,6 +27,7 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
 
   useEffect(() => {
     if (!open) return;
+    trackPixelEvent('Contact');
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
@@ -63,6 +65,8 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
         throw new Error(data.error ?? 'Failed to send');
       }
       setStatus('success');
+      trackPixelEvent('Lead');
+      trackPixelEvent('CompleteRegistration');
       markContactSubmitted();
       setForm(initial);
       setTimeout(() => {
