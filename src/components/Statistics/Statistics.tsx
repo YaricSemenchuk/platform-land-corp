@@ -32,7 +32,7 @@ export const Statistics: React.FC = () => {
             delay={120 * i}
             className="px-8 py-8 text-center md:py-10"
           >
-            <div className="text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
+            <div className="text-4xl font-extrabold tracking-tight text-[#252525] md:text-5xl">
               {s.display}
             </div>
             <p className="mx-auto mt-3 max-w-[24ch] text-sm text-muted md:text-base">

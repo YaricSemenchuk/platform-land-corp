@@ -50,7 +50,13 @@ export const About: React.FC = () => {
 
         <div className="mt-14 grid gap-8 md:grid-cols-2 md:gap-10">
           {cards.map((c, i) => (
-            <Reveal key={c.title} delay={120 * i}>
+            <Reveal
+              key={c.title}
+              delay={120 * i}
+              className={
+                i === 2 ? "order-4 md:order-none" : i === 3 ? "order-3 md:order-none" : ""
+              }
+            >
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 45 }}
                 className={
