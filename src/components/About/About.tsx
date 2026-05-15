@@ -60,23 +60,23 @@ export const About: React.FC = () => {
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 45 }}
                 className={
-                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col border-1 border-ink p-6 md:h-[420px] md:p-10 " +
+                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col border-1 border-ink p-6 md:h-[360px] md:p-8 lg:h-[420px] lg:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
                 }
               >
-                <h3 className="pr-12 font-bold leading-tight sm:pr-24 md:pr-28">
+                <h3 className="pr-12 font-bold leading-tight sm:pr-6 md:pr-4">
                   <span className="hidden whitespace-nowrap text-sm max-[380px]:block">
                     {c.title.replace(/\n/g, " ")}
                   </span>
-                  <span className="block whitespace-pre-line text-base sm:text-2xl md:text-[28px] max-[380px]:hidden">
+                  <span className="block whitespace-pre-line text-base sm:text-2xl lg:text-[28px] max-[380px]:hidden">
                     {c.title}
                   </span>
                 </h3>
                 <p
                   className={
-                    "mt-4 pr-16 text-[13px] leading-relaxed sm:mt-6 sm:pr-24 sm:text-sm md:pr-28 md:text-[15px] " +
+                    "mt-4 pr-16 text-[13px] leading-relaxed sm:mt-6 sm:pr-24 sm:text-sm md:pr-24 md:text-[15px] lg:pr-28 " +
                     (c.tone === "dark" ? "text-white/90" : "text-ink/80")
                   }
                 >
