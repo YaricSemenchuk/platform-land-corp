@@ -89,8 +89,8 @@ export const Results: React.FC = () => {
       data-card
       type="button"
       onClick={() => setActiveIdx(i)}
-      style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
-      className="group relative flex h-[320px] w-[280px] shrink-0 flex-col overflow-hidden rounded-3xl border-2 border-ink bg-[#dcdcdc] text-left transition hover:-translate-y-0.5 sm:w-[300px]"
+      style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 36 }}
+      className="group relative flex h-[330px] w-[270px] shrink-0 flex-col overflow-hidden border border-ink bg-[#ededed] text-left transition hover:-translate-y-0.5"
     >
       <div className="flex items-center gap-2 bg-primary px-5 py-3.5">
         <span className="h-3.5 w-3.5 rounded-full bg-[#ff5f57]" />
@@ -98,22 +98,21 @@ export const Results: React.FC = () => {
         <span className="h-3.5 w-3.5 rounded-full bg-[#ffffff]" />
       </div>
 
-      <div className="flex flex-1 flex-col px-6 py-5 md:px-7 md:py-6">
-        <h3 className="text-lg font-bold leading-tight text-ink md:text-xl">
+      <div className="flex flex-1 flex-col justify-center p-8">
+        <h3 className="text-2xl font-bold leading-tight text-ink">
           <span aria-hidden className="mr-2">📈</span>
-          Case #{i + 1}
+          Case
+          <br />
+          Study #{i + 1}:
         </h3>
 
-        <div className="my-4 h-px w-full bg-ink/40" />
+        <div className="mt-6 h-px w-full bg-ink/40" />
 
-        <div className="text-xs font-semibold uppercase tracking-wide text-ink/70">
-          {c.category}
+        <div className="mt-8 text-sm text-ink">
+          {c.appName} →
         </div>
-        <div className="mt-1 text-base font-bold text-ink">{c.appName}</div>
-        {c.highlight.value && (
-          <div className="mt-2 text-sm text-ink">
-            {c.highlight.value} {c.highlight.label}
-          </div>
+        {c.previewMetric && (
+          <div className="mt-1 text-sm font-bold text-ink">{c.previewMetric}</div>
         )}
       </div>
     </button>

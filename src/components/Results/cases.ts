@@ -16,7 +16,8 @@ const empty: Omit<CaseDetail, 'category' | 'appName'> = {
 export const cases: CaseDetail[] = [
   {
     category: 'Calorie Deficit Tracker: Srama',
-    appName: '',
+    appName: 'Calorie Deficit Tracker',
+    previewMetric: '+20K installs',
     tagline: 'Meal Planner & Macro Counter',
     platforms: ['appstore'],
     countries: ['US'],
@@ -49,7 +50,8 @@ export const cases: CaseDetail[] = [
   },
   {
     category: 'Project-Based App Store Optimization',
-    appName: 'ARBA',
+    appName: 'ARBA Auto',
+    previewMetric: '+10% CVR',
     tagline: '',
     platforms: ['appstore', 'googleplay'],
     countries: ['CA'],
@@ -78,6 +80,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Pre-Launch ASO',
     appName: 'Calm Baby Sleep',
+    previewMetric: '+240% impressions',
     tagline: 'Baby sleep sounds and white noise for kids',
     platforms: ['appstore'],
     countries: ['US', 'GB'],
@@ -108,6 +111,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Project-Based ASO & Keyword Promotion',
     appName: 'Licensed Sportsbook',
+    previewMetric: '+60% organic installs',
     tagline: 'Betting',
     platforms: ['appstore', 'rustore', 'appgallery', 'huawei', 'getapps'],
     countries: ['RU', 'KZ'],
@@ -137,6 +141,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Keyword Ranking Strategy & Search Visibility Growth',
     appName: 'FinTech Service',
+    previewMetric: 'Top Finance rankings',
     tagline: '',
     platforms: ['appstore', 'googleplay'],
     countries: ['UA'],
@@ -162,6 +167,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Project-Based Visual ASO & Keyword Promotion',
     appName: 'FinTech Service',
+    previewMetric: '+80% organic installs',
     tagline: '',
     platforms: ['appstore', 'googleplay'],
     countries: ['PH'],
@@ -188,7 +194,8 @@ export const cases: CaseDetail[] = [
   },
   {
     category: 'Text Metadata Optimization & Keyword Promotion',
-    appName: 'AI Assistant',
+    appName: 'Lumi AI Assistant',
+    previewMetric: '+145% organic installs',
     tagline: '',
     platforms: ['appstore'],
     countries: ['UA'],
@@ -218,6 +225,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Keyword Ranking Strategy & Search Visibility Growth',
     appName: "Kids' Fairy Tales",
+    previewMetric: '+185% impressions',
     tagline: '',
     platforms: ['appstore'],
     countries: ['US'],
@@ -244,6 +252,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Keyword Ranking & Search Visibility Strategy',
     appName: 'Enterprise Fashion Retail',
+    previewMetric: '+130% organic traffic',
     tagline: '',
     platforms: ['appstore', 'googleplay'],
     countries: ['RU'],
@@ -273,6 +282,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Project-Based Text Metadata Optimization',
     appName: 'Route Planner',
+    previewMetric: '#1 organic rank',
     tagline: '',
     platforms: ['appstore', 'googleplay'],
     countries: ['US', 'CA', 'GB'],
@@ -303,6 +313,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Text Metadata Optimization',
     appName: 'Skylex',
+    previewMetric: '466 keywords indexed (US)',
     tagline: '',
     platforms: ['appstore'],
     countries: ['US'],
@@ -331,7 +342,8 @@ export const cases: CaseDetail[] = [
   },
   {
     category: 'Project-based Reputation Management (ORM)',
-    appName: 'Online Cinema & Streaming Service',
+    appName: 'Online Cinema',
+    previewMetric: '3.2 → 4.6★ Google Play',
     tagline: '',
     platforms: ['googleplay'],
     countries: ['RU'],
@@ -359,6 +371,7 @@ export const cases: CaseDetail[] = [
   {
     category: 'Project-based Reputation Management (ORM)',
     appName: 'Gambling',
+    previewMetric: '1.5 → 4.8★ rating',
     tagline: '',
     platforms: ['appstore', 'googleplay'],
     countries: [],

@@ -43,6 +43,7 @@ export type CaseDetail = {
   execution: string[];
   keyResults: { label: string; value: string }[];
   highlight: { value: string; label: string };
+  previewMetric?: string;
   stats?: { value: string; label: string }[];
   preview?: {
     appName: string;
