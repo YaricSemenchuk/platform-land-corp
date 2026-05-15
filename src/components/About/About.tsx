@@ -60,7 +60,7 @@ export const About: React.FC = () => {
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 45 }}
                 className={
-                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col border-1 border-ink p-6 md:h-[360px] md:p-8 lg:h-[420px] lg:p-10 " +
+                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col border-1 border-ink p-6 md:h-[360px] md:p-8 lg:h-[320px] lg:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
