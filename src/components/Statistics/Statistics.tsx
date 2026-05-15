@@ -25,14 +25,19 @@ const stats: Stat[] = [
 export const Statistics: React.FC = () => {
   return (
     <div className="mx-auto max-w-[1080px]">
-      <div className="grid grid-cols-1 divide-y divide-border overflow-hidden rounded-[28px] border border-black/80 bg-surface shadow-[0_8px_0_0_#000] md:grid-cols-3 md:divide-x md:divide-y-0">
+      <div className="grid grid-cols-1 divide-y divide-border overflow-hidden rounded-[28px] border border-black/80 bg-surface shadow-[0_8px_0_0_#000] md:grid-cols-3 md:divide-y-0">
         {stats.map((s, i) => (
           <Reveal
             key={s.label}
             delay={120 * i}
-            className="px-8 py-8 text-center md:py-10"
+            className={
+              "relative px-8 py-8 text-center md:py-10 " +
+              (i > 0
+                ? "md:before:absolute md:before:left-0 md:before:top-1/2 md:before:-translate-y-1/2 md:before:h-[70%] md:before:w-px md:before:bg-black"
+                : "")
+            }
           >
-            <div className="text-4xl font-extrabold tracking-tight text-[#252525] md:text-5xl">
+            <div className="text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
               {s.display}
             </div>
             <p className="mx-auto mt-3 max-w-[24ch] text-sm text-muted md:text-base">
