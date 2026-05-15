@@ -76,7 +76,7 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
   };
 
   const inputCls =
-    'w-full rounded-xl bg-[#dcdcdc] px-4 py-3 text-sm text-ink placeholder:text-[#7a7a7a] outline-none focus:ring-2 focus:ring-primary/40';
+    'w-full rounded-xl bg-[#ededed] px-4 py-3 text-sm text-ink placeholder:text-[#7a7a7a] outline-none focus:ring-2 focus:ring-primary/40';
   const labelCls = 'mb-2 block text-sm font-semibold text-ink';
 
   return createPortal(
@@ -128,7 +128,8 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="inline-flex items-center justify-center rounded-full bg-primary px-10 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/20 transition hover:-translate-y-0.5 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+              className="inline-flex items-center justify-center border border-[#252525] bg-primary text-sm font-medium text-white transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+              style={{ width: 190, height: 55, borderRadius: 100, boxShadow: 'rgba(0, 0, 0, 0) 0px 0px 0px 0px' }}
             >
               {status === 'sending' ? 'Sending…' : 'Send'}
             </button>

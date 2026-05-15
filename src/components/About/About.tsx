@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { ChartNoAxesCombined, Rocket } from "lucide-react";
 import { Reveal } from "@/components/common/Reveal";
 
 type Card = {
@@ -51,9 +52,9 @@ export const About: React.FC = () => {
           {cards.map((c, i) => (
             <Reveal key={c.title} delay={120 * i}>
               <article
-                style={{ boxShadow: "0 8px 0 0 #0b0b0f" }}
+                style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 45 }}
                 className={
-                  "relative flex min-h-[260px] flex-col rounded-3xl border-1 border-ink p-8 md:min-h-[300px] md:p-10 " +
+                  "relative flex min-h-[260px] flex-col border-1 border-ink p-8 md:min-h-[300px] md:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
@@ -70,14 +71,28 @@ export const About: React.FC = () => {
                 >
                   {c.body}
                 </p>
-                <Image
-                  src={c.icon}
-                  alt=""
-                  aria-hidden
-                  width={80}
-                  height={80}
-                  className="absolute bottom-8 right-8 h-16 w-16 md:bottom-10 md:right-10 md:h-20 md:w-20"
-                />
+                {c.icon === "/analitics.png" ? (
+                  <ChartNoAxesCombined
+                    color="#4262FF"
+                    aria-hidden
+                    className="absolute bottom-8 right-8 h-12 w-12 md:bottom-10 md:right-10 md:h-14 md:w-14"
+                  />
+                ) : c.icon === "/aso.png" ? (
+                  <Rocket
+                    color="#ffffff"
+                    aria-hidden
+                    className="absolute bottom-8 right-8 h-12 w-12 md:bottom-10 md:right-10 md:h-14 md:w-14"
+                  />
+                ) : (
+                  <Image
+                    src={c.icon}
+                    alt=""
+                    aria-hidden
+                    width={80}
+                    height={80}
+                    className="absolute bottom-8 right-8 h-12 w-12 md:bottom-10 md:right-10 md:h-14 md:w-14"
+                  />
+                )}
               </article>
             </Reveal>
           ))}

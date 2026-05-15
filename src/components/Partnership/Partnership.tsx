@@ -51,12 +51,8 @@ export const Partnership: React.FC = () => {
     const compute = () => {
       raf = 0;
       const triggerY = window.innerHeight * 0.6;
-      const positions = items.map((el) => el.getBoundingClientRect().top);
-      const activeCount = positions.filter((top) => top < triggerY).length;
-      const activeIdx = activeCount - 1;
-
       items.forEach((el, i) => {
-        const next = i === activeIdx;
+        const next = el.getBoundingClientRect().top < triggerY;
         if (states[i] !== next) {
           states[i] = next;
           el.setAttribute('data-touched', 'true');

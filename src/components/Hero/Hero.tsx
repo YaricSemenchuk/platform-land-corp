@@ -63,8 +63,11 @@ const HeroDecoration: React.FC = () => (
       className="pointer-events-none absolute inset-0"
       style={{
         backgroundImage:
-          "linear-gradient(30deg, rgba(255,255,255,0.18) 1px, transparent 1px), linear-gradient(-30deg, rgba(255,255,255,0.18) 1px, transparent 1px)",
-        backgroundSize: "120px 70px",
+          "repeating-linear-gradient(30deg, rgba(255,255,255,0.35) 0 1px, transparent 1px 270px), repeating-linear-gradient(-30deg, rgba(255,255,255,0.35) 0 1px, transparent 1px 270px)",
+        maskImage:
+          "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 15%, #000 35%, #000 100%)",
+        WebkitMaskImage:
+          "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 15%, #000 35%, #000 100%)",
       }}
     />
 

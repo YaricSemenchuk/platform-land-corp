@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Reveal } from "@/components/common/Reveal";
+import { ContactModal } from "@/components/Contact/ContactModal";
 
 type Plan = {
   name: string;
@@ -99,6 +100,7 @@ const PLANS: Record<TabKey, Plan[]> = {
 
 export const Pricing: React.FC = () => {
   const [tab, setTab] = useState<TabKey>("aso");
+  const [modalOpen, setModalOpen] = useState(false);
   const plans = PLANS[tab];
 
   return (
@@ -135,17 +137,18 @@ export const Pricing: React.FC = () => {
 
         <div
           className={
-            "mt-12 grid gap-5 md:gap-6 " +
+            "mx-auto mt-12 grid gap-5 md:gap-6 " +
             (plans.length === 3
-              ? "md:grid-cols-3"
-              : "mx-auto max-w-3xl md:grid-cols-2")
+              ? "max-w-[1080px] md:grid-cols-3"
+              : "max-w-3xl md:grid-cols-2")
           }
         >
           {plans.map((p, i) => (
             <Reveal key={p.name} delay={i * 80}>
               <article
+                style={{ borderRadius: 45 }}
                 className={
-                  "relative flex h-full flex-col rounded-3xl border border-black/80 p-7 shadow-[0_8px_0_0_#000] transition " +
+                  "relative flex h-full flex-col border border-black/80 p-7 shadow-[0_8px_0_0_#000] transition " +
                   (p.highlighted ? "bg-primary text-white" : "bg-white text-ink")
                 }
               >
@@ -171,28 +174,23 @@ export const Pricing: React.FC = () => {
                   </span>
                 </div>
 
-                <a
-                  href="#contact"
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(true)}
+                  style={{ width: 256, height: 55, borderRadius: 30 }}
                   className={
-                    "group mt-6 inline-flex items-center justify-center gap-2 rounded-full border border-black/80 px-5 py-3 text-sm font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
+                    "group mx-auto mt-6 inline-flex items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
                     (p.highlighted
-                      ? "bg-white text-primary hover:bg-white/95"
+                      ? "bg-white text-ink hover:bg-white/95"
                       : "bg-primary text-white hover:bg-primary/90")
                   }
                 >
                   Get Started
-                  <span
-                    className={
-                      "h-2 w-2 rounded-full transition-transform duration-300 group-hover:translate-x-0.5 " +
-                      (p.highlighted ? "bg-primary" : "bg-white")
-                    }
-                  />
-                </a>
+                </button>
 
                 <div
                   className={
-                    "my-6 h-px w-full " +
-                    (p.highlighted ? "bg-white/25" : "bg-border")
+                    "my-6 h-px w-full " + (p.highlighted ? "bg-white" : "bg-black")
                   }
                 />
 
@@ -201,10 +199,10 @@ export const Pricing: React.FC = () => {
                     <li key={f.text} className="flex items-start gap-3">
                       <span
                         className={
-                          "mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full " +
+                          "mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md " +
                           (p.highlighted
-                            ? "bg-white/20 text-white"
-                            : "bg-primary-soft text-primary")
+                            ? "bg-white text-primary"
+                            : "bg-primary text-white")
                         }
                       >
                         <svg
@@ -248,6 +246,7 @@ export const Pricing: React.FC = () => {
           ))}
         </div>
       </div>
+      <ContactModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 };

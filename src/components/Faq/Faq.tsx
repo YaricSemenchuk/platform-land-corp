@@ -95,7 +95,7 @@ const FaqItem: React.FC<ItemProps> = ({ question, answer, open, onToggle }) => {
             transitionTimingFunction: "cubic-bezier(0.22,1,0.36,1)",
           }}
           className={
-            "grid h-11 w-11 shrink-0 place-items-center rounded-full border border-black/80 text-white group-hover:bg-ink " +
+            "grid h-11 w-11 shrink-0 place-items-center rounded-full text-white group-hover:bg-ink " +
             (open ? "bg-ink" : "bg-primary")
           }
         >
