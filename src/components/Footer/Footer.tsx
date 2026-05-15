@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/common/Reveal";
+import MuiLinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const colA = [
   { label: "About", href: "#about" },
@@ -100,15 +101,7 @@ export const Footer: React.FC = () => {
 };
 
 function LinkedInIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <rect x="2" y="2" width="20" height="20" rx="3" />
-      <path
-        d="M7.5 9.5h-2v8h2v-8zm-1-3.2a1.15 1.15 0 100 2.3 1.15 1.15 0 000-2.3zM18.5 17.5h-2v-3.9c0-1-.4-1.6-1.2-1.6-.7 0-1.1.5-1.3 1v4.5h-2v-8h2v.9c.3-.5 1-1.1 2.1-1.1 1.6 0 2.4 1 2.4 3v5.2z"
-        fill="#1c1c1f"
-      />
-    </svg>
-  );
+  return <MuiLinkedInIcon sx={{ fontSize: 26 }} />;
 }
 
 function TelegramIcon() {
