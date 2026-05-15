@@ -54,7 +54,7 @@ export const About: React.FC = () => {
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 45 }}
                 className={
-                  "relative flex min-h-[260px] flex-col border-1 border-ink p-8 md:min-h-[300px] md:p-10 " +
+                  "relative flex h-[300px] flex-col border-1 border-ink p-8 md:h-auto md:min-h-[300px] md:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
