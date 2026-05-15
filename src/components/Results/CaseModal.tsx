@@ -44,6 +44,8 @@ export type CaseDetail = {
   keyResults: { label: string; value: string }[];
   highlight: { value: string; label: string };
   previewMetric?: string;
+  wideKeyResults?: boolean;
+  spacedExecution?: boolean;
   stats?: { value: string; label: string }[];
   preview?: {
     appName: string;
@@ -187,8 +189,8 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
 
           <div className="mt-6 grid gap-6 lg:grid-cols-2">
             <div className="border bg-primary-soft-2 px-4 py-4 sm:px-6 sm:py-5" style={cardShadow}>
-              <div className="text-sm font-bold text-ink" style={headerFont}>Execution (What Was Done)</div>
-              <ol className="mt-3 space-y-2" style={descFont}>
+              <div className="text-sm font-bold text-ink" style={headerFont}>Execution</div>
+              <ol className={"mt-3" + (data.spacedExecution ? " space-y-3" : "")} style={descFont}>
                 {data.execution.map((e, i) => (
                   <li key={i}>
                     <span className="font-semibold text-ink">{i + 1}. </span>
@@ -198,7 +200,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
               </ol>
             </div>
 
-            <div className="border bg-primary px-4 py-4 text-white sm:px-6 sm:py-5" style={cardShadow}>
+            <div className="flex flex-col justify-center border bg-primary px-4 py-4 text-white sm:px-6 sm:py-5" style={cardShadow}>
               <div className="text-sm font-bold" style={headerFont}>Key Results</div>
               {data.stats && data.stats.length > 0 ? (
                 <div className="mt-3 grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
@@ -213,7 +215,14 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                   ))}
                 </div>
               ) : (
-                <div className={`mt-3 grid items-center gap-2 sm:gap-4 ${data.highlight.value ? 'grid-cols-[1fr_auto_1fr]' : ''}`}>
+                <div
+                  className="mt-3 grid items-center gap-2 sm:gap-4"
+                  style={
+                    data.highlight.value
+                      ? { gridTemplateColumns: data.wideKeyResults ? '2fr auto 1fr' : '1fr auto 1fr' }
+                      : undefined
+                  }
+                >
                   <ul className="space-y-1.5 sm:space-y-2" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '10px' }}>
                     {data.keyResults.map((r, i) => (
                       <li key={i}>
