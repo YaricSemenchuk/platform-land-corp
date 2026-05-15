@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Reveal } from "@/components/common/Reveal";
 import MuiLinkedInIcon from "@mui/icons-material/LinkedIn";
+import MuiTelegramIcon from "@mui/icons-material/Telegram";
 
 const colA = [
   { label: "About", href: "#about" },
@@ -105,11 +106,7 @@ function LinkedInIcon() {
 }
 
 function TelegramIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M21.5 3.5L2.5 11l5.5 2 2 6 3-3.5 4.5 3.5L21.5 3.5z" />
-    </svg>
-  );
+  return <MuiTelegramIcon sx={{ fontSize: 26 }} />;
 }
 
 function FacebookIcon() {
