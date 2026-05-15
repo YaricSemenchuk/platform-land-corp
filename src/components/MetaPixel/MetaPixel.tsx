@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import Script from "next/script";
 
 const PIXEL_ID = "977710231534111";
@@ -19,12 +18,6 @@ export const trackPixelEvent = (event: string, params?: Record<string, unknown>)
 };
 
 export const MetaPixel: React.FC = () => {
-  useEffect(() => {
-    if (typeof window !== "undefined" && typeof window.fbq === "function") {
-      window.fbq("track", "ViewContent");
-    }
-  }, []);
-
   return (
     <>
       <Script

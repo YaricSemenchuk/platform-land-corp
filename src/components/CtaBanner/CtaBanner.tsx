@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Reveal } from "@/components/common/Reveal";
 import { ContactModal } from "@/components/Contact/ContactModal";
+import { trackPixelEvent } from "@/components/MetaPixel/MetaPixel";
 
 type Props = {
   title: string;
@@ -64,7 +65,10 @@ export const CtaBanner: React.FC<Props> = ({
                 {primary && (
                   <button
                     type="button"
-                    onClick={() => setModalOpen(true)}
+                    onClick={() => {
+                      trackPixelEvent("InitiateCheckout");
+                      setModalOpen(true);
+                    }}
                     className={
                       "group inline-flex items-center gap-3 rounded-full border border-black/80 px-7 py-3.5 text-sm font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
                       (dark

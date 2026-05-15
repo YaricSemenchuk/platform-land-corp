@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Statistics } from "@/components/Statistics/Statistics";
 import { Reveal } from "@/components/common/Reveal";
 import { ContactModal } from "@/components/Contact/ContactModal";
+import { trackPixelEvent } from "@/components/MetaPixel/MetaPixel";
 
 export const Hero: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -39,7 +40,10 @@ export const Hero: React.FC = () => {
           <div className="mt-10 flex justify-center">
             <button
               type="button"
-              onClick={() => setModalOpen(true)}
+              onClick={() => {
+                trackPixelEvent("InitiateCheckout");
+                setModalOpen(true);
+              }}
               className="group inline-flex items-center gap-3 rounded-full border border-black/80 bg-white px-7 py-3.5 text-sm font-semibold text-ink shadow-[0_6px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_8px_0_0_#000] active:translate-y-0.5 active:shadow-[0_3px_0_0_#000]"
             >
               Get Started

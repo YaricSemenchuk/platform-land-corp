@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -35,7 +37,15 @@ export const Footer: React.FC = () => {
         <div className="rounded-t-[32px] bg-[#1c1c1f] px-8 py-14 text-white md:px-14 md:py-20">
           <div className="grid gap-12 md:grid-cols-[1fr_auto_auto] md:gap-16 md:items-start">
             <div className="flex flex-col gap-10">
-              <Link href="/" aria-label="ProMobile" className="inline-block">
+              <a
+                href="#top"
+                aria-label="ProMobile"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="inline-block"
+              >
                 <Image
                   src="/logopromobile.png"
                   alt="ProMobile"
@@ -44,7 +54,7 @@ export const Footer: React.FC = () => {
                   className="h-12 w-auto md:h-14"
                   priority
                 />
-              </Link>
+              </a>
 
               <div className="flex flex-col gap-4 text-sm text-white/85">
                 <Link href="/privacy-policy" className="hover:text-white">

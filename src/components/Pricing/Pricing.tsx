@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Reveal } from "@/components/common/Reveal";
 import { ContactModal } from "@/components/Contact/ContactModal";
+import { trackPixelEvent } from "@/components/MetaPixel/MetaPixel";
 
 type Plan = {
   name: string;
@@ -188,7 +189,10 @@ export const Pricing: React.FC = () => {
 
                 <button
                   type="button"
-                  onClick={() => setModalOpen(true)}
+                  onClick={() => {
+                    trackPixelEvent("InitiateCheckout");
+                    setModalOpen(true);
+                  }}
                   style={{ height: 55, borderRadius: 30 }}
                   className={
                     "group mx-auto mt-6 inline-flex w-full max-w-[256px] items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +

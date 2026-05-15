@@ -27,7 +27,6 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
 
   useEffect(() => {
     if (!open) return;
-    trackPixelEvent('Contact');
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
     };
@@ -66,7 +65,6 @@ export const ContactModal: React.FC<Props> = ({ open, onClose }) => {
       }
       setStatus('success');
       trackPixelEvent('Lead');
-      trackPixelEvent('CompleteRegistration');
       markContactSubmitted();
       setForm(initial);
       setTimeout(() => {
