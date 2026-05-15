@@ -40,7 +40,10 @@ export const Statistics: React.FC = () => {
             <div className="text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
               {s.display}
             </div>
-            <p className="mx-auto mt-3 max-w-[24ch] text-sm text-muted md:text-base">
+            <p
+              className="mx-auto mt-3 max-w-[24ch]"
+              style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: "16px", color: "#252525" }}
+            >
               {s.label}
             </p>
           </Reveal>

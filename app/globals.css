@@ -111,64 +111,6 @@ body {
 .anim-spin-slow { animation: spin-slow 24s linear infinite; }
 .anim-pulse-soft { animation: pulse-soft 4s ease-in-out infinite; }
 
-/* ------- Partnership Stages flash ------- */
-@keyframes ps-flash-in {
-  0%, 100% { background-color: #ffffff; color: var(--ink); }
-  35%, 65% { background-color: var(--primary); color: #ffffff; }
-}
-@keyframes ps-flash-out {
-  0%, 100% { background-color: #ffffff; color: var(--ink); }
-  35%, 65% { background-color: var(--primary); color: #ffffff; }
-}
-@keyframes ps-circle-flash-in {
-  0%, 100% { background-color: var(--primary); color: #ffffff; }
-  35%, 65% { background-color: #ffffff; color: var(--primary); }
-}
-@keyframes ps-circle-flash-out {
-  0%, 100% { background-color: var(--primary); color: #ffffff; }
-  35%, 65% { background-color: #ffffff; color: var(--primary); }
-}
-@keyframes ps-flash-dark-in {
-  0%, 100% { background-color: var(--primary); color: #ffffff; }
-  35%, 65% { background-color: #ffffff; color: var(--ink); }
-}
-@keyframes ps-flash-dark-out {
-  0%, 100% { background-color: var(--primary); color: #ffffff; }
-  35%, 65% { background-color: #ffffff; color: var(--ink); }
-}
-@keyframes ps-circle-dark-in {
-  0%, 100% { background-color: #ffffff; color: var(--primary); }
-  35%, 65% { background-color: var(--primary); color: #ffffff; }
-}
-@keyframes ps-circle-dark-out {
-  0%, 100% { background-color: #ffffff; color: var(--primary); }
-  35%, 65% { background-color: var(--primary); color: #ffffff; }
-}
-
-.ps-item[data-touched="true"][data-variant="light"][data-active="true"] {
-  animation: ps-flash-in 450ms ease-in-out;
-}
-.ps-item[data-touched="true"][data-variant="light"][data-active="false"] {
-  animation: ps-flash-out 450ms ease-in-out;
-}
-.ps-item[data-touched="true"][data-variant="light"][data-active="true"] .ps-circle {
-  animation: ps-circle-flash-in 450ms ease-in-out;
-}
-.ps-item[data-touched="true"][data-variant="light"][data-active="false"] .ps-circle {
-  animation: ps-circle-flash-out 450ms ease-in-out;
-}
-.ps-item[data-touched="true"][data-variant="dark"][data-active="true"] {
-  animation: ps-flash-dark-in 450ms ease-in-out;
-}
-.ps-item[data-touched="true"][data-variant="dark"][data-active="false"] {
-  animation: ps-flash-dark-out 450ms ease-in-out;
-}
-.ps-item[data-touched="true"][data-variant="dark"][data-active="true"] .ps-circle {
-  animation: ps-circle-dark-in 450ms ease-in-out;
-}
-.ps-item[data-touched="true"][data-variant="dark"][data-active="false"] .ps-circle {
-  animation: ps-circle-dark-out 450ms ease-in-out;
-}
 
 /* ------- Marquee for client retention ribbon ------- */
 @keyframes marquee {

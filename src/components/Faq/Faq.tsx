@@ -35,7 +35,7 @@ export const Faq: React.FC = () => {
           Frequently Asked Questions
         </Reveal>
 
-        <div className="mt-12 flex flex-col border-t border-border">
+        <div className="mt-12 flex flex-col" style={{ borderTop: "1px solid #bababa" }}>
           {items.map((it, i) => {
             const isOpen = open === i;
             return (
@@ -77,7 +77,7 @@ const FaqItem: React.FC<ItemProps> = ({ question, answer, open, onToggle }) => {
   const max = open ? measured + 32 : 0;
 
   return (
-    <div className="border-b border-border">
+    <div style={{ borderBottom: "1px solid #bababa" }}>
       <button
         type="button"
         onClick={onToggle}

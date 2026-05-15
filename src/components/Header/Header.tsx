@@ -1,14 +1,21 @@
+"use client";
+
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 
 export const Header: React.FC = () => {
+  const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <header className="bg-primary text-white">
       <div className="relative mx-auto flex h-16 max-w-[1280px] items-center px-6 md:h-20 md:px-10">
-        <Link
-          href="/"
+        <a
+          href="#top"
           aria-label="ProMobile"
+          onClick={scrollToTop}
           className="absolute left-1/2 -translate-x-1/2"
         >
           <Image
@@ -19,7 +26,7 @@ export const Header: React.FC = () => {
             className="h-10 w-auto md:h-12"
             priority
           />
-        </Link>
+        </a>
 
         <nav className="ml-auto">
           <a

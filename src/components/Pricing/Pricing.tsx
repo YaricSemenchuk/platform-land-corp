@@ -23,7 +23,7 @@ const PLANS: Record<TabKey, Plan[]> = {
   aso: [
     {
       name: "Express",
-      price: "$500",
+      price: "500$",
       unit: "/project",
       features: [
         { text: "1 platform" },
@@ -38,7 +38,7 @@ const PLANS: Record<TabKey, Plan[]> = {
     },
     {
       name: "Growth",
-      price: "$2,000",
+      price: "2000$",
       unit: "/month",
       highlighted: true,
       features: [
@@ -59,7 +59,7 @@ const PLANS: Record<TabKey, Plan[]> = {
     },
     {
       name: "Scale",
-      price: "$3,000",
+      price: "3000$",
       unit: "/month",
       features: [
         { text: "ASO Growth included" },
@@ -71,7 +71,7 @@ const PLANS: Record<TabKey, Plan[]> = {
   audit: [
     {
       name: "Audit",
-      price: "$300",
+      price: "300$",
       unit: "/project",
       highlighted: true,
       features: [
@@ -86,7 +86,7 @@ const PLANS: Record<TabKey, Plan[]> = {
     },
     {
       name: "Research & Strategy",
-      price: "$1,500",
+      price: "1500$",
       unit: "/project",
       features: [
         { text: "Competitor revenue and market assessment" },
@@ -148,27 +148,39 @@ export const Pricing: React.FC = () => {
               <article
                 style={{ borderRadius: 45 }}
                 className={
-                  "relative flex h-full flex-col border border-black/80 p-7 shadow-[0_8px_0_0_#000] transition " +
+                  "relative flex h-full flex-col border border-black/80 p-10 shadow-[0_8px_0_0_#000] transition " +
                   (p.highlighted ? "bg-primary text-white" : "bg-white text-ink")
                 }
               >
                 <h3
-                  className={
-                    "text-base font-semibold " +
-                    (p.highlighted ? "text-white/90" : "text-muted")
-                  }
+                  className="font-semibold"
+                  style={{
+                    fontFamily: "'Readex Pro', Arial, sans-serif",
+                    fontSize: "26px",
+                    color: p.highlighted ? "#ffffff" : "#252525",
+                  }}
                 >
                   {p.name}
                 </h3>
-                <div className="mt-3 flex items-end gap-1">
-                  <span className="text-3xl font-bold tracking-tight md:text-4xl">
+                <div className="mt-2 flex items-end gap-1">
+                  <span
+                    className="font-bold tracking-tight"
+                    style={{
+                      fontFamily: "'Readex Pro', Arial, sans-serif",
+                      fontSize: "48px",
+                      color: p.highlighted ? "#ffffff" : "#252525",
+                      lineHeight: 1,
+                    }}
+                  >
                     {p.price}
                   </span>
                   <span
-                    className={
-                      "pb-1.5 text-sm " +
-                      (p.highlighted ? "text-white/80" : "text-muted")
-                    }
+                    className="pb-1.5"
+                    style={{
+                      fontFamily: "'Readex Pro', Arial, sans-serif",
+                      fontSize: "18px",
+                      color: p.highlighted ? "rgba(255,255,255,0.85)" : "#252525",
+                    }}
                   >
                     {p.unit}
                   </span>
@@ -194,7 +206,10 @@ export const Pricing: React.FC = () => {
                   }
                 />
 
-                <ul className="flex flex-1 flex-col gap-3 text-sm">
+                <ul
+                  className="flex flex-1 flex-col gap-3"
+                  style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: "14px" }}
+                >
                   {p.features.map((f) => (
                     <li key={f.text} className="flex items-start gap-3">
                       <span
@@ -221,18 +236,12 @@ export const Pricing: React.FC = () => {
                           />
                         </svg>
                       </span>
-                      <span
-                        className={
-                          p.highlighted ? "text-white/95" : "text-ink-soft"
-                        }
-                      >
+                      <span style={{ color: p.highlighted ? "#ffffff" : "#000000" }}>
                         <span className="font-medium">{f.text}</span>
                         {f.sub && (
                           <span
-                            className={
-                              "block text-xs " +
-                              (p.highlighted ? "text-white/80" : "text-muted")
-                            }
+                            className="block"
+                            style={{ color: p.highlighted ? "rgba(255,255,255,0.85)" : "#000000" }}
                           >
                             {f.sub}
                           </span>

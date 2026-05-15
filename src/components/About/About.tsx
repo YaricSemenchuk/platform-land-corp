@@ -40,7 +40,7 @@ const cards: Card[] = [
 export const About: React.FC = () => {
   return (
     <section id="about" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
-      <div className="mx-auto max-w-[1080px]">
+      <div className="mx-auto max-w-[1200px]">
         <Reveal
           as="h2"
           className="text-center text-4xl font-bold tracking-tight text-ink sm:text-5xl md:text-6xl"
@@ -60,24 +60,35 @@ export const About: React.FC = () => {
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 45 }}
                 className={
-                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col border-1 border-ink p-6 md:h-[360px] md:p-8 lg:h-[320px] lg:p-10 " +
+                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col border-1 border-ink p-6 md:h-[260px] md:p-8 lg:h-[280px] lg:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
                 }
               >
-                <h3 className="pr-12 font-bold leading-tight sm:pr-6 md:pr-4">
+                <h3
+                  className="pr-12 font-bold leading-tight sm:pr-6 md:pr-4"
+                  style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}
+                >
                   <span className="hidden whitespace-nowrap text-sm max-[380px]:block">
                     {c.title.replace(/\n/g, " ")}
                   </span>
-                  <span className="block whitespace-pre-line text-base sm:text-2xl lg:text-[28px] max-[380px]:hidden">
+                  <span
+                    className="block whitespace-pre-line text-base sm:text-2xl lg:text-[26px] max-[380px]:hidden"
+                    style={c.tone === "light" ? { color: "#252525" } : undefined}
+                  >
                     {c.title}
                   </span>
                 </h3>
                 <p
                   className={
-                    "mt-4 pr-16 text-[13px] leading-relaxed sm:mt-6 sm:pr-24 sm:text-sm md:pr-24 md:text-[15px] lg:pr-28 " +
-                    (c.tone === "dark" ? "text-white/90" : "text-ink/80")
+                    "mt-4 pr-16 text-[13px] leading-relaxed sm:mt-6 sm:pr-24 sm:text-sm md:pr-24 lg:pr-28 lg:text-[16px] " +
+                    (c.tone === "dark" ? "text-white/90" : "")
+                  }
+                  style={
+                    c.tone === "light"
+                      ? { fontFamily: "'Readex Pro', Arial, sans-serif", color: "#252525" }
+                      : { fontFamily: "'Readex Pro', Arial, sans-serif" }
                   }
                 >
                   {c.body}

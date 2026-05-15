@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 pb-40 pt-16 text-center text-white sm:px-10 md:pb-56 md:pt-24">
         <Reveal as="h1" delay={120}>
           <span
-            className="block text-balance text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-[88px]"
+            className="block text-balance text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-[70px]"
             style={{ textShadow: "5px 5px 0 #000" }}
           >
             Drive Your
@@ -27,9 +27,11 @@ export const Hero: React.FC = () => {
         </Reveal>
 
         <Reveal as="p" delay={240}>
-          <span className="mx-auto mt-8 block max-w-xl text-base font-medium leading-relaxed text-white sm:text-lg">
-            We scale your product with a proven organic &amp; paid acquisition
-            strategies
+          <span
+            className="mx-auto mt-8 block max-w-xl font-medium leading-relaxed md:max-w-none md:whitespace-nowrap"
+            style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: "18px", color: "#FFFFFF" }}
+          >
+            We scale your product with a proven organic &amp; paid acquisition strategies
           </span>
         </Reveal>
 

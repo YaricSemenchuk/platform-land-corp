@@ -46,11 +46,22 @@ export const Results: React.FC = () => {
     };
   }, [getPeriod]);
 
+  const resumeTimerRef = useRef<number | null>(null);
   const pause = useCallback(() => {
     pausedRef.current = true;
+    if (resumeTimerRef.current) {
+      window.clearTimeout(resumeTimerRef.current);
+      resumeTimerRef.current = null;
+    }
   }, []);
   const resume = useCallback(() => {
-    pausedRef.current = false;
+    if (resumeTimerRef.current) window.clearTimeout(resumeTimerRef.current);
+    resumeTimerRef.current = window.setTimeout(() => {
+      const el = scrollerRef.current;
+      if (el) offsetRef.current = el.scrollLeft;
+      pausedRef.current = false;
+      resumeTimerRef.current = null;
+    }, 1200);
   }, []);
 
   const scrollByCards = useCallback((dir: 1 | -1) => {
@@ -140,7 +151,7 @@ export const Results: React.FC = () => {
           type="button"
           onClick={() => scrollByCards(-1)}
           aria-label="Previous case"
-          className="absolute left-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[0_4px_0_0_#0b0b0f] transition hover:-translate-y-[calc(50%+2px)] md:flex"
+          className="absolute left-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink transition md:flex"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 18l-6-6 6-6" />
@@ -150,7 +161,7 @@ export const Results: React.FC = () => {
           type="button"
           onClick={() => scrollByCards(1)}
           aria-label="Next case"
-          className="absolute right-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[0_4px_0_0_#0b0b0f] transition hover:-translate-y-[calc(50%+2px)] md:flex"
+          className="absolute right-2 top-1/2 z-10 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink transition md:flex"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
             <path d="M9 6l6 6-6 6" />
@@ -181,6 +192,9 @@ export const Results: React.FC = () => {
       <style jsx>{`
         .results-scroller {
           scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+          touch-action: pan-x;
+          overscroll-behavior-x: contain;
         }
         .results-scroller::-webkit-scrollbar {
           display: none;
