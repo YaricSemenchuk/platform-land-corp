@@ -60,11 +60,11 @@ const HeroDecoration: React.FC = () => (
   <>
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 opacity-30"
+      className="pointer-events-none absolute inset-0"
       style={{
         backgroundImage:
-          "linear-gradient(60deg, rgba(255,255,255,0.55) 1px, transparent 1px), linear-gradient(-60deg, rgba(255,255,255,0.55) 1px, transparent 1px)",
-        backgroundSize: "90px 156px",
+          "linear-gradient(30deg, rgba(255,255,255,0.18) 1px, transparent 1px), linear-gradient(-30deg, rgba(255,255,255,0.18) 1px, transparent 1px)",
+        backgroundSize: "120px 70px",
       }}
     />
 
