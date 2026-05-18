@@ -127,34 +127,40 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
             <div className="flex flex-col gap-3">
               <div className="grid grid-cols-3 gap-2 sm:gap-3 [&>div]:!h-[70px] [&>div]:!py-0 [&>div]:justify-center">
                 <div className={`${triCardCls} flex flex-col items-center text-center`} style={cardShadow}>
-                  <div className="flex flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 [&_span]:!h-[14px] [&_span]:!w-[14px] sm:[&_span]:!h-[21px] sm:[&_span]:!w-[21px] [&_svg]:!h-[9px] [&_svg]:!w-[9px] sm:[&_svg]:!h-[13px] sm:[&_svg]:!w-[13px]">
-                    {data.platforms.map((p, i) => (
-                      <PlatformIcon key={i} kind={p} size={21} />
-                    ))}
+                  <div className="flex h-[18px] items-center justify-center sm:h-[27px]">
+                    <div className="flex flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 [&_span]:!h-[14px] [&_span]:!w-[14px] sm:[&_span]:!h-[21px] sm:[&_span]:!w-[21px] [&_svg]:!h-[9px] [&_svg]:!w-[9px] sm:[&_svg]:!h-[13px] sm:[&_svg]:!w-[13px]">
+                      {data.platforms.map((p, i) => (
+                        <PlatformIcon key={i} kind={p} size={21} />
+                      ))}
+                    </div>
                   </div>
                   <div className="mt-2 text-[10px] font-medium text-ink-soft sm:text-xs">Platform</div>
                 </div>
                 <div className={`${triCardCls} flex flex-col items-center text-center`} style={cardShadow}>
-                  {data.countriesText ? (
-                    <div className="font-bold text-primary" style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}>
-                      <span className="text-[16px] sm:text-[25px]">{data.countriesText}</span>
-                    </div>
-                  ) : (
-                    <div className="flex flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 [&>img]:!h-[14px] [&>img]:!w-[20px] sm:[&>img]:!h-[21px] sm:[&>img]:!w-[30px]">
-                      {data.countries.map((code, i) => (
-                        <ReactCountryFlag
-                          key={i}
-                          countryCode={code}
-                          svg
-                          style={{ width: '30px', height: '21px', objectFit: 'cover', borderRadius: '2px' }}
-                        />
-                      ))}
-                    </div>
-                  )}
+                  <div className="flex h-[18px] items-center justify-center sm:h-[27px]">
+                    {data.countriesText ? (
+                      <div className="font-bold text-primary" style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}>
+                        <span className="text-[16px] sm:text-[25px]">{data.countriesText}</span>
+                      </div>
+                    ) : (
+                      <div className="flex flex-nowrap items-center justify-center gap-0.5 sm:gap-1.5 [&>img]:!h-[14px] [&>img]:!w-[20px] sm:[&>img]:!h-[21px] sm:[&>img]:!w-[30px]">
+                        {data.countries.map((code, i) => (
+                          <ReactCountryFlag
+                            key={i}
+                            countryCode={code}
+                            svg
+                            style={{ width: '30px', height: '21px', objectFit: 'cover', borderRadius: '2px' }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <div className="mt-2 text-[10px] font-medium text-ink-soft sm:text-xs">{data.countries.length > 1 ? 'Countries' : 'Country'}</div>
                 </div>
                 <div className={`${triCardCls} flex flex-col items-center text-center`} style={cardShadow}>
-                  <div className="font-bold text-primary text-[18px] sm:text-[25px]" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", lineHeight: 1 }}>{data.months}</div>
+                  <div className="flex h-[18px] items-center justify-center sm:h-[27px]">
+                    <div className="font-bold text-primary text-[18px] sm:text-[25px]" style={{ fontFamily: "'Readex Pro', Arial, sans-serif", lineHeight: 1 }}>{data.months}</div>
+                  </div>
                   <div className="mt-2 text-[10px] font-medium text-ink-soft sm:text-xs">Months</div>
                 </div>
               </div>
@@ -175,7 +181,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
                 <img
                   src={data.preview.image}
                   alt={data.preview.appName}
-                  className="h-full w-full object-contain"
+                  className="w-full object-contain"
                 />
               ) : (
                 <div className="grid flex-1 grid-cols-3 gap-2 bg-gradient-to-br from-primary-soft to-primary-soft-2 p-3">

@@ -40,7 +40,7 @@ const cards: Card[] = [
 export const About: React.FC = () => {
   return (
     <section id="about" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
-      <div className="mx-auto max-w-[1200px]">
+      <div className="mx-auto max-w-[1200px] lg:max-w-[1280px]">
         <Reveal
           as="h2"
           className="text-center text-4xl font-bold tracking-tight text-ink sm:text-5xl md:text-6xl"
@@ -48,7 +48,7 @@ export const About: React.FC = () => {
           Core Directions
         </Reveal>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-2 md:gap-10">
+        <div className="mt-14 grid gap-8 md:grid-cols-[repeat(2,304px)] md:justify-center md:gap-10 lg:grid-cols-2 lg:justify-normal">
           {cards.map((c, i) => (
             <Reveal
               key={c.title}
@@ -60,21 +60,21 @@ export const About: React.FC = () => {
               <article
                 style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 45 }}
                 className={
-                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col border-1 border-ink p-6 md:h-[260px] md:p-8 lg:h-[280px] lg:p-10 " +
+                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col overflow-hidden border-1 border-ink p-6 md:h-[240px] md:p-6 lg:h-[280px] lg:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
                 }
               >
                 <h3
-                  className="pr-12 font-bold leading-tight sm:pr-6 md:pr-4"
+                  className="font-bold leading-tight"
                   style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}
                 >
                   <span className="hidden whitespace-nowrap text-sm max-[380px]:block">
                     {c.title.replace(/\n/g, " ")}
                   </span>
                   <span
-                    className="block whitespace-pre-line text-base sm:text-2xl lg:text-[26px] max-[380px]:hidden"
+                    className="block whitespace-pre-line text-base sm:text-xl md:text-[19px] lg:text-[26px] max-[380px]:hidden"
                     style={c.tone === "light" ? { color: "#252525" } : undefined}
                   >
                     {c.title}
@@ -82,7 +82,7 @@ export const About: React.FC = () => {
                 </h3>
                 <p
                   className={
-                    "mt-4 pr-16 text-[13px] leading-relaxed sm:mt-6 sm:pr-24 sm:text-sm md:pr-24 lg:pr-28 lg:text-[16px] " +
+                    "mt-3 pr-16 text-[13px] leading-relaxed sm:mt-4 sm:text-sm md:mt-3 md:pr-12 md:text-[12px] md:leading-snug lg:mt-6 lg:pr-28 lg:text-[16px] lg:leading-relaxed " +
                     (c.tone === "dark" ? "text-white/90" : "")
                   }
                   style={
@@ -97,13 +97,13 @@ export const About: React.FC = () => {
                   <ChartNoAxesCombined
                     color="#4262FF"
                     aria-hidden
-                    className="absolute bottom-8 right-8 h-12 w-12 md:bottom-10 md:right-10 md:h-14 md:w-14"
+                    className="absolute bottom-6 right-6 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
                   />
                 ) : c.icon === "/aso.png" ? (
                   <Rocket
                     color="#ffffff"
                     aria-hidden
-                    className="absolute bottom-8 right-8 h-12 w-12 md:bottom-10 md:right-10 md:h-14 md:w-14"
+                    className="absolute bottom-6 right-6 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
                   />
                 ) : (
                   <Image
@@ -112,7 +112,7 @@ export const About: React.FC = () => {
                     aria-hidden
                     width={80}
                     height={80}
-                    className="absolute bottom-8 right-8 h-12 w-12 md:bottom-10 md:right-10 md:h-14 md:w-14"
+                    className="absolute bottom-6 right-6 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
                   />
                 )}
               </article>

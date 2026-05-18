@@ -115,8 +115,14 @@ const FaqItem: React.FC<ItemProps> = ({ question, answer, open, onToggle }) => {
       >
         <div
           ref={contentRef}
+          style={{
+            fontFamily: "'Readex Pro', Arial, sans-serif",
+            fontSize: "14px",
+            fontWeight: 400,
+            color: "#252525",
+          }}
           className={
-            "pb-6 pr-12 text-sm leading-relaxed text-muted transition-opacity duration-[700ms] ease-out md:text-base " +
+            "pb-6 pr-12 leading-relaxed transition-opacity duration-[700ms] ease-out " +
             (open ? "opacity-100 delay-150" : "opacity-0")
           }
         >
