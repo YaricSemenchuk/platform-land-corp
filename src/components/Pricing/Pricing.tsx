@@ -140,8 +140,8 @@ export const Pricing: React.FC = () => {
           className={
             "mx-auto mt-12 grid gap-5 md:gap-6 " +
             (plans.length === 3
-              ? "max-w-[1080px] md:grid-cols-3"
-              : "max-w-3xl md:grid-cols-2")
+              ? "max-w-[1080px] md:max-w-[460px] lg:max-w-[1080px] lg:grid-cols-3"
+              : "max-w-3xl md:max-w-[460px] lg:max-w-3xl lg:grid-cols-2")
           }
         >
           {plans.map((p, i) => (
@@ -195,7 +195,7 @@ export const Pricing: React.FC = () => {
                   }}
                   style={{ height: 55, borderRadius: 30 }}
                   className={
-                    "group mx-auto mt-6 inline-flex w-full max-w-[256px] items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
+                    "group mt-6 inline-flex w-full items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
                     (p.highlighted
                       ? "bg-white text-ink hover:bg-white/95"
                       : "bg-primary text-white hover:bg-primary/90")
