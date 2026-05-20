@@ -100,7 +100,7 @@ export const Results: React.FC = () => {
       data-card
       type="button"
       onClick={() => setActiveIdx(i)}
-      style={{ boxShadow: "0 8px 0 0 #0b0b0f", borderRadius: 36 }}
+      style={{ boxShadow: "0 6px 0 0 #0b0b0f", borderRadius: 36 }}
       className="group relative flex h-[330px] w-[270px] shrink-0 flex-col overflow-hidden border border-ink bg-[#ededed] text-left transition hover:-translate-y-0.5"
     >
       <div className="flex items-center gap-2 bg-primary px-5 py-3.5">

@@ -28,7 +28,7 @@ export const CtaBanner: React.FC<Props> = ({
       <Reveal as="div" direction="scale">
         <div
           className={
-            "relative mx-auto max-w-[1080px] overflow-hidden rounded-[28px] border border-black/80 px-8 py-14 text-center shadow-[0_8px_0_0_#000] sm:px-12 md:py-20 " +
+            "relative mx-auto max-w-[1080px] overflow-hidden rounded-[28px] border border-black/80 px-8 py-14 text-center shadow-[0_6px_0_0_#000] sm:px-12 md:py-20 " +
             (dark ? "bg-primary text-white" : "bg-white text-ink")
           }
         >
