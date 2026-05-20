@@ -84,7 +84,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
   const cardShadow = {
     borderRadius: '16px',
     borderColor: '#252525',
-    boxShadow: '0px 5px 0px 0px rgba(37, 37, 37, 1)',
+    boxShadow: '0px 6px 0px 0px rgba(37, 37, 37, 1)',
   } as const;
   const headerFont = { fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '12px' } as const;
   const descFont = { fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: '10px', color: '#252525' } as const;
@@ -99,7 +99,7 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
     >
       <div
         className="relative w-full max-w-5xl overflow-hidden rounded-3xl border-2 border-ink bg-white"
-        style={{ boxShadow: '0 10px 0 0 #0b0b0f' }}
+        style={{ boxShadow: '0 6px 0 0 #0b0b0f' }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-2 bg-primary px-5 py-3.5">
