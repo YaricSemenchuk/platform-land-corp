@@ -149,7 +149,7 @@ export const Pricing: React.FC = () => {
               <article
                 style={{ borderRadius: 45 }}
                 className={
-                  "relative flex h-full flex-col border border-black/80 p-10 shadow-[0_8px_0_0_#000] transition " +
+                  "relative flex h-full flex-col border border-black/80 p-10 shadow-[0_6px_0_0_#000] transition " +
                   (p.highlighted ? "bg-primary text-white" : "bg-white text-ink")
                 }
               >
