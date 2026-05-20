@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import { SiAppstore, SiGoogleplay, SiAppgallery, SiHuawei, SiXiaomi } from 'react-icons/si';
 import type { IconType } from 'react-icons';
@@ -178,10 +179,13 @@ export const CaseModal: React.FC<Props> = ({ open, onClose, data }) => {
 
             <div className="flex flex-col overflow-hidden bg-white">
               {data.preview?.image ? (
-                <img
+                <Image
                   src={data.preview.image}
                   alt={data.preview.appName}
-                  className="w-full object-contain"
+                  width={0}
+                  height={0}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="w-full h-auto object-contain"
                 />
               ) : (
                 <div className="grid flex-1 grid-cols-3 gap-2 bg-gradient-to-br from-primary-soft to-primary-soft-2 p-3">
