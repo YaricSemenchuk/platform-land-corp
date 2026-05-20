@@ -35,7 +35,7 @@ export const Contact: React.FC = () => {
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get In Touch</h2>
             <p className="text-xl text-gray-600">
-              Have a project in mind? Let's talk about how we can help.
+              Have a project in mind? Let&apos;s talk about how we can help.
             </p>
           </div>
 
@@ -44,7 +44,7 @@ export const Contact: React.FC = () => {
               <div className="text-center py-8">
                 <div className="text-4xl mb-4">✓</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-                <p className="text-gray-600">We'll be in touch soon.</p>
+                <p className="text-gray-600">We&apos;ll be in touch soon.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">

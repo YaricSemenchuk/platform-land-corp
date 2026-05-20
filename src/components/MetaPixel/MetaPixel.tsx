@@ -2,7 +2,8 @@
 
 import Script from "next/script";
 
-const PIXEL_ID = "977710231534111";
+const PIXEL_ID =
+  process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "977710231534111";
 
 declare global {
   interface Window {
@@ -18,6 +19,7 @@ export const trackPixelEvent = (event: string, params?: Record<string, unknown>)
 };
 
 export const MetaPixel: React.FC = () => {
+  if (!PIXEL_ID) return null;
   return (
     <>
       <Script

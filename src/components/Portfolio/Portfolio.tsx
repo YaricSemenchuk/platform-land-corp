@@ -39,7 +39,7 @@ export const Portfolio: React.FC = () => {
         <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Case Studies</h2>
           <p className="text-xl text-gray-600 max-w-2xl">
-            See how we've helped apps achieve remarkable growth.
+            See how we&apos;ve helped apps achieve remarkable growth.
           </p>
         </div>
 

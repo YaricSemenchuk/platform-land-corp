@@ -16,6 +16,12 @@ const formatLines = (p: Payload) => [
   `Message: ${p.message || '-'}`,
 ];
 
+const MAX_FIELD = 2000;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const clean = (v: unknown) =>
+  typeof v === 'string' ? v.trim().slice(0, MAX_FIELD) : '';
+
 export async function POST(req: Request) {
   let data: Payload;
   try {
@@ -24,15 +30,22 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const fullName = data.fullName?.trim();
-  const company = data.company?.trim();
-  const email = data.email?.trim();
-  const messenger = data.messenger?.trim();
-  const message = data.message?.trim();
+  const fullName = clean(data.fullName);
+  const company = clean(data.company);
+  const email = clean(data.email);
+  const messenger = clean(data.messenger);
+  const message = clean(data.message);
 
   if (!fullName || !company || !email || !messenger || !message) {
     return NextResponse.json(
       { error: 'All fields are required' },
+      { status: 400 },
+    );
+  }
+
+  if (!EMAIL_RE.test(email)) {
+    return NextResponse.json(
+      { error: 'Invalid email' },
       { status: 400 },
     );
   }

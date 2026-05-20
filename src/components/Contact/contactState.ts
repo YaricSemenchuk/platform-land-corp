@@ -1,23 +1,25 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 let submitted = false;
-const listeners = new Set<(v: boolean) => void>();
+const listeners = new Set<() => void>();
+
+const subscribe = (cb: () => void) => {
+  listeners.add(cb);
+  return () => {
+    listeners.delete(cb);
+  };
+};
+
+const getSnapshot = () => submitted;
+const getServerSnapshot = () => false;
 
 export const markContactSubmitted = () => {
+  if (submitted) return;
   submitted = true;
-  listeners.forEach((fn) => fn(true));
+  listeners.forEach((fn) => fn());
 };
 
-export const useContactSubmitted = () => {
-  const [value, setValue] = useState(submitted);
-  useEffect(() => {
-    listeners.add(setValue);
-    setValue(submitted);
-    return () => {
-      listeners.delete(setValue);
-    };
-  }, []);
-  return value;
-};
+export const useContactSubmitted = () =>
+  useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
