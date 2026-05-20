@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header } from "@/components/Header/Header";
 
 export const metadata = {
@@ -11,7 +12,28 @@ export default function PrivacyPolicyPage() {
 
       <section className="px-4 py-16 sm:px-6 md:px-10 md:py-24">
         <article className="mx-auto max-w-[860px] text-ink [&_h2]:mt-12 [&_h2]:text-2xl [&_h2]:font-bold sm:[&_h2]:text-3xl [&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-ink/80 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6 [&_ul]:leading-relaxed [&_ul]:text-ink/80">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:text-primary/80"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M19 12H5" />
+              <path d="M12 19l-7-7 7-7" />
+            </svg>
+            Back to home
+          </Link>
+          <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl">
             Privacy Policy
           </h1>
 
