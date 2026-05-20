@@ -32,7 +32,7 @@ export const CountUp: React.FC<Props> = ({
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setN(to);
+      queueMicrotask(() => setN(to));
       return;
     }
 

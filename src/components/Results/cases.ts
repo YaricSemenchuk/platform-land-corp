@@ -1,18 +1,5 @@
 import type { CaseDetail } from './CaseModal';
 
-const empty: Omit<CaseDetail, 'category' | 'appName'> = {
-  tagline: '',
-  platforms: [],
-  countries: [],
-  months: 0,
-  tools: '',
-  goal: '',
-  execution: [],
-  keyResults: [],
-  highlight: { value: '', label: '' },
-  preview: { appName: '', publisher: '', iconBg: '#4262ff', iconLabel: '' },
-};
-
 export const cases: CaseDetail[] = [
   {
     category: 'Calorie Deficit Tracker: Srama',

@@ -31,7 +31,7 @@ export const Reveal: React.FC<Props> = ({
     if (!el) return;
 
     if (typeof IntersectionObserver === "undefined") {
-      setOn(true);
+      queueMicrotask(() => setOn(true));
       return;
     }
 
