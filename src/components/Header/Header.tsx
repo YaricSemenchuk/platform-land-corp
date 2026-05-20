@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
 
         <nav className="ml-auto">
           <a
-            href="https://client.promobile.app/"
+            href="https://client.promobile.app/login"
             className="text-sm font-semibold text-white transition hover:text-white/80 md:text-base"
           >
             Platform
