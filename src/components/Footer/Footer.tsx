@@ -8,15 +8,15 @@ import MuiLinkedInIcon from "@mui/icons-material/LinkedIn";
 import MuiTelegramIcon from "@mui/icons-material/Telegram";
 
 const colA = [
-  { label: "About", href: "#about" },
-  { label: "Stages", href: "#partnership" },
-  { label: "Services", href: "#pricing" },
+  { label: "About", href: "/#about" },
+  { label: "Stages", href: "/#partnership" },
+  { label: "Services", href: "/#pricing" },
 ];
 
 const colB = [
-  { label: "Cases", href: "#cases" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Cases", href: "/#cases" },
+  { label: "FAQ", href: "/#faq" },
+  { label: "Pricing", href: "/#pricing" },
 ];
 
 const socials = [
@@ -70,18 +70,18 @@ export const Footer: React.FC = () => {
               <ul className="flex flex-col gap-5">
                 {colA.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} className="hover:text-white">
+                    <Link href={l.href} className="hover:text-white">
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
               <ul className="flex flex-col gap-5">
                 {colB.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} className="hover:text-white">
+                    <Link href={l.href} className="hover:text-white">
                       {l.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
