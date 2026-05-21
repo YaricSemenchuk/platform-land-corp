@@ -10,7 +10,7 @@ const items = [
   },
   {
     q: "How much does ASO & Paid UA cost?",
-    a: "Starts from $1,000 per month, depending on the scope.",
+    a: "Starts from $500 per month, depending on the scope.",
   },
   {
     q: "Do I need both ASO and ASA?",
