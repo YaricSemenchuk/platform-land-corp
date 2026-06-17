@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const text = ['New contact form submission:', ...formatLines({ fullName, company, email, messenger, message })].join('\n');
+  const text = ['New contact from agency_leads:', ...formatLines({ fullName, company, email, messenger, message })].join('\n');
 
   const slackUrl = process.env.SLACK_WEBHOOK_URL;
   const tgToken = process.env.TELEGRAM_BOT_TOKEN;
