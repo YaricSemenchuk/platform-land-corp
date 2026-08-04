@@ -12,25 +12,25 @@ type Card = {
 
 const cards: Card[] = [
   {
-    title: "Audit & Competitor\nResearch",
+    title: "Audit & Competitor Research",
     body: "Analysis of the store page, niche, and competitors based on real data and metric dynamics. We build a strategy that is grounded in the product’s economics.",
     tone: "light",
     icon: "/global.png",
   },
   {
-    title: "App Store\nOptimization",
+    title: "App Store Optimization",
     body: "Our team guarantees your app gets discovered and installed more often by boosting search rankings and conversion rates.",
     tone: "dark",
     icon: "/aso.png",
   },
   {
-    title: "Paid User\nAcquisition",
+    title: "Paid User Acquisition",
     body: "Aligning paid channels with your product KPIs for efficient launches and management. Strong unit economics guide our efforts, managing spend wisely to avoid waste and achieve optimal returns.",
     tone: "dark",
     icon: "/result.png",
   },
   {
-    title: "Full Service App\nPromotion",
+    title: "Full Service App Promotion",
     body: "Ongoing, reliable support that unites our expertise into a seamless system for app advancement. A dedicated team manages analytics setup, organic search optimization, and paid traffic channels.",
     tone: "light",
     icon: "/analitics.png",
@@ -43,12 +43,12 @@ export const About: React.FC = () => {
       <div className="mx-auto max-w-[1200px] lg:max-w-[1280px]">
         <Reveal
           as="h2"
-          className="text-center text-4xl font-bold tracking-tight text-ink sm:text-5xl md:text-6xl"
+          className="text-center text-4xl font-bold tracking-tight text-ink sm:text-5xl"
         >
           Core Directions
         </Reveal>
 
-        <div className="mt-14 grid gap-8 md:grid-cols-[repeat(2,304px)] md:justify-center md:gap-10 lg:grid-cols-2 lg:justify-normal">
+        <div className="mt-10 grid gap-8 md:grid-cols-[repeat(2,304px)] md:justify-center md:gap-10 lg:grid-cols-2 lg:justify-normal">
           {cards.map((c, i) => (
             <Reveal
               key={c.title}
@@ -58,31 +58,23 @@ export const About: React.FC = () => {
               }
             >
               <article
-                style={{ boxShadow: "0 6px 0 0 #0b0b0f", borderRadius: 45 }}
+                style={{ boxShadow: "0 6px 0 0 #0b0b0f" }}
                 className={
-                  "relative flex h-[260px] max-[380px]:h-[220px] flex-col overflow-hidden border-1 border-ink p-6 md:h-[240px] md:p-6 lg:h-[280px] lg:p-10 " +
+                  "relative flex h-full min-h-[220px] flex-col overflow-hidden rounded-[32px] border-1 border-ink p-6 md:min-h-[240px] md:p-6 lg:min-h-[280px] lg:rounded-[45px] lg:p-10 " +
                   (c.tone === "dark"
                     ? "bg-primary text-white"
                     : "bg-white text-ink")
                 }
               >
                 <h3
-                  className="font-bold leading-tight"
+                  className="text-[18px] font-bold leading-[20px] sm:text-xl sm:leading-tight md:text-[19px] lg:text-[26px] lg:leading-[36.4px]"
                   style={{ fontFamily: "'Readex Pro', Arial, sans-serif" }}
                 >
-                  <span className="hidden whitespace-nowrap text-sm max-[380px]:block">
-                    {c.title.replace(/\n/g, " ")}
-                  </span>
-                  <span
-                    className="block whitespace-pre-line text-base sm:text-xl md:text-[19px] lg:text-[26px] max-[380px]:hidden"
-                    style={c.tone === "light" ? { color: "#252525" } : undefined}
-                  >
-                    {c.title}
-                  </span>
+                  {c.title}
                 </h3>
                 <p
                   className={
-                    "mt-3 pr-16 text-[13px] leading-relaxed sm:mt-4 sm:text-sm md:mt-3 md:pr-12 md:text-[12px] md:leading-snug lg:mt-6 lg:pr-28 lg:text-[16px] lg:leading-relaxed " +
+                    "mt-2.5 mb-12 text-base leading-none sm:mt-4 sm:text-sm sm:leading-relaxed md:mt-3 md:mb-0 md:pr-12 md:text-[12px] md:leading-snug lg:mt-6 lg:pr-28 lg:text-[16px] lg:leading-relaxed " +
                     (c.tone === "dark" ? "text-white/90" : "")
                   }
                   style={
@@ -97,13 +89,13 @@ export const About: React.FC = () => {
                   <ChartNoAxesCombined
                     color="#4262FF"
                     aria-hidden
-                    className="absolute bottom-6 right-6 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
+                    className="absolute bottom-6 right-10 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
                   />
                 ) : c.icon === "/aso.png" ? (
                   <Rocket
                     color="#ffffff"
                     aria-hidden
-                    className="absolute bottom-6 right-6 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
+                    className="absolute bottom-6 right-10 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
                   />
                 ) : (
                   <Image
@@ -112,7 +104,7 @@ export const About: React.FC = () => {
                     aria-hidden
                     width={80}
                     height={80}
-                    className="absolute bottom-6 right-6 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
+                    className="absolute bottom-6 right-10 h-12 w-12 md:h-10 md:w-10 lg:bottom-10 lg:right-10 lg:h-14 lg:w-14"
                   />
                 )}
               </article>
