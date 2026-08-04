@@ -108,12 +108,12 @@ export const Pricing: React.FC = () => {
       <div className="mx-auto max-w-[1280px]">
         <Reveal
           as="h2"
-          className="text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
+          className="text-center text-[32px] font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
         >
           Services &amp; Pricing
         </Reveal>
 
-        <Reveal as="div" delay={120} className="mt-10 flex justify-center gap-3 sm:gap-4">
+        <Reveal as="div" delay={120} className="mt-5 flex justify-center gap-4 md:mt-10">
           {TABS.map((t) => {
             const active = tab === t.key;
             return (
@@ -123,7 +123,7 @@ export const Pricing: React.FC = () => {
                 onClick={() => setTab(t.key)}
                 aria-pressed={active}
                 className={
-                  "rounded-full border border-black/80 px-6 py-3 text-sm font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] sm:text-base " +
+                  "rounded-full border border-black/80 px-[25px] py-[13px] text-base font-semibold leading-none shadow-[0_4px_0_0_#000] transition duration-200 ease-out active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] md:leading-6 " +
                   (active
                     ? "bg-primary text-white"
                     : "bg-white text-ink hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000]")
@@ -137,36 +137,33 @@ export const Pricing: React.FC = () => {
 
         <div
           className={
-            "mx-auto mt-12 grid md:max-w-[460px] lg:grid-cols-2 " + layout.grid
+            "mx-auto mt-10 grid md:mt-12 md:max-w-[460px] lg:grid-cols-2 " +
+            layout.grid
           }
         >
           {plans.map((p, i) => (
             <Reveal key={p.name} delay={i * 80}>
               <article
-                style={{ borderRadius: 45 }}
                 className={
-                  "relative flex h-full flex-col border border-black/80 p-10 shadow-[0_6px_0_0_#000] transition " +
+                  "relative flex h-full flex-col rounded-[32px] border border-black/80 p-[25px] shadow-[0_6px_0_0_#000] transition lg:rounded-[45px] lg:p-10 " +
                   (p.highlighted ? "bg-primary text-white" : "bg-white text-ink")
                 }
               >
                 <h3
-                  className="font-semibold leading-none"
+                  className="text-[18px] font-semibold leading-none lg:text-[24px]"
                   style={{
                     fontFamily: "'Readex Pro', Arial, sans-serif",
-                    fontSize: "24px",
                     color: p.highlighted ? "#ffffff" : "#252525",
                   }}
                 >
                   {p.name}
                 </h3>
-                <div className="mt-2.5 flex flex-wrap items-end gap-x-5 gap-y-1 lg:flex-nowrap">
+                <div className="mt-2.5 flex w-full flex-wrap items-end justify-between gap-x-5 gap-y-1 lg:w-auto lg:flex-nowrap lg:justify-start">
                   <div className="flex shrink-0 items-end gap-1 whitespace-nowrap">
                     <span
-                      className="font-bold leading-none"
+                      className="text-[32px] font-bold leading-none tracking-normal lg:text-[40px] lg:tracking-[-1.2px]"
                       style={{
                         fontFamily: "'Readex Pro', Arial, sans-serif",
-                        fontSize: "40px",
-                        letterSpacing: "-1.2px",
                         color: p.highlighted ? "#ffffff" : "#252525",
                       }}
                     >
@@ -185,11 +182,9 @@ export const Pricing: React.FC = () => {
                   </div>
                   {p.oldPrice && (
                     <span
-                      className="shrink-0 whitespace-nowrap font-bold leading-none line-through"
+                      className="shrink-0 whitespace-nowrap text-[32px] font-bold leading-none tracking-normal line-through lg:text-[40px] lg:tracking-[-1.2px]"
                       style={{
                         fontFamily: "'Readex Pro', Arial, sans-serif",
-                        fontSize: "40px",
-                        letterSpacing: "-1.2px",
                         color: "#a6c6ff",
                       }}
                     >
@@ -206,7 +201,7 @@ export const Pricing: React.FC = () => {
                   }}
                   style={{ height: 55, borderRadius: 30 }}
                   className={
-                    "group mt-6 inline-flex w-full items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
+                    "group mt-5 inline-flex w-full items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] lg:mt-6 " +
                     layout.column +
                     " " +
                     (p.highlighted
