@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
     <main className="flex flex-1 flex-col bg-white">
       <Header />
 
-      <section className="px-4 py-16 sm:px-6 md:px-10 md:py-24">
+      <section className="px-4 py-20 sm:px-6 md:px-10">
         <article className="mx-auto max-w-[860px] text-ink [&_h2]:mt-12 [&_h2]:text-2xl [&_h2]:font-bold sm:[&_h2]:text-3xl [&_p]:mt-4 [&_p]:leading-relaxed [&_p]:text-ink/80 [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-6 [&_ul]:leading-relaxed [&_ul]:text-ink/80">
           <Link
             href="/"

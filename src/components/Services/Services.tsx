@@ -42,7 +42,7 @@ export const Services: React.FC = () => {
   return (
     <section
       id="services"
-      className="px-4 py-24 sm:px-6 md:px-10 md:py-28"
+      className="px-4 py-20 sm:px-6 md:px-10"
     >
       <div className="mx-auto max-w-[1080px]">
         <h2 className="text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl">

@@ -104,7 +104,7 @@ export const Pricing: React.FC = () => {
   const layout = LAYOUT[tab];
 
   return (
-    <section id="pricing" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
+    <section id="pricing" className="px-4 py-20 sm:px-6 md:px-10">
       <div className="mx-auto max-w-[1280px]">
         <Reveal
           as="h2"

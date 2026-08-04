@@ -35,7 +35,7 @@ const reviews: Review[] = [
 ];
 
 export const Reviews: React.FC = () => (
-  <section id="reviews" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
+  <section id="reviews" className="px-4 py-20 sm:px-6 md:px-10">
     <div className="mx-auto max-w-[1280px]">
       <Reveal
         as="h2"

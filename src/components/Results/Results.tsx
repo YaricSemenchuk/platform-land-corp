@@ -139,7 +139,7 @@ export const Results: React.FC = () => {
   );
 
   return (
-    <section id="cases" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
+    <section id="cases" className="px-4 py-20 sm:px-6 md:px-10">
       <div className="mx-auto max-w-[1280px]">
         <Reveal
           as="h2"

@@ -26,7 +26,7 @@ export const Faq: React.FC = () => {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
+    <section id="faq" className="px-4 py-20 sm:px-6 md:px-10">
       <div className="mx-auto max-w-[920px]">
         <Reveal
           as="h2"

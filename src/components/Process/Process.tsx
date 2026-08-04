@@ -28,7 +28,7 @@ export const Process: React.FC = () => {
   return (
     <section
       id="process"
-      className="bg-surface px-4 py-24 sm:px-6 md:px-10 md:py-28"
+      className="bg-surface px-4 py-20 sm:px-6 md:px-10"
     >
       <div className="mx-auto max-w-[820px]">
         <Reveal as="div" className="text-center">
