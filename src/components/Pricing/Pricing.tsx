@@ -8,6 +8,8 @@ import { trackPixelEvent } from "@/components/MetaPixel/MetaPixel";
 type Plan = {
   name: string;
   price: string;
+  /** Struck-through previous price shown next to the current one. */
+  oldPrice?: string;
   unit: string;
   features: { text: string; sub?: string }[];
   highlighted?: boolean;
@@ -23,23 +25,8 @@ const TABS: { key: TabKey; label: string }[] = [
 const PLANS: Record<TabKey, Plan[]> = {
   aso: [
     {
-      name: "Express",
-      price: "500$",
-      unit: "/project",
-      features: [
-        { text: "1 platform" },
-        { text: "1 localization" },
-        {
-          text: "Text metadata",
-          sub: "(semantic core, tittle, subtitle, full description, other key fields)",
-        },
-        { text: "Graph metadata", sub: "(icons, screens, banners etc.)" },
-        { text: "App release report, KPI analysis" },
-      ],
-    },
-    {
       name: "Growth",
-      price: "2000$",
+      price: "$1,999",
       unit: "/month",
       highlighted: true,
       features: [
@@ -60,7 +47,8 @@ const PLANS: Record<TabKey, Plan[]> = {
     },
     {
       name: "Scale",
-      price: "3000$",
+      price: "$2,999",
+      oldPrice: "$3,999",
       unit: "/month",
       features: [
         { text: "ASO Growth included" },
@@ -72,7 +60,7 @@ const PLANS: Record<TabKey, Plan[]> = {
   audit: [
     {
       name: "Audit",
-      price: "300$",
+      price: "$300",
       unit: "/project",
       highlighted: true,
       features: [
@@ -87,7 +75,7 @@ const PLANS: Record<TabKey, Plan[]> = {
     },
     {
       name: "Research & Strategy",
-      price: "1500$",
+      price: "$1,500",
       unit: "/project",
       features: [
         { text: "Competitor revenue and market assessment" },
@@ -138,10 +126,10 @@ export const Pricing: React.FC = () => {
 
         <div
           className={
-            "mx-auto mt-12 grid gap-5 md:gap-6 " +
+            "mx-auto mt-12 grid gap-5 " +
             (plans.length === 3
-              ? "max-w-[1080px] md:max-w-[460px] lg:max-w-[1080px] lg:grid-cols-3"
-              : "max-w-3xl md:max-w-[460px] lg:max-w-3xl lg:grid-cols-2")
+              ? "max-w-[1080px] md:max-w-[460px] lg:max-w-[1240px] lg:grid-cols-3"
+              : "max-w-[820px] md:max-w-[460px] lg:max-w-[820px] lg:grid-cols-2")
           }
         >
           {plans.map((p, i) => (
@@ -154,37 +142,52 @@ export const Pricing: React.FC = () => {
                 }
               >
                 <h3
-                  className="font-semibold"
+                  className="font-semibold leading-none"
                   style={{
                     fontFamily: "'Readex Pro', Arial, sans-serif",
-                    fontSize: "26px",
+                    fontSize: "24px",
                     color: p.highlighted ? "#ffffff" : "#252525",
                   }}
                 >
                   {p.name}
                 </h3>
-                <div className="mt-2 flex items-end gap-1">
-                  <span
-                    className="font-bold tracking-tight"
-                    style={{
-                      fontFamily: "'Readex Pro', Arial, sans-serif",
-                      fontSize: "48px",
-                      color: p.highlighted ? "#ffffff" : "#252525",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {p.price}
-                  </span>
-                  <span
-                    className="pb-1.5"
-                    style={{
-                      fontFamily: "'Readex Pro', Arial, sans-serif",
-                      fontSize: "18px",
-                      color: p.highlighted ? "rgba(255,255,255,0.85)" : "#252525",
-                    }}
-                  >
-                    {p.unit}
-                  </span>
+                <div className="mt-2.5 flex flex-wrap items-end gap-x-5 gap-y-1 lg:flex-nowrap">
+                  <div className="flex shrink-0 items-end gap-1 whitespace-nowrap">
+                    <span
+                      className="font-bold leading-none"
+                      style={{
+                        fontFamily: "'Readex Pro', Arial, sans-serif",
+                        fontSize: "40px",
+                        letterSpacing: "-1.2px",
+                        color: p.highlighted ? "#ffffff" : "#252525",
+                      }}
+                    >
+                      {p.price}
+                    </span>
+                    <span
+                      className="leading-none"
+                      style={{
+                        fontFamily: "'Readex Pro', Arial, sans-serif",
+                        fontSize: "16px",
+                        color: p.highlighted ? "rgba(255,255,255,0.85)" : "#252525",
+                      }}
+                    >
+                      {p.unit}
+                    </span>
+                  </div>
+                  {p.oldPrice && (
+                    <span
+                      className="shrink-0 whitespace-nowrap font-bold leading-none line-through"
+                      style={{
+                        fontFamily: "'Readex Pro', Arial, sans-serif",
+                        fontSize: "40px",
+                        letterSpacing: "-1.2px",
+                        color: "#a6c6ff",
+                      }}
+                    >
+                      {p.oldPrice}
+                    </span>
+                  )}
                 </div>
 
                 <button
@@ -195,7 +198,7 @@ export const Pricing: React.FC = () => {
                   }}
                   style={{ height: 55, borderRadius: 30 }}
                   className={
-                    "group mt-6 inline-flex w-full items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
+                    "group mt-6 inline-flex w-full items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] lg:w-[262px] " +
                     (p.highlighted
                       ? "bg-white text-ink hover:bg-white/95"
                       : "bg-primary text-white hover:bg-primary/90")
@@ -206,13 +209,18 @@ export const Pricing: React.FC = () => {
 
                 <div
                   className={
-                    "my-6 h-px w-full " + (p.highlighted ? "bg-white" : "bg-black")
+                    "my-6 h-px w-full lg:w-[262px] " +
+                    (p.highlighted ? "bg-white" : "bg-black")
                   }
                 />
 
                 <ul
-                  className="flex flex-1 flex-col gap-3"
-                  style={{ fontFamily: "'Readex Pro', Arial, sans-serif", fontSize: "14px" }}
+                  className="flex flex-1 flex-col gap-3 lg:w-[262px]"
+                  style={{
+                    fontFamily: "'Readex Pro', Arial, sans-serif",
+                    fontSize: "14px",
+                    lineHeight: "21px",
+                  }}
                 >
                   {p.features.map((f) => (
                     <li key={f.text} className="flex items-start gap-3">
