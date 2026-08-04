@@ -20,11 +20,7 @@ export default function Home() {
       <Partnership />
       <Faq />
       <div className="py-8" />
-      <CtaBanner
-        title="Are you ready to start?"
-        primary={{ label: "Get Started", href: "#contact" }}
-        variant="dark"
-      />
+      <CtaBanner title="Are you ready to start?" />
     </main>
   );
 }
