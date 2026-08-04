@@ -14,7 +14,7 @@ import {
 } from "@/components/common/messengers";
 
 const colA = [
-  { label: "About", href: "/#about" },
+  { label: "Directions", href: "/#about" },
   { label: "Stages", href: "/#partnership" },
   { label: "Services", href: "/#pricing" },
 ];
