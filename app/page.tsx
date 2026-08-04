@@ -13,9 +13,9 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
+      <Pricing />
       <Partnership />
       <Results />
-      <Pricing />
       <Faq />
       <div className="py-8" />
       <CtaBanner
