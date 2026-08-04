@@ -63,33 +63,50 @@ export const Footer: React.FC = () => {
   return (
     <footer id="contact" className="mt-auto pt-20 md:pt-28">
       <Reveal>
-        <div className="rounded-t-[32px] bg-[#1c1c1f] px-8 py-10 text-white md:px-14">
+        <div className="rounded-t-[32px] bg-[#1c1c1f] px-4 py-6 text-white md:px-14 md:py-10">
           <div className="mx-auto max-w-[1280px]">
             <div className="grid gap-10 md:grid-cols-4">
-              <a
-                href="#top"
-                aria-label="ProMobile"
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-                className="inline-block self-start"
-              >
-                <Image
-                  src="/logopromobile.png"
-                  alt="ProMobile"
-                  width={62}
-                  height={79}
-                  className="h-14 w-auto md:h-20"
-                  priority
-                />
-              </a>
+              {/* Logo shares its row with the socials on phones. */}
+              <div className="flex items-start justify-between gap-4">
+                <a
+                  href="#top"
+                  aria-label="ProMobile"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="inline-block"
+                >
+                  <Image
+                    src="/logopromobile.png"
+                    alt="ProMobile"
+                    width={62}
+                    height={79}
+                    className="h-12 w-auto md:h-20"
+                    priority
+                  />
+                </a>
+                <Socials className="gap-2.5 md:hidden" />
+              </div>
 
               {/* Paired on small screens, individual grid cells from md up. */}
-              <div className="grid grid-cols-2 gap-10 md:contents">
-              <div className="flex flex-col gap-10">
-                <ul className="flex flex-col gap-2.5">
-                  {colA.map((l) => (
+              <div className="grid grid-cols-2 gap-5 md:contents">
+                <div className="order-2 flex flex-col gap-10 md:order-none">
+                  <ul className="flex flex-col gap-2.5">
+                    {colA.map((l) => (
+                      <li key={l.label}>
+                        <Link href={l.href} className={navLinkCls}>
+                          {l.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Socials className="hidden gap-5 md:flex" />
+                </div>
+
+                <ul className="order-1 flex flex-col gap-2.5 self-start md:order-none">
+                  {colB.map((l) => (
                     <li key={l.label}>
                       <Link href={l.href} className={navLinkCls}>
                         {l.label}
@@ -97,36 +114,10 @@ export const Footer: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-
-                <div className="flex items-center gap-5">
-                  {socials.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      aria-label={s.label}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white transition hover:-translate-y-0.5 hover:text-white/80"
-                    >
-                      {s.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <ul className="flex flex-col gap-2.5 self-start">
-                {colB.map((l) => (
-                  <li key={l.label}>
-                    <Link href={l.href} className={navLinkCls}>
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
               </div>
 
               <div className="flex flex-col gap-10">
-                <p className="text-[32px] font-bold leading-none tracking-[-1.1px] text-white">
+                <p className="max-w-[275px] text-[32px] font-bold leading-none tracking-[-1.1px] text-white">
                   Let&rsquo;s build your next growth story
                 </p>
                 <div className="flex w-full max-w-[257px] flex-col gap-5">
@@ -146,7 +137,8 @@ export const Footer: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-10 grid gap-2.5 text-[14px] leading-5 md:grid-cols-4">
+            {/* Privacy sits above the copyright on phones, beside it from md up. */}
+            <div className="mt-10 flex flex-col-reverse gap-5 text-[14px] leading-5 md:grid md:grid-cols-4 md:gap-2.5">
               <p className="text-white/70">
                 Copyright © ProMobile, {new Date().getFullYear()}
               </p>
@@ -160,6 +152,23 @@ export const Footer: React.FC = () => {
     </footer>
   );
 };
+
+const Socials: React.FC<{ className?: string }> = ({ className = "" }) => (
+  <div className={"flex items-center " + className}>
+    {socials.map((s) => (
+      <a
+        key={s.label}
+        href={s.href}
+        aria-label={s.label}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-white transition hover:-translate-y-0.5 hover:text-white/80"
+      >
+        {s.icon}
+      </a>
+    ))}
+  </div>
+);
 
 function LinkedInIcon() {
   return <MuiLinkedInIcon sx={{ fontSize: 26 }} />;
