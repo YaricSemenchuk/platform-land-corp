@@ -22,6 +22,16 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "audit", label: "Audit & Research" },
 ];
 
+/**
+ * The two tabs use different card metrics in the design: ASO cards are 400px
+ * wide with a narrower 262px inner column, Audit cards are 372px wide and fill
+ * their content width.
+ */
+const LAYOUT: Record<TabKey, { grid: string; column: string }> = {
+  aso: { grid: "max-w-[820px] gap-5 lg:max-w-[820px]", column: "lg:w-[262px]" },
+  audit: { grid: "max-w-[768px] gap-6 lg:max-w-[768px]", column: "" },
+};
+
 const PLANS: Record<TabKey, Plan[]> = {
   aso: [
     {
@@ -60,7 +70,7 @@ const PLANS: Record<TabKey, Plan[]> = {
   audit: [
     {
       name: "Audit",
-      price: "$300",
+      price: "$299",
       unit: "/project",
       highlighted: true,
       features: [
@@ -75,7 +85,7 @@ const PLANS: Record<TabKey, Plan[]> = {
     },
     {
       name: "Research & Strategy",
-      price: "$1,500",
+      price: "$1,499",
       unit: "/project",
       features: [
         { text: "Competitor revenue and market assessment" },
@@ -91,6 +101,7 @@ export const Pricing: React.FC = () => {
   const [tab, setTab] = useState<TabKey>("aso");
   const [modalOpen, setModalOpen] = useState(false);
   const plans = PLANS[tab];
+  const layout = LAYOUT[tab];
 
   return (
     <section id="pricing" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
@@ -126,10 +137,7 @@ export const Pricing: React.FC = () => {
 
         <div
           className={
-            "mx-auto mt-12 grid gap-5 " +
-            (plans.length === 3
-              ? "max-w-[1080px] md:max-w-[460px] lg:max-w-[1240px] lg:grid-cols-3"
-              : "max-w-[820px] md:max-w-[460px] lg:max-w-[820px] lg:grid-cols-2")
+            "mx-auto mt-12 grid md:max-w-[460px] lg:grid-cols-2 " + layout.grid
           }
         >
           {plans.map((p, i) => (
@@ -198,7 +206,9 @@ export const Pricing: React.FC = () => {
                   }}
                   style={{ height: 55, borderRadius: 30 }}
                   className={
-                    "group mt-6 inline-flex w-full items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] lg:w-[262px] " +
+                    "group mt-6 inline-flex w-full items-center justify-center gap-2 border border-black/80 text-base font-semibold shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000] " +
+                    layout.column +
+                    " " +
                     (p.highlighted
                       ? "bg-white text-ink hover:bg-white/95"
                       : "bg-primary text-white hover:bg-primary/90")
@@ -209,13 +219,15 @@ export const Pricing: React.FC = () => {
 
                 <div
                   className={
-                    "my-6 h-px w-full lg:w-[262px] " +
+                    "my-6 h-px w-full " +
+                    layout.column +
+                    " " +
                     (p.highlighted ? "bg-white" : "bg-black")
                   }
                 />
 
                 <ul
-                  className="flex flex-1 flex-col gap-3 lg:w-[262px]"
+                  className={"flex flex-1 flex-col gap-3 " + layout.column}
                   style={{
                     fontFamily: "'Readex Pro', Arial, sans-serif",
                     fontSize: "14px",
