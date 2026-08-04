@@ -37,8 +37,24 @@ const socials = [
 ];
 
 const contactButtons = [
-  { label: "Contact us on WhatsApp", href: WHATSAPP_URL, icon: <WhatsAppIcon /> },
-  { label: "Contact us on Telegram", href: TELEGRAM_URL, icon: <TelegramIcon /> },
+  {
+    label: "Contact us on WhatsApp",
+    href: WHATSAPP_URL,
+    icon: (
+      <span className="text-primary">
+        <WhatsAppIcon />
+      </span>
+    ),
+  },
+  {
+    label: "Contact us on Telegram",
+    href: TELEGRAM_URL,
+    icon: (
+      <span className="text-primary">
+        <TelegramIcon />
+      </span>
+    ),
+  },
 ];
 
 const navLinkCls = "text-[14px] font-medium leading-[21px] text-white hover:text-white/80";
