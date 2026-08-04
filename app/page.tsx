@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero/Hero";
 import { About } from "@/components/About/About";
 import { Partnership } from "@/components/Partnership/Partnership";
 import { Results } from "@/components/Results/Results";
+import { Reviews } from "@/components/Reviews/Reviews";
 import { Pricing } from "@/components/Pricing/Pricing";
 import { Faq } from "@/components/Faq/Faq";
 import { CtaBanner } from "@/components/CtaBanner/CtaBanner";
@@ -15,6 +16,7 @@ export default function Home() {
       <About />
       <Pricing />
       <Results />
+      <Reviews />
       <Partnership />
       <Faq />
       <div className="py-8" />
