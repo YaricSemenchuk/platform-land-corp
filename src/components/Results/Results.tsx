@@ -237,8 +237,15 @@ const FeaturedBlock: React.FC<{ data: FeaturedCase }> = ({ data }) => {
 
   return (
     <div className="flex flex-col gap-5 rounded-[36px] bg-primary p-6 shadow-[0_6px_0_0_#000] lg:grid lg:grid-cols-2 lg:rounded-[48px] lg:p-10">
-      <article className={cardShell + " p-[17px] lg:order-2 lg:p-[41px]"}>
-        <div className="relative aspect-[507/386] w-full">
+      <article
+        className={
+          cardShell + " flex items-center p-[17px] lg:order-2 lg:p-[41px]"
+        }
+      >
+        {/* Figma keeps the artwork at a fixed 506×386 inside a 590×469 card. The
+            card stretches to whatever the copy beside it needs, so the artwork
+            is centred rather than left hanging at the top. */}
+        <div className="relative aspect-[506/386] w-full">
           <Image
             src={data.image}
             alt={data.imageAlt}
@@ -260,10 +267,10 @@ const FeaturedBlock: React.FC<{ data: FeaturedCase }> = ({ data }) => {
             {data.title}
           </h3>
           <div className="flex flex-col gap-5 lg:gap-2.5">
-            <p className="whitespace-pre-line text-[16px] font-semibold leading-tight text-ink">
+            <p className="whitespace-pre-line text-[16px] font-semibold leading-tight text-ink lg:leading-none lg:tracking-[-0.03em]">
               {data.intro}
             </p>
-            <ol className="flex flex-col text-[14px] leading-[1.1] text-ink">
+            <ol className="flex flex-col text-[14px] leading-[1.1] text-ink lg:leading-[1.05]">
               {data.steps.map((s, i) => (
                 <li key={s}>
                   {i + 1}. {s}
@@ -321,7 +328,7 @@ const Stat: React.FC<{ stat: FeaturedStat }> = ({ stat }) => (
       )}
     </div>
     {stat.caption && (
-      <p className="whitespace-pre-line text-[14px] font-semibold leading-[1.15] text-ink">
+      <p className="whitespace-pre-line text-[14px] font-semibold leading-[1.15] text-ink lg:leading-none">
         {stat.caption}
       </p>
     )}
