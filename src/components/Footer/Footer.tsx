@@ -59,6 +59,27 @@ const contactButtons = [
 
 const navLinkCls = "text-[14px] font-medium leading-[21px] text-white hover:text-white/80";
 
+/**
+ * Once the address bar already holds the target hash the router treats a
+ * second click as a no-op, so nothing scrolls until the page is reloaded.
+ * Drive the scroll ourselves and keep the hash in sync with replaceState.
+ * Off the home page we let the link navigate normally.
+ */
+const scrollToHash = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  if (window.location.pathname !== "/") return;
+  const el = document.getElementById(href.split("#")[1] ?? "");
+  if (!el) return;
+  e.preventDefault();
+  el.scrollIntoView({ behavior: "smooth" });
+  window.history.replaceState(null, "", href);
+};
+
+const NavLink: React.FC<{ href: string; label: string }> = ({ href, label }) => (
+  <Link href={href} className={navLinkCls} onClick={(e) => scrollToHash(e, href)}>
+    {label}
+  </Link>
+);
+
 export const Footer: React.FC = () => {
   return (
     <footer id="contact" className="mt-auto pt-20 md:pt-28">
@@ -95,9 +116,7 @@ export const Footer: React.FC = () => {
                   <ul className="flex flex-col gap-2.5">
                     {colA.map((l) => (
                       <li key={l.label}>
-                        <Link href={l.href} className={navLinkCls}>
-                          {l.label}
-                        </Link>
+                        <NavLink href={l.href} label={l.label} />
                       </li>
                     ))}
                   </ul>
@@ -108,9 +127,7 @@ export const Footer: React.FC = () => {
                 <ul className="order-1 flex flex-col gap-2.5 self-start md:order-none">
                   {colB.map((l) => (
                     <li key={l.label}>
-                      <Link href={l.href} className={navLinkCls}>
-                        {l.label}
-                      </Link>
+                      <NavLink href={l.href} label={l.label} />
                     </li>
                   ))}
                 </ul>
