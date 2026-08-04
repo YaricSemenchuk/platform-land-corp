@@ -6,6 +6,12 @@ import Image from "next/image";
 import { Reveal } from "@/components/common/Reveal";
 import MuiLinkedInIcon from "@mui/icons-material/LinkedIn";
 import MuiTelegramIcon from "@mui/icons-material/Telegram";
+import {
+  TELEGRAM_URL,
+  TelegramIcon,
+  WHATSAPP_URL,
+  WhatsAppIcon,
+} from "@/components/common/messengers";
 
 const colA = [
   { label: "About", href: "/#about" },
@@ -25,18 +31,25 @@ const socials = [
     href: "https://www.linkedin.com/company/promobile-app/",
     icon: <LinkedInIcon />,
   },
-  { label: "Telegram", href: "https://t.me/promobile_app", icon: <TelegramIcon /> },
+  { label: "Telegram", href: TELEGRAM_URL, icon: <SocialTelegramIcon /> },
   { label: "Facebook", href: "https://www.facebook.com/61575265504649/about/?_rdr", icon: <FacebookIcon /> },
   { label: "Instagram", href: "https://www.instagram.com/promobile_app/", icon: <InstagramIcon /> },
 ];
+
+const contactButtons = [
+  { label: "Contact us on WhatsApp", href: WHATSAPP_URL, icon: <WhatsAppIcon /> },
+  { label: "Contact us on Telegram", href: TELEGRAM_URL, icon: <TelegramIcon /> },
+];
+
+const navLinkCls = "text-[14px] font-medium leading-[21px] text-white hover:text-white/80";
 
 export const Footer: React.FC = () => {
   return (
     <footer id="contact" className="mt-auto pt-20 md:pt-28">
       <Reveal>
-        <div className="rounded-t-[32px] bg-[#1c1c1f] px-8 py-14 text-white md:px-14 md:py-20">
-          <div className="grid gap-12 md:grid-cols-[1fr_auto_auto] md:gap-16 md:items-start">
-            <div className="flex flex-col gap-10">
+        <div className="rounded-t-[32px] bg-[#1c1c1f] px-8 py-10 text-white md:px-14">
+          <div className="mx-auto max-w-[1280px]">
+            <div className="grid gap-10 md:grid-cols-4">
               <a
                 href="#top"
                 aria-label="ProMobile"
@@ -44,65 +57,86 @@ export const Footer: React.FC = () => {
                   e.preventDefault();
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-                className="inline-block"
+                className="inline-block self-start"
               >
                 <Image
                   src="/logopromobile.png"
                   alt="ProMobile"
-                  width={56}
-                  height={56}
-                  className="h-12 w-auto md:h-14"
+                  width={62}
+                  height={79}
+                  className="h-14 w-auto md:h-20"
                   priority
                 />
               </a>
 
-              <div className="flex flex-col gap-4 text-sm text-white/85">
-                <Link href="/privacy-policy" className="hover:text-white">
-                  Privacy policy
-                </Link>
-                <p className="text-white/70">
-                  Copyright © ProMobile, {new Date().getFullYear()}
+              {/* Paired on small screens, individual grid cells from md up. */}
+              <div className="grid grid-cols-2 gap-10 md:contents">
+              <div className="flex flex-col gap-10">
+                <ul className="flex flex-col gap-2.5">
+                  {colA.map((l) => (
+                    <li key={l.label}>
+                      <Link href={l.href} className={navLinkCls}>
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="flex items-center gap-5">
+                  {socials.map((s) => (
+                    <a
+                      key={s.label}
+                      href={s.href}
+                      aria-label={s.label}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white transition hover:-translate-y-0.5 hover:text-white/80"
+                    >
+                      {s.icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <ul className="flex flex-col gap-2.5 self-start">
+                {colB.map((l) => (
+                  <li key={l.label}>
+                    <Link href={l.href} className={navLinkCls}>
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              </div>
+
+              <div className="flex flex-col gap-10">
+                <p className="text-[32px] font-bold leading-none tracking-[-1.1px] text-white">
+                  Let&rsquo;s build your next growth story
                 </p>
+                <div className="flex w-full max-w-[257px] flex-col gap-5">
+                  {contactButtons.map((b) => (
+                    <a
+                      key={b.label}
+                      href={b.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-3 whitespace-nowrap rounded-full border border-black/80 bg-white px-[29px] py-[15px] text-[14px] font-semibold leading-none text-ink shadow-[0_4px_0_0_#000] transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_6px_0_0_#000] active:translate-y-0.5 active:shadow-[0_2px_0_0_#000]"
+                    >
+                      {b.icon}
+                      {b.label}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <nav className="grid grid-cols-2 gap-x-16 gap-y-5 text-sm text-white/90 md:gap-x-20">
-              <ul className="flex flex-col gap-5">
-                {colA.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="hover:text-white">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className="flex flex-col gap-5">
-                {colB.map((l) => (
-                  <li key={l.href}>
-                    <Link href={l.href} className="hover:text-white">
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div className="flex items-start gap-5 md:justify-self-end">
-              {socials.map((s) => {
-                const external = s.href.startsWith("http");
-                return (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    aria-label={s.label}
-                    target={external ? "_blank" : undefined}
-                    rel={external ? "noopener noreferrer" : undefined}
-                    className="text-white transition hover:-translate-y-0.5 hover:text-white/80"
-                  >
-                    {s.icon}
-                  </a>
-                );
-              })}
+            <div className="mt-10 grid gap-2.5 text-[14px] leading-5 md:grid-cols-4">
+              <p className="text-white/70">
+                Copyright © ProMobile, {new Date().getFullYear()}
+              </p>
+              <Link href="/privacy-policy" className="text-white/85 hover:text-white">
+                Privacy policy
+              </Link>
             </div>
           </div>
         </div>
@@ -115,7 +149,7 @@ function LinkedInIcon() {
   return <MuiLinkedInIcon sx={{ fontSize: 26 }} />;
 }
 
-function TelegramIcon() {
+function SocialTelegramIcon() {
   return <MuiTelegramIcon sx={{ fontSize: 26 }} />;
 }
 
