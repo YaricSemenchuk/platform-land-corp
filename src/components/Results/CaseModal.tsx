@@ -45,6 +45,11 @@ export type CaseDetail = {
   keyResults: { label: string; value: string }[];
   highlight: { value: string; label: string };
   previewMetric?: string;
+  /**
+   * Headline figure for the compact card in the results marquee. Cases without
+   * it are the ones promoted to a full-width featured block (see `featured.ts`).
+   */
+  cardStat?: { value: string; label: string };
   wideKeyResults?: boolean;
   spacedExecution?: boolean;
   stats?: { value: string; label: string }[];

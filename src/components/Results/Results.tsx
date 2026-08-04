@@ -1,9 +1,14 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/common/Reveal";
 import { CaseModal } from "./CaseModal";
 import { cases } from "./cases";
+import { featuredCases, type FeaturedCase, type FeaturedStat } from "./featured";
+
+const cardShell =
+  "rounded-[32px] border border-black/80 bg-white shadow-[0_6px_0_0_#000] lg:rounded-[40px]";
 
 export const Results: React.FC = () => {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
@@ -14,10 +19,16 @@ export const Results: React.FC = () => {
   const lastTsRef = useRef<number | null>(null);
   const offsetRef = useRef(0);
 
+  // Cases without a card stat are the ones promoted to a featured block above.
+  const cardCases = useMemo(
+    () => cases.map((c, i) => ({ c, i })).filter(({ c }) => c.cardStat),
+    []
+  );
+
   const getPeriod = useCallback(() => {
     const set = setRef.current;
     if (!set) return 0;
-    return set.offsetWidth + 24; // set width + gap between sets
+    return set.offsetWidth + 20; // set width + gap between sets
   }, []);
 
   // Auto-scroll loop. Speed in px/sec.
@@ -68,8 +79,8 @@ export const Results: React.FC = () => {
     const el = scrollerRef.current;
     if (!el) return;
     const card = el.querySelector<HTMLElement>("[data-card]");
-    const gap = 24;
-    const step = (card?.offsetWidth ?? 300) + gap;
+    const gap = 20;
+    const step = (card?.offsetWidth ?? 305) + gap;
     const period = getPeriod();
     if (period <= 0) return;
     if (dir === -1 && el.scrollLeft - step < 0) {
@@ -94,54 +105,60 @@ export const Results: React.FC = () => {
     return () => el.removeEventListener("scrollend", onScrollEnd);
   }, [getPeriod]);
 
-  const renderCard = (c: (typeof cases)[number], i: number, keyPrefix: string) => (
+  const renderCard = (
+    { c, i }: (typeof cardCases)[number],
+    keyPrefix: string
+  ) => (
     <button
       key={`${keyPrefix}-${i}`}
       data-card
       type="button"
       onClick={() => setActiveIdx(i)}
-      style={{ boxShadow: "0 6px 0 0 #0b0b0f", borderRadius: 36 }}
-      className="group relative flex h-[330px] w-[270px] shrink-0 flex-col overflow-hidden border border-ink bg-[#ededed] text-left transition hover:-translate-y-0.5"
+      className={
+        cardShell +
+        " group flex w-[280px] shrink-0 flex-col justify-between p-[25px] text-left transition duration-200 ease-out hover:-translate-y-1 hover:shadow-[0_8px_0_0_#000] sm:w-[305px] sm:p-[41px]"
+      }
+      style={{ minHeight: 300 }}
     >
-      <div className="flex items-center gap-2 bg-primary px-5 py-3.5">
-        <span className="h-3.5 w-3.5 rounded-full bg-[#ff5f57]" />
-        <span className="h-3.5 w-3.5 rounded-full bg-[#ffbd2e]" />
-        <span className="h-3.5 w-3.5 rounded-full bg-[#ffffff]" />
+      <div className="flex flex-col gap-2.5">
+        <span className="text-[18px] font-bold leading-[1.01] text-ink">
+          {c.appName}
+        </span>
+        <span className="text-[16px] leading-5 text-ink">{c.category}</span>
       </div>
 
-      <div className="flex flex-1 flex-col justify-center p-8">
-        <h3 className="text-2xl font-bold leading-tight text-ink">
-          <span aria-hidden className="mr-2">📈</span>
-          Case
-          <br />
-          Study #{i + 1}:
-        </h3>
-
-        <div className="mt-6 h-px w-full bg-ink/40" />
-
-        <div className="mt-8 text-sm text-ink">
-          {c.appName} →
-        </div>
-        {c.previewMetric && (
-          <div className="mt-1 text-sm font-bold text-ink">{c.previewMetric}</div>
-        )}
+      <div className="mt-8 flex flex-col gap-2.5">
+        <span className="text-[44px] font-bold leading-[55px] tracking-[-1.1px] text-ink">
+          {c.cardStat?.value}
+        </span>
+        <span className="text-[18px] font-bold leading-none text-ink">
+          {c.cardStat?.label}
+        </span>
       </div>
     </button>
   );
 
   return (
     <section id="cases" className="px-4 py-24 sm:px-6 md:px-10 md:py-28">
-      <div className="mx-auto max-w-[1180px]">
+      <div className="mx-auto max-w-[1280px]">
         <Reveal
           as="h2"
-          className="text-center text-4xl font-bold tracking-tight text-ink sm:text-5xl md:text-6xl"
+          className="text-center text-[32px] font-bold tracking-tight text-ink sm:text-4xl md:text-5xl"
         >
           Proven Results in the App Market
         </Reveal>
+
+        <div className="mt-10 flex flex-col gap-5 md:mt-12">
+          {featuredCases.map((f, i) => (
+            <Reveal key={f.title} delay={i * 80}>
+              <FeaturedBlock data={f} />
+            </Reveal>
+          ))}
+        </div>
       </div>
 
       <div
-        className="relative mt-14"
+        className="relative mt-5"
         onMouseEnter={pause}
         onMouseLeave={resume}
         onTouchStart={pause}
@@ -178,12 +195,12 @@ export const Results: React.FC = () => {
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           }}
         >
-          <div className="flex w-max gap-6 py-3">
-            <div ref={setRef} className="flex shrink-0 gap-6">
-              {cases.map((c, i) => renderCard(c, i, "a"))}
+          <div className="flex w-max gap-5 py-3">
+            <div ref={setRef} className="flex shrink-0 gap-5">
+              {cardCases.map((item) => renderCard(item, "a"))}
             </div>
-            <div className="flex shrink-0 gap-6" aria-hidden>
-              {cases.map((c, i) => renderCard(c, i, "b"))}
+            <div className="flex shrink-0 gap-5" aria-hidden>
+              {cardCases.map((item) => renderCard(item, "b"))}
             </div>
           </div>
         </div>
@@ -209,3 +226,104 @@ export const Results: React.FC = () => {
     </section>
   );
 };
+
+const FeaturedBlock: React.FC<{ data: FeaturedCase }> = ({ data }) => {
+  // On mobile the stats live in their own card(s) below the copy.
+  const statCards = data.splitStatsByColumn
+    ? data.rows[0].map((_, col) =>
+        data.rows.map((row) => row[col]).filter(Boolean)
+      )
+    : [data.rows.flat()];
+
+  return (
+    <div className="flex flex-col gap-5 rounded-[36px] bg-primary p-6 shadow-[0_6px_0_0_#000] lg:grid lg:grid-cols-2 lg:rounded-[48px] lg:p-10">
+      <article className={cardShell + " p-[17px] lg:order-2 lg:p-[41px]"}>
+        <div className="relative aspect-[507/386] w-full">
+          <Image
+            src={data.image}
+            alt={data.imageAlt}
+            fill
+            sizes="(max-width: 1024px) 100vw, 508px"
+            className="object-contain"
+          />
+        </div>
+      </article>
+
+      <article
+        className={
+          cardShell +
+          " flex flex-col gap-5 p-[17px] lg:order-1 lg:justify-between lg:p-[41px]"
+        }
+      >
+        <div className="flex flex-col gap-5">
+          <h3 className="text-[24px] font-bold leading-[0.9] text-ink lg:text-[40px]">
+            {data.title}
+          </h3>
+          <div className="flex flex-col gap-5 lg:gap-2.5">
+            <p className="whitespace-pre-line text-[16px] font-semibold leading-tight text-ink">
+              {data.intro}
+            </p>
+            <ol className="flex flex-col text-[14px] leading-[1.1] text-ink">
+              {data.steps.map((s, i) => (
+                <li key={s}>
+                  {i + 1}. {s}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+
+        <div className="hidden flex-col gap-5 lg:flex">
+          {data.rows.map((row, ri) => (
+            <div key={ri} className="flex flex-wrap gap-x-10 gap-y-5">
+              {row.map((stat) => (
+                <Stat key={stat.value + (stat.label ?? "")} stat={stat} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </article>
+
+      {statCards.map((stats, i) => (
+        <article
+          key={i}
+          className={cardShell + " flex flex-col gap-5 p-[17px] lg:hidden"}
+        >
+          {stats.map((stat) => (
+            <Stat key={stat.value + (stat.label ?? "")} stat={stat} />
+          ))}
+        </article>
+      ))}
+    </div>
+  );
+};
+
+const Stat: React.FC<{ stat: FeaturedStat }> = ({ stat }) => (
+  <div className="flex min-w-[45%] flex-1 flex-col gap-2.5">
+    {stat.label && (
+      <span className="text-[12px] font-semibold leading-none text-ink">
+        {stat.label}
+      </span>
+    )}
+    <div className="flex items-end gap-1">
+      <span
+        className={
+          "whitespace-pre-line font-bold text-primary " +
+          (stat.size === "sm"
+            ? "text-[18px] font-semibold leading-tight"
+            : "text-[24px] leading-[0.9]")
+        }
+      >
+        {stat.value}
+      </span>
+      {stat.unit && (
+        <span className="text-[14px] leading-4 text-ink">{stat.unit}</span>
+      )}
+    </div>
+    {stat.caption && (
+      <p className="whitespace-pre-line text-[14px] font-semibold leading-[1.15] text-ink">
+        {stat.caption}
+      </p>
+    )}
+  </div>
+);
